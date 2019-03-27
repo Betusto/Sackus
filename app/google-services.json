@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "830176147471",
+    "firebase_url": "https://sackus-e5848.firebaseio.com",
+    "project_id": "sackus-e5848",
+    "storage_bucket": "sackus-e5848.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830176147471:android:b552c5dd1f139655",
+        "android_client_info": {
+          "package_name": "aplicacion.android.app.betusto.sackus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830176147471-8ava4gcieq7pasjbibu5aljcg5cc8f47.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "aplicacion.android.app.betusto.sackus",
+            "certificate_hash": "2791bc5a25265dd8d90485dfffa0fa64bac7ee10"
+          }
+        },
+        {
+          "client_id": "830176147471-k4qbd91n1154o9hhncl6v7p9t04p1m46.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG53AkiQkbrxCxJ6SmO04RBtgAMjn5va0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830176147471-k4qbd91n1154o9hhncl6v7p9t04p1m46.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
