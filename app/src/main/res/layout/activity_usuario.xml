@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
     tools:context=".UsuarioActivity">
 
     <ImageButton
@@ -49,6 +50,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="223dp"
         android:text="MODIFICAR CUENTA"
+        android:background="@drawable/btn_uno"
+        android:textColor="@drawable/txt_btn_uno"
         android:textAllCaps="true"
         android:textSize="15sp" />
 
@@ -60,6 +63,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="87dp"
         android:text="Cerrar Sesión"
+        android:background="@drawable/btn_uno"
+        android:textColor="@drawable/txt_btn_uno"
         android:textAllCaps="true"
         android:textSize="15sp" />
 

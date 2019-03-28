@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ModificandoActivity"
+    android:background="@drawable/fondo"
     android:focusable="true" android:focusableInTouchMode="true">
 
     <TextView
@@ -98,6 +99,8 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="445dp"
         android:text="Cambiar \nnombre"
+        android:background="@drawable/btn_uno"
+        android:textColor="@drawable/txt_btn_uno"
         android:textAllCaps="true"
         android:textSize="14sp" />
 
