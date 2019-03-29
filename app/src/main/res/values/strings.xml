@@ -23,5 +23,8 @@
     <!---String subrayado-->
     <string name="Olvidé_mi_contraseña"><Data><![CDATA[<u>Olvidé mi contraseña</u>]]></Data></string>
     <string name="No_Subrayado">Olvidé mi contraseña</string>
+    <string name="title_activity_gasto">GastoActivity</string>
+    <string name="title_activity_viajes">ViajesActivity</string>
+    <string name="title_activity_notas">NotasActivity</string>
 
 </resources>

@@ -82,6 +82,44 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(yatemgocuenta);
             }
         });*/
+
+
+        //BOTONES PRINCIPALES
+        //Ir al activity de añadir efectivo
+        SackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent add = new Intent(MainMenu.this,     AddActivity.class);
+                startActivity(add);
+            }
+        });
+
+        //Ir al fragment de ver y crear viajes
+        ViajeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent viaje = new Intent(MainMenu.this,     ViajesActivity.class);
+                startActivity(viaje);
+            }
+        });
+
+        //Ir al fragment de escribir y ver notas
+        NotasButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent notas = new Intent(MainMenu.this,     NotasActivity.class);
+                startActivity(notas);
+            }
+        });
+
+        //Ir al fragment de gasto e historial
+        GastoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gasto = new Intent(MainMenu.this,     GastoActivity.class);
+                startActivity(gasto);
+            }
+        });
         }
 
     @Override

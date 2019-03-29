@@ -33,6 +33,19 @@
         <activity
             android:name=".ModificandoActivity"
             android:label="@string/title_activity_modificando"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AddActivity" />
+        <activity
+            android:name=".GastoActivity"
+            android:label="@string/title_activity_gasto"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViajesActivity"
+            android:label="@string/title_activity_viajes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NotasActivity"
+            android:label="@string/title_activity_notas"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

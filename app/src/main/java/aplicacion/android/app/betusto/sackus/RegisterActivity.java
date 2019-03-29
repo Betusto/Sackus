@@ -213,9 +213,9 @@ public void LogeoExitoso(String UID){
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.e("TEST2", "TODO BIEN");
                 final int CantidadTotalDeSnaps = (int) dataSnapshot.getChildrenCount();
+                if(dataSnapshot.getValue() != null) { //*No se puede usar equals en null aunque sea string*
                     for (final DataSnapshot snapshot : dataSnapshot.getChildren()) //Recorremos cada campo de la tabla Usuarios
                     {
-                        if(snapshot.getValue() != null) { //*No se puede usar equals en null aunque sea string*
                         Database.child(snapshot.getKey()).child("Usuario").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -275,8 +275,11 @@ public void LogeoExitoso(String UID){
                                 //Toast.makeText(RegisterActivity.this, "Ocurrio un error al intentar acceder a la base de datos", Toast.LENGTH_SHORT).show();
                             }
                         });
-
-                    }
+                        //Si no hay ningun usuario en la base de datos
+                        }
+                        }else{
+                    Progress.dismiss();
+                    logearUsuarioParaBD(VariablesEstaticas.UID);
             }
             }
 
