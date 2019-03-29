@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
     tools:context=".MainMenu">
 
     <Button
@@ -14,6 +15,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="400dp"
         android:text="SACK"
+        android:background="@drawable/btn_uno"
+        android:textColor="@drawable/txt_btn_uno"
         android:textAlignment="center"
         android:textSize="25sp" />
 
@@ -33,6 +36,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="300dp"
         android:text="GASTO"
+        android:background="@drawable/btn_uno"
+        android:textColor="@drawable/txt_btn_uno"
         android:textSize="25sp" />
 
     <Button
@@ -43,6 +48,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="200dp"
         android:text="VIAJE"
+        android:background="@drawable/btn_uno"
+        android:textColor="@drawable/txt_btn_uno"
         android:textSize="24sp" />
 
     <Button
@@ -54,6 +61,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100dp"
         android:text="NOTAS"
+        android:background="@drawable/btn_uno"
+        android:textColor="@drawable/txt_btn_uno"
         android:textSize="24sp" />
 
     <TextView
