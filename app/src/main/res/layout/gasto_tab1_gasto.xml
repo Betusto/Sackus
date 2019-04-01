@@ -1,23 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GastoActivity">
+    tools:context=".GastoActivity"
+    android:focusable="true" android:focusableInTouchMode="true">
 
     <TextView
-        android:id="@+id/section_label"
+        android:id="@+id/activity_gasto_tab1_efectivo_total_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="56dp"
+        android:text="Efectivo Total:\n"
+        android:textAlignment="center"
+        android:textSize="33sp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:src="@mipmap/ic_addsincirculo" />
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/activity_gasto_tab1_fondo_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="296dp"
+        android:layout_above="@+id/activity_gasto_tab1_precio_edittext"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="-112dp"
+        app:srcCompat="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/activity_gasto_tab1_indicacion_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="248dp"
+        android:text="Nuevo Gasto"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@color/colorIcons"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/activity_gasto_tab1_precio_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="62dp"
+        android:ems="10"
+        android:hint="Precio"
+        android:inputType="numberDecimal"
+        android:singleLine="true"
+        android:textSize="22sp" />
+
+    <EditText
+        android:id="@+id/activity_gasto_tab1_gastaste_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="171dp"
+        android:ems="10"
+        android:hint="¿Qué gastaste?"
+        android:inputType="textCapSentences|textMultiLine"
+        android:lines="2"
+        android:maxLines="2"
+        android:minLines="1"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="false"
+        android:textSize="22sp" />
+</RelativeLayout>

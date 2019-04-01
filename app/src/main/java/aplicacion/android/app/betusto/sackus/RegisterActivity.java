@@ -125,7 +125,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private void logearUsuarioParaBD(final String uid) {
-        GettersDeUsuarios g = new GettersDeUsuarios(usuarioStr, correoStr, contraseñaStr, "true"); //Usuario se logea al crear la cuenta HAY QUE CREAR UN FALSE AL CERRAR SESION
+        GettersDeUsuarios g = new GettersDeUsuarios(usuarioStr, correoStr, contraseñaStr, "true", "$0"); //Usuario se logea al crear la cuenta HAY QUE CREAR UN FALSE AL CERRAR SESION
             Database.child(uid).setValue(g);
             LogeoExitoso(uid);
         }

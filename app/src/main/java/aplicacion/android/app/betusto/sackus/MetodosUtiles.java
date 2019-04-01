@@ -13,9 +13,12 @@ import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.Html;
 import android.text.InputFilter;
+import android.text.Selection;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -26,6 +29,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,6 +43,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.locks.Lock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -58,6 +67,31 @@ public class MetodosUtiles {
         };
         return filter;
     }
+
+    //Limites de digitos y decimales
+    public InputFilter limite = new InputFilter() {
+        final int maxDigitsBeforeDecimalPoint=10;
+        final int maxDigitsAfterDecimalPoint=2;
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end,
+                                   Spanned dest, int dstart, int dend) {
+            StringBuilder builder = new StringBuilder(dest);
+            builder.replace(dstart, dend, source
+                    .subSequence(start, end).toString());
+            if (!builder.toString().replace("$", "").matches( //el replace es para que no tome en cuenta el signo de peso
+                    "(([1-9]{1})([0-9]{0,"+(maxDigitsBeforeDecimalPoint-1)+"})?)?(\\.[0-9]{0,"+maxDigitsAfterDecimalPoint+"})?"
+
+            )) {
+                if(source.length()==0)
+                    return dest.subSequence(dstart, dend);
+                return "";
+            }
+
+            return null;
+
+        }
+    };
 
     //Metodo para subrayar un textview por medio segundo
     public void Subrayar(final TextView text){
@@ -133,6 +167,73 @@ public class MetodosUtiles {
             visible = true; //La proxima vez que se le oprima hará el efecto contrario
             return visible;
         }
+    }
+
+    //Metodo que nos ayuda tener una cierta cantidad de lineas de texto en nuestros edittext
+    public void LimitarLineasEditText(final EditText editText, final int LineasMaximas){
+        editText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+
+            //Se ejecuta cada que se presione una tecla
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (editText.getLayout().getLineCount() > LineasMaximas)
+                    editText.getText().delete(editText.getText().length() - 1, editText.getText().length());
+            }
+        });
+    }
+
+    //Metodo para poner el simbolo de dinero y tener maximo 10 digitos con 2 decimales
+    public void EstiloDinero(final EditText editText){
+        //Constante simbolo de peso
+        Selection.setSelection(editText.getText(), editText.getText().length());
+
+        editText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!s.toString().startsWith("$")){
+                    editText.setText("$"+s.toString());
+                    Selection.setSelection(editText.getText(), editText.getText().length());
+
+                }
+
+            }
+        });
+
+        //Elimina la posibiliad de poder poner mas de dos decimales y mas de 10 digitos de precio
+        editText.setFilters(new InputFilter[] {new MetodosUtiles().limite});
+    }
+
+    //Metodo para conseguir la fecha actual
+    public static String fechaHora(long time) {
+        DateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy 'at' hh:mm aaa");
+        return format.format(new Date(time));
     }
 
 
@@ -218,6 +319,8 @@ class VariablesEstaticas extends  android.app.Application{
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String CURRENT_USER_UID = "currentUserUID";
     public static final String IS_LOGGED = "isLogged";
+    //Cantidad total que puede tener el usuario
+    public static final double MAXIMO = 9999999999.99;
 
     public static String CurrentUserUID; //Valor del current user UID //VARIABLE QUE DEBE GUARDARSE HASTA CUANDO SE CIERRA LA APP
     public static boolean isLoged = false; //VARIABLE QUE DEBE GUARDARSE HASTA CUANDO SE CIERRA LA APP
@@ -267,6 +370,27 @@ class BaseDeDatos{
         });
     }
 
+    public void MostrarElementosUsuarioActualConSlash(DatabaseReference Database, String ElementoAConseguir, final String Coplemento, final TextView textView, final SharedPreferences sharedPreferences){
+        Database.child(VariablesEstaticas.CurrentUserUID).child(ElementoAConseguir).addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //if necesario por si ya no obtiene el valor del uid por alguna razon, de esta manera no crasheara
+                //Se necesitan volver a cargar los datos porque cada cambio en la base de datos activa este ondatachange
+                VE.CargarDatos(sharedPreferences);
+                if(VariablesEstaticas.CurrentUserUID != null && !VariablesEstaticas.CurrentUserUID.equals("")) {
+                    String resultado = dataSnapshot.getValue().toString();
+                    textView.setText(Coplemento+"\n" + resultado);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     public int ValidarContraseña(String contraseñaStr, int detectorDeErroresPassword, EditText contraseña, String mensaje){
         if(contraseñaStr.isEmpty()){
             contraseña.setError(mensaje);
@@ -308,4 +432,6 @@ class BaseDeDatos{
         return detectorDeErroresUsuario;
     }
 }
+
+
 

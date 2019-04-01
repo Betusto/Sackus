@@ -35,6 +35,7 @@ public class MainMenu extends AppCompatActivity {
     //Variable que nos permite vincular con el metodo que se encuentra en MetodosUtiles de VariablesEstaticas para guardar o cargar data
     SharedPreferences sharedPreferences;
     VariablesEstaticas VE = new VariablesEstaticas();
+    BaseDeDatos BD = new BaseDeDatos();
     public static final String FINISH_ALERT = "finish_alert"; //Variable para terminar este activity desde otro
 
 
@@ -161,25 +162,7 @@ public class MainMenu extends AppCompatActivity {
 
 
     public void Saludos(){
-            Database.child(VariablesEstaticas.CurrentUserUID).child("Usuario").addValueEventListener(new ValueEventListener() {
-
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    //if necesario por si ya no obtiene el valor del uid por alguna razon, de esta manera no crasheara
-                    //Se necesitan volver a cargar los datos porque cada cambio en la base de datos activa este ondatachange
-                    VE.CargarDatos(sharedPreferences);
-                    if(VariablesEstaticas.CurrentUserUID != null && !VariablesEstaticas.CurrentUserUID.equals("")) {
-                    Log.e("TEST", "VALOR: "+VariablesEstaticas.CurrentUserUID);
-                    String bienvenida = dataSnapshot.getValue().toString();
-                    usuarioBienvenidoText.setText("Saludos\n" + bienvenida);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
+        BD.MostrarElementosUsuarioActualConSlash(Database, "Usuario", "Saludos", usuarioBienvenidoText, sharedPreferences);
     }
 
     //Revisar conexion internet

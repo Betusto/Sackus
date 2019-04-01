@@ -34,11 +34,13 @@
             android:name=".ModificandoActivity"
             android:label="@string/title_activity_modificando"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddActivity" />
+        <activity android:name=".AddActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".GastoActivity"
             android:label="@string/title_activity_gasto"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".ViajesActivity"
             android:label="@string/title_activity_viajes"
@@ -47,6 +49,10 @@
             android:name=".NotasActivity"
             android:label="@string/title_activity_notas"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
