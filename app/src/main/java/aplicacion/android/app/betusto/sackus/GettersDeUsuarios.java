@@ -21,5 +21,19 @@ public class GettersDeUsuarios {
     }
 }
 
+class GastosGetters{
+    public String NombreDelGasto, Fecha, Gasto, TimeStamp;
+    public GastosGetters(){
+
+    }
+
+    public GastosGetters(String NombreDelGasto, String Fecha, String Gasto, String TimeStamp){
+        this.NombreDelGasto = NombreDelGasto;
+        this.Fecha = Fecha;
+        this.Gasto = Gasto;
+        this.TimeStamp = TimeStamp;
+    }
+}
+
 
 

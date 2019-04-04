@@ -3,18 +3,13 @@ package aplicacion.android.app.betusto.sackus;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.Html;
 import android.text.InputFilter;
 import android.text.Selection;
 import android.text.Spanned;
@@ -25,28 +20,29 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
-import java.util.Locale;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.locks.Lock;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class MetodosUtiles {
 
@@ -67,6 +63,7 @@ public class MetodosUtiles {
         };
         return filter;
     }
+
 
     //Limites de digitos y decimales
     public InputFilter limite = new InputFilter() {
@@ -110,8 +107,9 @@ public class MetodosUtiles {
        if (ToastMessage != null) {
            ToastMessage.cancel();
        }
-       ToastMessage = Toast.makeText(context, Texto, Toast.LENGTH_LONG);
-       ToastMessage.show();
+           ToastMessage = Toast.makeText(context, Texto, Toast.LENGTH_LONG);
+           ToastMessage.show();
+
    }
 
    private boolean estaVisible = false;
@@ -177,6 +175,7 @@ public class MetodosUtiles {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // TODO Auto-generated method stub
 
+
             }
 
             @Override
@@ -186,11 +185,19 @@ public class MetodosUtiles {
 
             }
 
-            //Se ejecuta cada que se presione una tecla
+            //Se ejecuta cada que se presione una tecla e impide que puedas escribir algo mas
             @Override
             public void afterTextChanged(Editable s) {
-                if (editText.getLayout().getLineCount() > LineasMaximas)
-                    editText.getText().delete(editText.getText().length() - 1, editText.getText().length());
+                if(editText.getLayout() != null) { //Para evitar que crashee
+                    if (editText.getLayout().getLineCount() > LineasMaximas) {
+                        editText.setText(editText.getText().delete(editText.getText().length() - 1, editText.getText().length()));
+                        editText.setSelection(editText.getText().length());
+
+                    }
+                }
+                //editText.getText().insert(editText.getSelectionStart(), "");
+                //if (editText.getSelectionStart() == editText.getText().length()) {
+                //}
             }
         });
     }
@@ -232,11 +239,9 @@ public class MetodosUtiles {
 
     //Metodo para conseguir la fecha actual
     public static String fechaHora(long time) {
-        DateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy 'at' hh:mm aaa");
+        DateFormat format = new SimpleDateFormat("EEE, dd 'de' MMM 'del' yyyy 'a las' hh:mm aaa");
         return format.format(new Date(time));
     }
-
-
 }
 
 
@@ -329,7 +334,6 @@ class VariablesEstaticas extends  android.app.Application{
     public static String UID = UUID.randomUUID().toString().replace("-", ""); //Generador
     //Variable estatica que tomará un control del uid que se vaya a guardar en la base de datos local
     public static boolean Locked = false;
-
     //Metodo que nos ayudara a guardar las variables desde la memoria del telefono
     public void GuardarDatos(SharedPreferences sharedPreferences, boolean estado, String uid){
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -391,6 +395,89 @@ class BaseDeDatos{
         });
     }
 
+    //Metodo para mostrar las listas
+    public static ArrayList<Gastos> retornarGastos = new ArrayList<>();
+    public void MostrarListasDelUsuario(final String ElementoPadre, final ArrayList<Gastos> notas, final  SharedPreferences sharedPreferences, final RecyclerView recyclerView, final Adaptador adaptador
+    , final Context mActivity){
+        retornarGastos.add(new Gastos("","",""));
+        retornarGastos.clear();
+        //Referencia.child("Gastos").child(ElementoAConseguir)
+        //String ID = BD.GenerarTimeStamp(); //ID unico basado en el tiempo en el que se consiguió
+        //String fecha = MetodosUtiles.fechaHora(new Date().getTime()); //Fecha actual
+        //Referencia para la BD de forma en que podamos meter una tabla dentro de ella
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        //Referencia a la tabla del child:
+        final DatabaseReference TablaHija = database.child(VariablesEstaticas.CurrentUserUID);
+        final List CantidadDeSnapshots = new ArrayList();
+        TablaHija.child(ElementoPadre).addValueEventListener(new ValueEventListener(){
+
+            @Override
+            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+                VE.CargarDatos(sharedPreferences);
+                //notas.clear();
+                //if necesario por si ya no obtiene el valor del uid por alguna razon, de esta manera no crasheara
+                //Se necesitan volver a cargar los datos porque cada cambio en la base de datos activa este ondatachange
+                if (VariablesEstaticas.CurrentUserUID != null && !VariablesEstaticas.CurrentUserUID.equals("")) {
+                    final int CantidadTotalDeSnaps = (int) dataSnapshot.getChildrenCount();
+                    if (dataSnapshot.getValue() != null) { //*No se puede usar equals en null aunque sea string*
+                        for (final DataSnapshot snapshot : dataSnapshot.getChildren()) //Recorremos cada campo de la tabla
+                        {
+                            switch (ElementoPadre) {
+                                case "Gastos":
+                                        //Conseguimos los valores de la tabla
+                                    CantidadDeSnapshots.add(snapshot.child("NombreDelGasto"));
+                                    String GastoNota = snapshot.child("NombreDelGasto").getValue().toString();
+                                    String Fecha = snapshot.child("Fecha").getValue().toString();
+                                    String Precio = snapshot.child("Gasto").getValue().toString();
+                                    notas.add(new Gastos(GastoNota, Fecha, Precio));
+                                    if (CantidadDeSnapshots.size() == CantidadTotalDeSnaps) {
+                                        //Collections.copy(retornarGastos,notas);
+                                        //retornarGastos.addAll(notas); //le pasamos todos los elementos conseguidos
+                                        GastoTab2Historial Historial = new GastoTab2Historial();
+                                        retornarGastos = (ArrayList<Gastos>)notas.clone();
+                                        Log.e("TEST","CANTIDAD DE NOTAS: "+retornarGastos.size());
+                                        CantidadDeSnapshots.clear();
+                                        Historial.Adaptando(recyclerView, adaptador, mActivity);
+                                        }
+                                    break;
+                                case "Viajes":
+                                    break;
+                                case "Notas":
+                                    break;
+                            }
+                            //notas.clear();
+                        }
+                    }else{
+                        Log.e("TEST", "DATASNAP ES NULO");
+                    }
+                }else{
+                    Log.e("TEST", "Current user es nulo");
+                }
+            }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        //Toast.makeText(RegisterActivity.this, "Ocurrio un error al intentar acceder a la base de datos", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void AlAñadirNuevaNota(String NombreDelGasto, String Precio){
+        //clearData(); //limpiar textviews
+        String ID = GenerarTimeStamp(); //ID unico basado en el tiempo en el que se consiguió
+        Adaptador.isPressed = 1; //se presionó
+        String fecha = MetodosUtiles.fechaHora(new Date().getTime()); //Fecha actual
+        Adaptador.isPressed = 0;
+        //Referencia para la BD de forma en que podamos meter una tabla dentro de ella
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        //Referencia a la tabla del child:
+        DatabaseReference gastosDB = database.child(VariablesEstaticas.CurrentUserUID);
+        //Guardamos los campos
+        GastosGetters g = new GastosGetters(NombreDelGasto, fecha, Precio, ID);
+        gastosDB.child("Gastos").child(ID).setValue(g);
+    }
+
+
     public int ValidarContraseña(String contraseñaStr, int detectorDeErroresPassword, EditText contraseña, String mensaje){
         if(contraseñaStr.isEmpty()){
             contraseña.setError(mensaje);
@@ -431,7 +518,14 @@ class BaseDeDatos{
         }
         return detectorDeErroresUsuario;
     }
+
+    //Metodo encargado de generar una ficha unica para cada gasto/viaje/nota basada en el tiempo
+    public String GenerarTimeStamp(){
+        Date date= new Date();
+        long time = date.getTime();
+        Timestamp ts = new Timestamp(time);
+        String timeStr = ts+"";
+        timeStr = timeStr.replace("."," ");
+        return  timeStr;
+    }
 }
-
-
-

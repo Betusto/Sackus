@@ -2,7 +2,9 @@ package aplicacion.android.app.betusto.sackus;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,13 +25,17 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Selection;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -44,6 +50,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class GastoTab1Gasto extends Fragment {
     private ProgressDialog Progress;
@@ -59,6 +66,8 @@ public class GastoTab1Gasto extends Fragment {
     private int detectorDeErroresGastaste = 0, detectorDeErroresPrecio = 0;
     private String gastasteStr, precioStr;
 
+    private static GastoTab1Gasto instance = null;
+
 
 
     private static DecimalFormat df2 = new DecimalFormat("0.00"); //Para usar solo dos decimales
@@ -71,6 +80,7 @@ public class GastoTab1Gasto extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.gasto_tab1_gasto, container, false);
+        instance = GastoTab1Gasto.this;
         añadirButton = rootView.findViewById(R.id.fab1);
         efectivototalText =  rootView.findViewById(R.id.activity_gasto_tab1_efectivo_total_text);
         gastasteEdit = rootView.findViewById(R.id.activity_gasto_tab1_gastaste_edittext);
@@ -99,6 +109,15 @@ public class GastoTab1Gasto extends Fragment {
         //Constante simbolo de peso
         MU.EstiloDinero(precioEdit);
 
+        //cursor siempre al final
+        gastasteEdit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                gastasteEdit.setSelection(gastasteEdit.getText().length());
+            }
+        });
+
 
         //Restar al monto
         añadirButton.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +129,7 @@ public class GastoTab1Gasto extends Fragment {
 
         return rootView;
     }
+
 
     //Al iniciar el activity se ejecutara lo siguiente
     @Override
@@ -130,11 +150,18 @@ public class GastoTab1Gasto extends Fragment {
             Calcular(); //Se encarga de calcular y guardar el historial en la bd
         }
     }
-
     public void Calcular(){
                 Database.child(VariablesEstaticas.CurrentUserUID).child("EfectivoTotal").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+                        //Ocultar keyboard, debe esperar un segundo y medio para que lo cierre bien
+                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(precioEdit.getWindowToken(), 0);
+                        imm.hideSoftInputFromWindow(gastasteEdit.getWindowToken(), 0);
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
                         if (Double.parseDouble(dataSnapshot.getValue().toString().replace("$", "")) != Double.NaN && Double.parseDouble(dataSnapshot.getValue().toString().replace("$", "")) != 0.00) {
                         double efectivoTotal = Double.parseDouble(dataSnapshot.getValue().toString().replace("$", "")); //Conseguimos la cantidad actual y la convertimos a int
                         double dineroeditDouble = Double.parseDouble(precioEdit.getText().toString().replace("$", "")); //Conseguimos el monto que se escribio
@@ -146,7 +173,15 @@ public class GastoTab1Gasto extends Fragment {
                                 precioEdit.getText().clear(); //limpiamos caja de texto
                                 MandarToast.MostrarToast(getActivity(), "El efectivo total se actualizó exitosamente");
                                 //VINCULO
-                                ElementoDelOtroTab.AlAñadirNuevaNota();
+                                BD.AlAñadirNuevaNota(gastasteStr,precioStr);
+                                Intent reebot = new Intent(getActivity(), GastoActivity.class);
+                                //Engañar al usuario, no pude encontrar una mejor solucion, el recycler no se actualiza
+                                //hasta que se cambie de activity
+                                getActivity().finish();
+                                //Quitar animacione
+                                getActivity().overridePendingTransition(0, 0);
+                                getActivity().startActivity(reebot);
+                                getActivity().overridePendingTransition(0, 0);
                             } else {
                                 MandarToast.MostrarToast(getActivity(), "No se puede agregar el gasto por falta de dinero");
                             }
@@ -158,6 +193,8 @@ public class GastoTab1Gasto extends Fragment {
                             MandarToast.MostrarToast(getActivity(), "Se necesita efectivo para añadir nuevo gasto");
                         }
                         Progress.dismiss();
+                            }
+                        }, 1500);
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {

@@ -118,6 +118,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent gasto = new Intent(MainMenu.this,     GastoActivity.class);
+                gasto.putExtra("One", 1);// One is your argument
                 startActivity(gasto);
             }
         });

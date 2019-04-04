@@ -86,7 +86,7 @@ public class AddActivity extends AppCompatActivity {
                                     dineroedit.getText().clear(); //limpiamos caja de texto
                                     MandarToast.MostrarToast(AddActivity.this, "El efectivo total se actualizó exitosamente");
                                 } else {
-                                    Database.child(VariablesEstaticas.CurrentUserUID).child("EfectivoTotal").setValue("$" + df2.format(VariablesEstaticas.MAXIMO));
+                                    MandarToast.MostrarToast(AddActivity.this, "No se puede agregar tanto efectivo");
                                     dineroedit.getText().clear(); //limpiamos caja de texto
                                 }
                             } else {

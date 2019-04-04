@@ -1,6 +1,7 @@
 package aplicacion.android.app.betusto.sackus;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -96,11 +98,15 @@ public class GastoActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+
+
         //Nombres de los tabs
         tabLayout.getTabAt(0).setText("GASTO");
         tabLayout.getTabAt(1).setText("HISTORIAL");
 
         CD.startConexion(nowifibutton);
+        //mViewPager.setCurrentItem(1);
+        //mViewPager.setCurrentItem(0);
     }
 
     //Revisar conexion internet
@@ -134,8 +140,8 @@ public class GastoActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    GastoTab1Gasto Tab1 = new GastoTab1Gasto();
-                    return Tab1;
+                        GastoTab1Gasto Tab1 = new GastoTab1Gasto();
+                        return Tab1;
                 case 1:
                     GastoTab2Historial Tab2 = new GastoTab2Historial();
                     return Tab2;
