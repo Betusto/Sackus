@@ -117,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
         //Verificamos que el usuario no haya dejado campos sin escribir
         Validar(usuarioStr, correoStr, contraseñaStr);
         if (detectorDeErroresEmail == 0 && detectorDeErroresPassword == 0) {
-        Progress.setMessage("Registrando, por favor espere");
+        Progress.setMessage(getResources().getString(R.string.registrando_espere));
         Progress.show();
         CheckUsuarioExiste(); //Se encarga de revisar si el usuario existe en la base de datos
         }
@@ -132,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 public void LogeoExitoso(String UID){
     Progress.dismiss();
-    Toast.makeText(RegisterActivity.this, "Usuario generado en BD", Toast.LENGTH_SHORT).show();
+    Toast.makeText(RegisterActivity.this, getResources().getString(R.string.usuario_generado_en_bd), Toast.LENGTH_SHORT).show();
     Intent mainmenu = new Intent(RegisterActivity.this, MainMenu.class);
     mainmenu.putExtra("El UID",UID);
     startActivity(mainmenu);
@@ -155,7 +155,7 @@ public void LogeoExitoso(String UID){
     private void Validar(String usuarioStr, String correoStr, String contraseñaStr){
 
         if(usuarioStr.isEmpty()){
-            Usuario.setError("Nombre de usuario requerido");
+            Usuario.setError(getResources().getString(R.string.nombre_de_usuario_requerido));
             Usuario.requestFocus();
             detectorDeErroresUsuario++;
         }else{
@@ -163,11 +163,11 @@ public void LogeoExitoso(String UID){
         }
 
         if(correoStr.isEmpty()){
-            Correo.setError("Correo requerido");
+            Correo.setError(getResources().getString(R.string.correo_requerido));
             Correo.requestFocus();
             detectorDeErroresEmail++;
         }else if(!Patterns.EMAIL_ADDRESS.matcher(correoStr).matches()){
-            Correo.setError("Ingrese un email valido");
+            Correo.setError(getResources().getString(R.string.ingrese_un_correo_valido));
             Correo.requestFocus();
             detectorDeErroresEmail++;
         }else{
@@ -175,11 +175,11 @@ public void LogeoExitoso(String UID){
         }
 
         if(contraseñaStr.isEmpty()){
-            Contraseña.setError("Contraseña requerida");
+            Contraseña.setError(getResources().getString(R.string.contraseña_requerida));
             Contraseña.requestFocus();
             detectorDeErroresPassword++;
         }else if(contraseñaStr.length() < 6){
-            Contraseña.setError("La contraseña es muy corta");
+            Contraseña.setError(getResources().getString(R.string.contraseña_es_muy_corta));
             Contraseña.requestFocus();
             detectorDeErroresPassword++;
         }else{
@@ -256,11 +256,11 @@ public void LogeoExitoso(String UID){
                                             Progress.dismiss();
                                             if(detectorDeErroresUsuario != 0) {
                                                 Usuario.requestFocus();
-                                                Usuario.setError("El nombre de usuario ingresado ya existe");
+                                                Usuario.setError(getResources().getString(R.string.el_nombre_ya_existe));
                                             }
                                             if(detectorDeErroresEmail != 0){
                                                 Correo.requestFocus();
-                                                Correo.setError("El correo ingresado ya existe");
+                                                Correo.setError(getResources().getString(R.string.el_correo_ya_existe));
                                             }
                                         }else{
                                             CantidadDeSnapshots.clear();
@@ -285,7 +285,7 @@ public void LogeoExitoso(String UID){
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(RegisterActivity.this, "Ocurrio un error al intentar acceder a la base de datos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, getResources().getString(R.string.error_al_acceder_a_bd), Toast.LENGTH_SHORT).show();
             }
         });
         Log.e("TEST2", "VALOR DE DETECTORDEERRORESUSUARIO ANTES DE RETORNAR: "+detectorDeErroresUsuario);

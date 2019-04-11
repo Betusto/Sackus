@@ -15,7 +15,7 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="252dp"
-        android:text="Añadir Efectivo"
+        android:text="@string/añadir_efectivo"
         android:textAlignment="center"
         android:textSize="33sp" />
 
@@ -27,7 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:text="Efectivo Total:\n"
+        android:text="@string/efectivo_total"
         android:textAlignment="center"
         android:textSize="33sp" />
 

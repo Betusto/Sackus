@@ -101,8 +101,8 @@ public class GastoActivity extends AppCompatActivity {
 
 
         //Nombres de los tabs
-        tabLayout.getTabAt(0).setText("GASTO");
-        tabLayout.getTabAt(1).setText("HISTORIAL");
+        tabLayout.getTabAt(0).setText(getResources().getString(R.string.gasto));
+        tabLayout.getTabAt(1).setText(getResources().getString(R.string.historial));
 
         CD.startConexion(nowifibutton);
         //mViewPager.setCurrentItem(1);

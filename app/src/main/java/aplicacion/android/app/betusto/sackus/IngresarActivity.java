@@ -118,8 +118,8 @@ public class IngresarActivity extends AppCompatActivity {
                             startActivity(olvidepassword);
                             VariablesEstaticas.Locked = false; //Para poder volver a entrar al boton
                         } else {    //Si no esta conectado a internet
-                            MandarToast.MostrarToast(IngresarActivity.this,"Se necesita conexión a internet para acceder a " +
-                                    "esta opción");
+                            MandarToast.MostrarToast(IngresarActivity.this,getResources().getString(R.string.necesita_conexion_a_internet) +
+                                    getResources().getString(R.string.esta_opcion));
                             VariablesEstaticas.Locked = false; //Para volver a entrar al boton
                         }
                     }
@@ -170,14 +170,14 @@ public class IngresarActivity extends AppCompatActivity {
         password = Contraseña.getText().toString().trim();
         Validar(email, password);
         if (detectorDeErroresEmail == 0 && detectorDeErroresPassword == 0) {
-            Progress.setMessage("Entrnado, por favor espere");
+            Progress.setMessage(getResources().getString(R.string.entrando_espere));
             Progress.show();
             RevisarBD();
         }
     }
 
     public void LogeoExitosoOffline(String UID){
-        Toast.makeText(IngresarActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+        Toast.makeText(IngresarActivity.this, getResources().getString(R.string.bienvenido), Toast.LENGTH_SHORT).show();
         //VE.CuentaAbiertaGuardarUID(true, UID);
         VE.GuardarDatos(sharedPreferences, true, UID);
         //VariablesEstaticas.isLoged = true;
@@ -194,7 +194,7 @@ public class IngresarActivity extends AppCompatActivity {
     //Metodo para validar los campos a ingresar del usuario
     private void Validar(String correoStr, String contraseñaStr){
         if(correoStr.isEmpty()){
-            Usuario.setError("Correo requerido");
+            Usuario.setError(getResources().getString(R.string.correo_requerido));
             Usuario.requestFocus();
             detectorDeErroresEmail++;
         }else{
@@ -202,11 +202,11 @@ public class IngresarActivity extends AppCompatActivity {
         }
 
         if(contraseñaStr.isEmpty()){
-            Contraseña.setError("Contraseña requerida");
+            Contraseña.setError(getResources().getString(R.string.contraseña_requerida));
             Contraseña.requestFocus();
             detectorDeErroresPassword++;
         }else if(contraseñaStr.length() < 6){
-            Contraseña.setError("La contraseña es muy corta");
+            Contraseña.setError(getResources().getString(R.string.contraseña_es_muy_corta));
             Contraseña.requestFocus();
             detectorDeErroresPassword++;
         }else{
@@ -331,7 +331,7 @@ public class IngresarActivity extends AppCompatActivity {
                                                                             if (noMasDataChanges == false) {
                                                                                 CantidadDeSnapshots.clear();
                                                                                 Progress.dismiss();
-                                                                                Toast.makeText(IngresarActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                                                                                Toast.makeText(IngresarActivity.this, getResources().getString(R.string.usuario_o_contraseña_incorrectos), Toast.LENGTH_SHORT).show();
                                                                             }
                                                                         }
                                                                     }
@@ -354,7 +354,7 @@ public class IngresarActivity extends AppCompatActivity {
                                         }else{
                                             CantidadDeSnapshots.clear();
                                             Progress.dismiss();
-                                            Toast.makeText(IngresarActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(IngresarActivity.this, getResources().getString(R.string.usuario_o_contraseña_incorrectos), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
@@ -372,7 +372,7 @@ public class IngresarActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(IngresarActivity.this, "Ocurrio un error al intentar acceder a la base de datos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(IngresarActivity.this, getResources().getString(R.string.error_al_acceder_a_bd), Toast.LENGTH_SHORT).show();
             }
         });
     }

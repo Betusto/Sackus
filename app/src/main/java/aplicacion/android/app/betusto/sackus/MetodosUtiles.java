@@ -307,7 +307,7 @@ class DetectaConexion{
         //Dialogo
         AlertDialog.Builder builder = new AlertDialog.Builder(Activity);
         builder.setTitle("No hay conexión a internet");
-        builder.setMessage("Es posible que " + "algunas opciones no funcionen correctamente. Por seguridad de datos mantenga la aplicación abierta u oculta hasta " +
+        builder.setMessage("Es posible que"+" " + "algunas opciones no funcionen correctamente. Por seguridad de datos mantenga la aplicación abierta u oculta hasta"+" " +
                         "que vuelva a entrar la conexión.");
         builder.setPositiveButton("OK", null);
         AlertDialog dialog = builder.show();

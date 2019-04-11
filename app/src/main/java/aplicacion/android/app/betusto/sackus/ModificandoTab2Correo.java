@@ -80,11 +80,10 @@ public class ModificandoTab2Correo extends Fragment {
             public void onClick(View v) {
                 correoNuevoStr = correoNuevo.getText().toString().toLowerCase().trim();
                 passwordCorreoStr = confirmarPassword.getText().toString().trim();
-                detectorDeErroresPassword = BD.ValidarContraseña(passwordCorreoStr, detectorDeErroresPassword, confirmarPassword, "Se requiere contraseña");
-                detectorDeErroresCorreoNuevo = BD.ValidarCorreo(correoNuevoStr, detectorDeErroresCorreoNuevo, correoNuevo, "Se requiere" +
-                        " el nuevo correo");
+                detectorDeErroresPassword = BD.ValidarContraseña(passwordCorreoStr, detectorDeErroresPassword, confirmarPassword, getResources().getString(R.string.se_requiere_contraseña));
+                detectorDeErroresCorreoNuevo = BD.ValidarCorreo(correoNuevoStr, detectorDeErroresCorreoNuevo, correoNuevo, getResources().getString(R.string.se_requiere_el_nuevo_correo));
                 if (detectorDeErroresPassword == 0 && detectorDeErroresCorreoNuevo == 0) {
-                    Progress.setMessage("Modificando, por favor espere");
+                    Progress.setMessage(getResources().getString(R.string.modificando_espere));
                     Progress.show();
                     RevisarMatchCorreo(); //Metodo encargado de ver si lo que se escribio coincide
                 }
@@ -102,12 +101,12 @@ public class ModificandoTab2Correo extends Fragment {
                 //Si se escribio correctamente:
                 if(passwordCorreoStr.equals(ContraseñaReal)){
                     Database.child(VariablesEstaticas.CurrentUserUID).child("Correo").setValue(correoNuevoStr); //Actualizamos la database
-                    MU.MostrarToast(getActivity(), "El correo se cambió exitosamente");
+                    MU.MostrarToast(getActivity(), getResources().getString(R.string.el_correo_se_cambio_exitosamente));
                     //Limpiamos cajas de texto
                     correoNuevo.getText().clear();
                     confirmarPassword.getText().clear();
                 }else{
-                    confirmarPassword.setError("La contraseña actual escrita no es la correcta");
+                    confirmarPassword.setError(getResources().getString(R.string.la_contraseña_no_es_correcta));
                     confirmarPassword.requestFocus();
                 }
                 Progress.dismiss();

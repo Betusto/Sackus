@@ -99,8 +99,8 @@ public class NotasActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         //Nombres de los tabs
-        tabLayout.getTabAt(0).setText("ESCRIBIR\nNOTA");
-        tabLayout.getTabAt(1).setText("VER NOTAS");
+        tabLayout.getTabAt(0).setText(getResources().getString(R.string.escribir_nota_may));
+        tabLayout.getTabAt(1).setText(getResources().getString(R.string.ver_notas_may));
 
         CD.startConexion(nowifibutton);
     }

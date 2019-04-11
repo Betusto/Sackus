@@ -97,8 +97,8 @@ public class UsuarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(UsuarioActivity.this);
-                builder.setTitle("¿Desea eliminar su cuenta?");
-                builder.setMessage("Al eliminar su cuenta se perderán permanentemente todos sus datos y cambios que haya hecho.\n¿Desea continuar?");
+                builder.setTitle(getResources().getString(R.string.desea_eliminar_su_cuenta));
+                builder.setMessage(getResources().getString(R.string.aviso_eliminacion_de_cuenta));
                 builder.setCancelable(true);
                 //Hacemos el icono de color rojo
                 Drawable icon = ContextCompat.getDrawable(UsuarioActivity.this,android.R.drawable.ic_dialog_alert);
@@ -107,12 +107,12 @@ public class UsuarioActivity extends AppCompatActivity {
                 builder.setIcon(icon); //R.color.colorButtonRed
                 //Boton eliminar
                 builder.setPositiveButton(
-                        "ELIMINAR",
+                        getResources().getString(R.string.eliminar_mayus),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 AlertDialog.Builder buildersecundario = new AlertDialog.Builder(UsuarioActivity.this);
-                                buildersecundario.setTitle("Eliminar Cuenta");
-                                buildersecundario.setMessage("Escriba su contraseña para poder eliminar su cuenta: ");
+                                buildersecundario.setTitle(getResources().getString(R.string.eliminar_cuenta));
+                                buildersecundario.setMessage(getResources().getString(R.string.escriba_su_contraseña_para_eliminar_cuenta));
 
                                 //EditText que incluiremos para poder escribir la contraseña
                                 input = new EditText(UsuarioActivity.this);
@@ -120,10 +120,10 @@ public class UsuarioActivity extends AppCompatActivity {
                                 input.setInputType(InputType.TYPE_CLASS_TEXT |
                                         InputType.TYPE_TEXT_VARIATION_PASSWORD);
                                 input.setSelection(input.getText().length());
-                                input.setHint("Contraseña"); //Para indicar al usuario que debe escribir su contraseña
+                                input.setHint(getResources().getString(R.string.contraseña)); //Para indicar al usuario que debe escribir su contraseña
                                 buildersecundario.setView(input);
-                                buildersecundario.setPositiveButton("ELIMINAR", null);
-                                buildersecundario.setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
+                                buildersecundario.setPositiveButton(getResources().getString(R.string.eliminar_mayus), null);
+                                buildersecundario.setNegativeButton(getResources().getString(R.string.cancelar_mayus), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
                                         //Se cancela el proceso
                                         dialog.cancel();
@@ -142,9 +142,9 @@ public class UsuarioActivity extends AppCompatActivity {
                                             public void onClick(View view) {
                                                 contraseñaStr = input.getText().toString(); //Contraseña escrita por el usuario
                                                 //Validar si la contraseña escrita es correcta
-                                                detectorDeErroresPassword = BD.ValidarContraseña(contraseñaStr, detectorDeErroresPassword, input, "Contraseña requerida");
+                                                detectorDeErroresPassword = BD.ValidarContraseña(contraseñaStr, detectorDeErroresPassword, input, getResources().getString(R.string.contraseña_requerida));
                                                 if (detectorDeErroresPassword == 0) {
-                                                    Progress.setMessage("Eliminando, por favor espere");
+                                                    Progress.setMessage(getResources().getString(R.string.eliminando_espere));
                                                     Progress.show();
                                                     RevisarMatchPassowrd(); //Metodo encargado de ver si lo que se escribio coincide
                                                 }
@@ -185,7 +185,7 @@ public class UsuarioActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(UsuarioActivity.this);
                 builder.setPositiveButton(
-                        "SI",
+                        getResources().getString(R.string.si_mayus),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Intent cerrarMainMenu = new Intent(MainMenu.FINISH_ALERT); //Vinculamos la variable de IngresarActivity acá
@@ -206,7 +206,7 @@ public class UsuarioActivity extends AppCompatActivity {
                         });
                 //Centrar Titulo
                 TextView title = new TextView(UsuarioActivity.this);
-                title.setText("¿Deseas cerrar sesión?");
+                title.setText(getResources().getString(R.string.deseas_cerrar_sesion));
                 //title.setBackgroundColor(Color.BLACK);
                 title.setPadding(10, 10, 10, 10);
                 title.setGravity(Gravity.CENTER);
@@ -238,13 +238,13 @@ public class UsuarioActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ContraseñaReal = dataSnapshot.getValue().toString(); //Conseguimos el valor real de la contraseña del usuario
                 if(!contraseñaStr.equals(ContraseñaReal)){
-                    input.setError("La contraseña escrita no es la correcta");
+                    input.setError(getResources().getString(R.string.la_contraseña_no_es_correcta));
                     input.requestFocus();
                 }else{
                     Intent cerrarMainMenu = new Intent(MainMenu.FINISH_ALERT); //Vinculamos la variable de IngresarActivity acá
                     UsuarioActivity.this.sendBroadcast(cerrarMainMenu); //Llamamos al Broadcast para que lo cierre
                     Database.child(VariablesEstaticas.CurrentUserUID).removeValue(); //Eliminamos de la database
-                    MU.MostrarToast(UsuarioActivity.this, "La cuenta fue eliminada permanentemente");
+                    MU.MostrarToast(UsuarioActivity.this, getResources().getString(R.string.la_cuenta_fue_eliminada));
                     VE.GuardarDatos(sharedPreferences, false, ""); //Guardamos los cambios, la variable islogged y el uid ahora tienen valores
                     Intent ingresar = new Intent(UsuarioActivity.this, IngresarActivity.class);
                     startActivity(ingresar);

@@ -80,11 +80,10 @@ public class ModificandoTab3Usuario extends Fragment {
             public void onClick(View v) {
                 usuarioNuevoStr = usuarioNuevo.getText().toString().trim();
                 passwordUsuarioStr = confirmarPassword.getText().toString().trim();
-                detectorDeErroresPassword = BD.ValidarContraseña(passwordUsuarioStr, detectorDeErroresPassword, confirmarPassword, "Se requiere contraseña");
-                detectorDeErroresNombreNuevo = BD.ValidarUsuario(usuarioNuevoStr, detectorDeErroresNombreNuevo, usuarioNuevo, "Se requiere" +
-                        " el nuevo nombre de usuario");
+                detectorDeErroresPassword = BD.ValidarContraseña(passwordUsuarioStr, detectorDeErroresPassword, confirmarPassword, getResources().getString(R.string.se_requiere_contraseña));
+                detectorDeErroresNombreNuevo = BD.ValidarUsuario(usuarioNuevoStr, detectorDeErroresNombreNuevo, usuarioNuevo, getResources().getString(R.string.se_requiere_el_nuevo_nombre_de_usuario));
                 if (detectorDeErroresPassword == 0 && detectorDeErroresNombreNuevo == 0) {
-                    Progress.setMessage("Modificando, por favor espere");
+                    Progress.setMessage(getResources().getString(R.string.modificando_espere));
                     Progress.show();
                     RevisarMatchUsuario(); //Metodo encargado de ver si lo que se escribio coincide
                 }
@@ -102,12 +101,12 @@ public class ModificandoTab3Usuario extends Fragment {
                 //Si se escribio correctamente:
                 if(passwordUsuarioStr.equals(ContraseñaReal)){
                     Database.child(VariablesEstaticas.CurrentUserUID).child("Usuario").setValue(usuarioNuevoStr); //Actualizamos la database
-                    MU.MostrarToast(getActivity(), "El nombre de usuario se cambió exitosamente");
+                    MU.MostrarToast(getActivity(), getResources().getString(R.string.el_nombre_de_usuario_se_cambio_exitosamente));
                     //Limpiamos cajas de texto
                     usuarioNuevo.getText().clear();
                     confirmarPassword.getText().clear();
                 }else{
-                    confirmarPassword.setError("La contraseña actual escrita no es la correcta");
+                    confirmarPassword.setError(getResources().getString(R.string.la_contraseña_no_es_correcta));
                     confirmarPassword.requestFocus();
                 }
                 Progress.dismiss();

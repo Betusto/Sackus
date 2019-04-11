@@ -30,7 +30,7 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="539dp"
         android:clickable="true"
-        android:text="Olvidé mi contraseña"
+        android:text="@string/No_Subrayado"
         android:textColor="@color/colorAccent"
         android:textSize="18sp" />
 

@@ -136,7 +136,7 @@ public class GastoTab1Gasto extends Fragment {
     public void onStart() {
         super.onStart();
         //Mostrar el efectivo
-        BD.MostrarElementosUsuarioActualConSlash(Database, "EfectivoTotal", "Efectivo Total:", efectivototalText, sharedPreferences);
+        BD.MostrarElementosUsuarioActualConSlash(Database, "EfectivoTotal", getResources().getString(R.string.efectivo_total_2), efectivototalText, sharedPreferences);
     }
 
     public void RestarMontoAñadirHistorial(){
@@ -145,7 +145,7 @@ public class GastoTab1Gasto extends Fragment {
         //Verificamos que el usuario no haya dejado campos sin escribir
         Validar();
         if (detectorDeErroresGastaste == 0 && detectorDeErroresPrecio == 0) {
-            Progress.setMessage("Añadiendo, por favor espere");
+            Progress.setMessage(getResources().getString(R.string.añadiendo_espere));
             Progress.show();
             Calcular(); //Se encarga de calcular y guardar el historial en la bd
         }
@@ -171,7 +171,7 @@ public class GastoTab1Gasto extends Fragment {
                                 Database.child(VariablesEstaticas.CurrentUserUID).child("EfectivoTotal").setValue("$" + df2.format(efectivoTotal - dineroeditDouble));
                                 gastasteEdit.getText().clear();
                                 precioEdit.getText().clear(); //limpiamos caja de texto
-                                MandarToast.MostrarToast(getActivity(), "El efectivo total se actualizó exitosamente");
+                                MandarToast.MostrarToast(getActivity(), getResources().getString(R.string.efectivo_se_actualizo));
                                 //VINCULO
                                 BD.AlAñadirNuevaNota(gastasteStr,precioStr);
                                 Intent reebot = new Intent(getActivity(), GastoActivity.class);
@@ -183,14 +183,14 @@ public class GastoTab1Gasto extends Fragment {
                                 getActivity().startActivity(reebot);
                                 getActivity().overridePendingTransition(0, 0);
                             } else {
-                                MandarToast.MostrarToast(getActivity(), "No se puede agregar el gasto por falta de dinero");
+                                MandarToast.MostrarToast(getActivity(), getResources().getString(R.string.no_se_puede_agregar_gasto_por_falta_de_dinero));
                             }
                         } else {
-                            precioEdit.setError("Se requiere un monto valido");
+                            precioEdit.setError(getResources().getString(R.string.se_requiere_monto_valido));
                             precioEdit.requestFocus();
                         }
                     }else{
-                            MandarToast.MostrarToast(getActivity(), "Se necesita efectivo para añadir nuevo gasto");
+                            MandarToast.MostrarToast(getActivity(), getResources().getString(R.string.se_necesita_efectivo_para_añadir_gasto));
                         }
                         Progress.dismiss();
                             }
@@ -206,14 +206,14 @@ public class GastoTab1Gasto extends Fragment {
 
     public void Validar(){
         if(precioStr.equals("$") || precioStr.equals("$.") || precioStr.isEmpty()) { //Si no dejo el campo de texto vacio
-            precioEdit.setError("Se requiere un monto valido");
+            precioEdit.setError(getResources().getString(R.string.se_requiere_monto_valido));
             precioEdit.requestFocus();
             detectorDeErroresPrecio++;
         }else{
             detectorDeErroresPrecio = 0;
         }
         if(gastasteStr.isEmpty()){
-            gastasteEdit.setError("Se requiere nombre del gasto");
+            gastasteEdit.setError(getResources().getString(R.string.se_requiere_nombre_del_gasto));
             gastasteEdit.requestFocus();
             detectorDeErroresGastaste++;
         }else{

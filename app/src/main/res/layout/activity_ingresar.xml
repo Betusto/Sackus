@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   
+    android:background="@drawable/fondo"
     tools:context=".IngresarActivity">
 
     <EditText
@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="164dp"
         android:ems="10"
-        android:hint="Usuario o Correo"
+        android:hint="@string/usuario_o_correo"
         android:inputType="textEmailAddress|textCapSentences" />
 
 
@@ -28,7 +28,7 @@
         android:layout_marginTop="230dp"
         android:layout_marginEnd="81dp"
         android:ems="10"
-        android:hint="Contraseña"
+        android:hint="@string/contraseña"
         android:inputType="textPassword" />
 
     <Button
@@ -40,29 +40,29 @@
         android:layout_marginBottom="171dp"
         android:background="@drawable/btn_uno"
         android:textColor="@drawable/txt_btn_uno"
-        android:text="Ingresar" />
+        android:text="@string/ingresar" />
 
     <Button
         android:id="@+id/crearbutton"
-        android:layout_width="wrap_content"
+        android:layout_width="134dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="77dp"
         android:background="@drawable/btn_uno"
-        android:textColor="@drawable/txt_btn_uno"
-        android:text="CREAR CUENTA" />
+        android:text="@string/crear_cuenta"
+        android:textColor="@drawable/txt_btn_uno" />
 
     <Button
         android:id="@+id/olvidebutton"
-        android:layout_width="wrap_content"
+        android:layout_width="154dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="19dp"
         android:background="@drawable/btn_uno"
-        android:textColor="@drawable/txt_btn_uno"
-        android:text="OLVIDÉ CONTRASEÑA" />
+        android:text="@string/olvide_contraseña"
+        android:textColor="@drawable/txt_btn_uno" />
 
     <ImageView
         android:id="@+id/logoimage"

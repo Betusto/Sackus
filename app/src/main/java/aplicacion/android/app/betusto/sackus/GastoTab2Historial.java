@@ -71,7 +71,7 @@ public class GastoTab2Historial extends Fragment {
         //banner.setBackgroundColor(Color.GREEN);
         banner.setGravity(Gravity.CENTER);//Centramos el banner
         TextView text = new TextView(getActivity());//Creamos un textview
-        text.setText("LISTA DE GASTOS");//texto
+        text.setText(getResources().getString(R.string.lista_de_gastos_may));//texto
         text.setGravity(Gravity.CENTER);//lo centramos
         text.setTextColor(Color.WHITE);//color
         text.setTextSize(20);//tamaño

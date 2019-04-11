@@ -101,8 +101,8 @@ public class ModificandoActivity extends AppCompatActivity {
                         startActivity(olvidepassword);
                         VariablesEstaticas.Locked = false; //Para poder volver a entrar al boton
                     } else {
-                        MandarToast.MostrarToast(ModificandoActivity.this,"Se necesita conexión a internet para acceder a " +
-                                "esta opción");
+                        MandarToast.MostrarToast(ModificandoActivity.this,getResources().getString(R.string.necesita_conexion_a_internet) +
+                                getResources().getString(R.string.esta_opcion));
                         Palabra.Subrayar(OlvideContraseña); //Manda a llamar al metodo que dejara de subrayar el texto
                         VariablesEstaticas.Locked = false; //Para volver a entrar al boton
                     }
@@ -129,9 +129,9 @@ public class ModificandoActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         //Nombres de los tabs
-        tabLayout.getTabAt(0).setText("CAMBIAR CONTRASEÑA");
-        tabLayout.getTabAt(1).setText("CAMBIAR CORREO");
-        tabLayout.getTabAt(2).setText("CAMBIAR NOMBRE");
+        tabLayout.getTabAt(0).setText(getResources().getString(R.string.cambiar_contraseña).toUpperCase());
+        tabLayout.getTabAt(1).setText(getResources().getString(R.string.cambiar_correo).toUpperCase());
+        tabLayout.getTabAt(2).setText(getResources().getString(R.string.cambiar_nombre).toUpperCase());
 
         CD.startConexion(nowifibutton);
     }

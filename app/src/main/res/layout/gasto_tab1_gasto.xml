@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="56dp"
-        android:text="Efectivo Total:\n"
+        android:text="@string/efectivo_total"
         android:textAlignment="center"
         android:textSize="33sp" />
 
@@ -48,7 +48,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="248dp"
-        android:text="Nuevo Gasto"
+        android:text="@string/nuevo_gasto"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@color/colorIcons"
         android:textSize="24sp" />
@@ -62,7 +62,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginBottom="62dp"
         android:ems="10"
-        android:hint="Precio"
+        android:hint="@string/precio"
         android:inputType="numberDecimal"
         android:singleLine="true"
         android:textSize="22sp" />
@@ -76,7 +76,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginBottom="171dp"
         android:ems="10"
-        android:hint="¿Qué gastaste?"
+        android:hint="@string/en_que_gastaste"
         android:inputType="textCapSentences|textMultiLine"
         android:lines="2"
         android:maxLines="2"

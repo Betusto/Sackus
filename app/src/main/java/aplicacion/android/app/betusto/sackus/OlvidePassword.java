@@ -130,12 +130,12 @@ public class OlvidePassword extends AppCompatActivity {
                     if (VariablesEstaticas.Locked == false) { //Si no esta locked
                         VariablesEstaticas.Locked = true;
                         if (CD.isConnected()) { //Revisamos si hay internet
-                            Progress.setMessage("Enviando, por favor espere");
+                            Progress.setMessage(getResources().getString(R.string.enviando_por_favor_espere));
                             Progress.show();
                             RevisarCorreoExiste();
                         } else { //Si no hay internet:
-                            MandarToast.MostrarToast(OlvidePassword.this,"Se necesita conexión a internet para acceder a " +
-                                    "esta opción");
+                            MandarToast.MostrarToast(OlvidePassword.this,getResources().getString(R.string.necesita_conexion_a_internet) +
+                                    getResources().getString(R.string.esta_opcion));
                             VariablesEstaticas.Locked = false; //Para volver a entrar al boton
                         }
                     }
@@ -170,18 +170,18 @@ public class OlvidePassword extends AppCompatActivity {
                     if (session != null) { //Si pudo ingresar a la cuenta de gmail entonces mandara el mensaje
                         javax.mail.Message message = new MimeMessage(session);
                         message.setFrom(new InternetAddress(correo));
-                        message.setSubject("Recuperación de contraseña"); //Titulo del mensaje del correo
+                        message.setSubject(getResources().getString(R.string.recuperar_contraseña)); //Titulo del mensaje del correo
                         message.setRecipients(javax.mail.Message.RecipientType.TO, InternetAddress.parse(CorreoAMandar)); //Correo al que se le va a mandar
-                        message.setContent("Saludos "+NombreUsuario+",\n Tu contraseña es: "+ContraseñaUsuario+",\n " +
-                                "Si no pediste recuperar tu contraseña, puedes ignorar este correo.\n" +
-                                "Atentamente, App2.", "text/html; charset=utf-8"); //Correo que se le va a madar
+                        message.setContent(getResources().getString(R.string.mail_saludos)+" "+NombreUsuario+getResources().getString(R.string.mail_tu_contraseña_es)+ContraseñaUsuario+",\n " +
+                                getResources().getString(R.string.mail_si_no_pediste_recuperar) +
+                                getResources().getString(R.string.mail_atentamente_app2), "text/html; charset=utf-8"); //Correo que se le va a madar
                         Transport.send(message); //Mandamos el correo
 
                     }
-                    MandarToast.MostrarToast(OlvidePassword.this,"Correo enviado");
+                    MandarToast.MostrarToast(OlvidePassword.this,getResources().getString(R.string.correo_enviado));
                 } catch (Exception e) {
                     e.printStackTrace(); //Manda una excepcion
-                    MandarToast.MostrarToast(OlvidePassword.this,"Ocurrió un error al tratar de enviar el correo");
+                    MandarToast.MostrarToast(OlvidePassword.this,getResources().getString(R.string.error_enviar_correo));
                 }
                 VariablesEstaticas.Locked = false; //Para volver a entrar al boton
                 finish();
@@ -230,7 +230,7 @@ public class OlvidePassword extends AppCompatActivity {
                                             VariablesEstaticas.Locked = false; //Para volver a entrar al boton
                                             if(detectorDeErroresCorreo != 0){
                                                 correoText.requestFocus();
-                                                correoText.setError("El correo que escribió no pertenece a ningún usuario registrado");
+                                                correoText.setError(getResources().getString(R.string.el_correo_no_pertenece_a_ningun_usuario));
                                             }
                                         }else{
                                             CantidadDeSnapshots.clear();
@@ -252,18 +252,18 @@ public class OlvidePassword extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(OlvidePassword.this, "Ocurrio un error al intentar acceder a la base de datos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OlvidePassword.this, getResources().getString(R.string.error_al_acceder_a_bd), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void Validar(String BuscarErroresCorreo){
         if(BuscarErroresCorreo.isEmpty()){
-            correoText.setError("Correo requerido");
+            correoText.setError(getResources().getString(R.string.correo_requerido));
             correoText.requestFocus();
             detectorDeErroresCorreo++;
         }else if(!Patterns.EMAIL_ADDRESS.matcher(BuscarErroresCorreo).matches()){
-            correoText.setError("Ingrese un correo valido");
+            correoText.setError(getResources().getString(R.string.ingrese_un_correo_valido));
             correoText.requestFocus();
             detectorDeErroresCorreo++;
         }else{

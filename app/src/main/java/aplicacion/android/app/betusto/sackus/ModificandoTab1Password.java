@@ -104,13 +104,12 @@ public class ModificandoTab1Password extends Fragment {
                 passwordStr = password.getText().toString().trim();
                 passwordNuevoStr = passwordNuevo.getText().toString().trim();
                 confirmarPassowrdStr = confirmarPassword.getText().toString().trim();
-                detectorDeErroresPassword = BD.ValidarContraseña(passwordStr, detectorDeErroresPassword, password, "Se requiere contraseña");
-                detectorDeErroresPasswordNuevo = BD.ValidarContraseña(passwordNuevoStr, detectorDeErroresPasswordNuevo, passwordNuevo, "Se requiere" +
-                        " contraseña nueva");
+                detectorDeErroresPassword = BD.ValidarContraseña(passwordStr, detectorDeErroresPassword, password, getResources().getString(R.string.se_requiere_contraseña));
+                detectorDeErroresPasswordNuevo = BD.ValidarContraseña(passwordNuevoStr, detectorDeErroresPasswordNuevo, passwordNuevo, getResources().getString(R.string.se_requiere_contraseña_nueva));
                 detectorDeErroresConfirmarPassword = BD.ValidarContraseña(confirmarPassowrdStr, detectorDeErroresConfirmarPassword, confirmarPassword,
-                        "Se requiere confirmar contraseña");
+                        getResources().getString(R.string.se_requiere_confirmar_contraseña));
                 if (detectorDeErroresPassword == 0 && detectorDeErroresPasswordNuevo == 0 && detectorDeErroresConfirmarPassword == 0) {
-                    Progress.setMessage("Modificando, por favor espere");
+                    Progress.setMessage(getResources().getString(R.string.modificando_espere));
                     Progress.show();
                     RevisarMatchPassowrd(); //Metodo encargado de ver si lo que se escribio coincide
                 }
@@ -131,17 +130,17 @@ public class ModificandoTab1Password extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ContraseñaReal = dataSnapshot.getValue().toString(); //Conseguimos el valor real de la contraseña del usuario
                 if(!passwordStr.equals(ContraseñaReal)){
-                    password.setError("La contraseña actual escrita no es la correcta");
+                    password.setError(getResources().getString(R.string.la_contraseña_no_es_correcta));
                     password.requestFocus();
                 }
                 if(!passwordNuevoStr.equals(confirmarPassowrdStr)){
-                    confirmarPassword.setError("La contraseña nueva no concuerda con la confirmada");
+                    confirmarPassword.setError(getResources().getString(R.string.la_contraseña_nueva_no_concuerda));
                     confirmarPassword.requestFocus();
                 }
                 //Si se escribio correctamente:
                 if(passwordStr.equals(ContraseñaReal) && passwordNuevoStr.equals(confirmarPassowrdStr)){
                     Database.child(VariablesEstaticas.CurrentUserUID).child("Contraseña").setValue(passwordNuevoStr); //Actualizamos la database
-                    MU.MostrarToast(getActivity(), "La contraseña se cambió exitosamente");
+                    MU.MostrarToast(getActivity(), getResources().getString(R.string.la_contraseña_se_cambio_exitosamente));
                     //Limpiamos cajas de texto
                     password.getText().clear();
                     passwordNuevo.getText().clear();

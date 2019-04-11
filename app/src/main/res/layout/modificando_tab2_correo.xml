@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="6dp"
         android:layout_marginTop="344dp"
-        android:text="Ingrese su contraseña para confirmar:"
+        android:text="@string/ingrese_su_contraseña_para_confirmar"
         android:textSize="20sp" />
 
     <EditText
@@ -29,7 +29,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="370dp"
         android:ems="10"
-        android:hint="Contraseña"
+        android:hint="@string/contraseña"
         android:inputType="textPassword" />
 
     <ImageButton
@@ -56,7 +56,7 @@
         android:layout_marginStart="7dp"
         android:layout_marginTop="253dp"
         android:ems="10"
-        android:hint="Nuevo correo"
+        android:hint="@string/nuevo_correo"
         android:inputType="textEmailAddress" />
 
     <TextView
@@ -67,7 +67,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="6dp"
         android:layout_marginTop="226dp"
-        android:text="Ingrese su nuevo correo:"
+        android:text="@string/ingrese_su_nuevo_correo"
         android:textSize="20sp" />
 
     <TextView
@@ -87,7 +87,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="6dp"
         android:layout_marginTop="113dp"
-        android:text="Correo actual:"
+        android:text="@string/correo_actual"
         android:textSize="20sp" />
 
     <Button
@@ -98,7 +98,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="445dp"
-        android:text="Cambiar \ncorreo"
+        android:text="@string/cambiar_correo_boton"
         android:background="@drawable/btn_uno"
         android:textColor="@drawable/txt_btn_uno"
         android:textAllCaps="true"

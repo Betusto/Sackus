@@ -163,7 +163,7 @@ public class MainMenu extends AppCompatActivity {
 
 
     public void Saludos(){
-        BD.MostrarElementosUsuarioActualConSlash(Database, "Usuario", "Saludos", usuarioBienvenidoText, sharedPreferences);
+        BD.MostrarElementosUsuarioActualConSlash(Database, "Usuario", getResources().getString(R.string.mail_saludos), usuarioBienvenidoText, sharedPreferences);
     }
 
     //Revisar conexion internet

@@ -84,17 +84,17 @@ public class AddActivity extends AppCompatActivity {
                                     //Actualizamos la cantidad de dinero
                                     Database.child(VariablesEstaticas.CurrentUserUID).child("EfectivoTotal").setValue("$" + df2.format(dineroeditDouble + efectivoTotal));
                                     dineroedit.getText().clear(); //limpiamos caja de texto
-                                    MandarToast.MostrarToast(AddActivity.this, "El efectivo total se actualizó exitosamente");
+                                    MandarToast.MostrarToast(AddActivity.this, getResources().getString(R.string.efectivo_se_actualizo));
                                 } else {
                                     MandarToast.MostrarToast(AddActivity.this, "No se puede agregar tanto efectivo");
                                     dineroedit.getText().clear(); //limpiamos caja de texto
                                 }
                             } else {
-                                dineroedit.setError("Se requiere un monto valido");
+                                dineroedit.setError(getResources().getString(R.string.se_requiere_monto_valido));
                                 dineroedit.requestFocus();
                             }
                         }else{
-                            dineroedit.setError("Se requiere un monto valido");
+                            dineroedit.setError(getResources().getString(R.string.se_requiere_monto_valido));
                             dineroedit.requestFocus();
                         }
                     }
@@ -112,7 +112,7 @@ public class AddActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         //Mostrar el efectivo
-        BD.MostrarElementosUsuarioActualConSlash(Database, "EfectivoTotal", "Efectivo Total:", mostrartotaltext, sharedPreferences);
+        BD.MostrarElementosUsuarioActualConSlash(Database, "EfectivoTotal", getResources().getString(R.string.efectivo_total_2), mostrartotaltext, sharedPreferences);
     }
 
 

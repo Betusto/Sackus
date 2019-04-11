@@ -21,10 +21,149 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <!---String subrayado-->
-    <string name="Olvidé_mi_contraseña"><Data><![CDATA[<u>Olvidé mi contraseña</u>]]></Data></string>
-    <string name="No_Subrayado">Olvidé mi contraseña</string>
+    <string name="Olvidé_mi_contraseña"><Data><![CDATA[<u>Forgot password</u>]]></Data></string>
+    <string name="No_Subrayado">Forgot password</string>
     <string name="title_activity_gasto">GastoActivity</string>
     <string name="title_activity_viajes">ViajesActivity</string>
     <string name="title_activity_notas">NotasActivity</string>
+
+    <!---activity_add-->
+    <string name="efectivo_total">Total Cash:\n</string>
+    <string name="añadir_efectivo">Add Cash</string>
+    <!---AddActivity-->
+    <string name="efectivo_se_actualizo">The total cash was successfully updated</string>
+    <string name="se_requiere_monto_valido">A valid amount is required</string>
+    <string name="efectivo_total_2">Total Cash:</string>
+
+    <!---activity_ingresar-->
+    <string name="usuario_o_correo">Username or Email</string>
+    <string name="contraseña">Password</string>
+    <string name="ingresar">Sign in</string>
+    <string name="crear_cuenta">CREATE ACCOUNT</string>
+    <string name="olvide_contraseña">FORGOT PASSWORD</string>
+    <!---IngresarActivity-->
+    <string name="necesita_conexion_a_internet">Internet connection is needed to access</string>
+    <string name="esta_opcion">this option</string>
+    <string name="entrando_espere">Loading, please wait</string>
+    <string name="bienvenido">Welcome</string>
+    <string name="correo_requerido">Email required</string>
+    <string name="contraseña_requerida">Password required</string>
+    <string name="contraseña_es_muy_corta">Password is too short</string>
+    <string name="usuario_o_contraseña_incorrectos">Incorrect username or password</string>
+    <string name="error_al_acceder_a_bd">An error has occurred when trying to access the database</string>
+
+    <!---activity_main_menu-->
+    <string name="gasto">SPENDING</string>
+    <string name="viaje">TRAVEL</string>
+    <string name="notas">NOTES</string>
+    <string name="saludos">Greetings\n</string>
+    <!---MainMenu-->
+
+    <!---activity_olvide_password-->
+    <string name="ingrese_el_correo_de_su_cuenta">Enter the email of your account:</string>
+    <string name="recuperar_contraseña">Password Recovery</string>
+    <string name="correo">Email</string>
+    <string name="enviar_contraseña_al_correo">Send password to my email</string>
+    <!---OlvidePassword-->
+    <string name="enviando_por_favor_espere">Sending, please wait</string>
+    <string name="error_enviar_correo">An error has occurred when trying to send the mail</string>
+    <string name="correo_enviado">Mail sent</string>
+    <string name="el_correo_no_pertenece_a_ningun_usuario">The Email that you wrote does not belong to any registered user</string>
+    <string name="ingrese_un_correo_valido">Email is invalid</string>
+
+    <string name="mail_saludos">Greetings </string>
+    <string name="mail_tu_contraseña_es">,
+        Your password is: </string>
+    <string name="mail_si_no_pediste_recuperar">If you did not requested a password recovery, you can ignore this mail.\n</string>
+    <string name="mail_atentamente_app2"> Attentively, App2.</string>
+
+    <!---activity_register-->
+    <string name="nombre_de_usuario">Username</string>
+    <string name="crear_cuenta_low">Create account</string>
+    <string name="registrar">Sign up</string>
+    <string name="ya_tengo_cuenta">I already have an account</string>
+    <!---RegisterActivity-->
+    <string name="registrando_espere">Signing up, please wait</string>
+    <string name="usuario_generado_en_bd">User generated in DB</string>
+    <string name="nombre_de_usuario_requerido">Username required</string>
+    <string name="el_nombre_ya_existe">That username is already taken</string>
+    <string name="el_correo_ya_existe">That email is already being used</string>
+
+    <!---activity_usuario-->
+    <string name="modificar_cuenta">MODIFY ACCOUNT</string>
+    <string name="cerrar_sesion">Sign off</string>
+    <!---UsuarioActivity-->
+    <string name="desea_eliminar_su_cuenta">Do you want to delete your account?</string>
+    <string name="aviso_eliminacion_de_cuenta">If you delete your account, all the data and changes done will be permanently lost.\nDo you want to continue?</string>
+    <string name="eliminar_mayus">DELETE</string>
+    <string name="cancelar_mayus">CANCEL</string>
+    <string name="si_mayus">YES</string>
+    <string name="eliminar_cuenta">Delete account</string>
+    <string name="escriba_su_contraseña_para_eliminar_cuenta">Write your password to be able to delete your account: </string>
+    <string name="eliminando_espere">Deleting, please wait</string>
+    <string name="deseas_cerrar_sesion">Do you want to sign off?</string>
+    <string name="la_contraseña_no_es_correcta">The password is incorrect</string>
+    <string name="la_cuenta_fue_eliminada">The account has been deleted permanently</string>
+
+    <!---gasto_tab1_gasto-->
+    <string name="nuevo_gasto">New expense</string>
+    <string name="precio">Price</string>
+    <string name="en_que_gastaste">In what did you spend?</string>
+    <!---GastoTab1Gasto-->
+    <string name="añadiendo_espere">Adding, please wait</string>
+    <string name="no_se_puede_agregar_gasto_por_falta_de_dinero">The expense cannot be added because of lack of money</string>
+    <string name="se_necesita_efectivo_para_añadir_gasto">You need cash to add a new expense</string>
+    <string name="se_requiere_nombre_del_gasto">Name of the expense is required</string>
+    <!---GastoTab2Historial-->
+    <string name="lista_de_gastos_may">LISTA DE GASTOS</string>
+    <!---GastoActivity-->
+    <string name="historial">HISTORY</string>
+
+    <!---ModificandoActivity-->
+    <string name="cambiar_contraseña">Change password</string>
+    <string name="cambiar_correo">Change email</string>
+    <string name="cambiar_nombre">Change username</string>
+    <!---modificando_tab1_password-->
+    <string name="confirme_su_nueva_contraseña">Confirm your new password:</string>
+    <string name="confirmar_contraseña">Confirm password</string>
+    <string name="nueva_contraseña">New password</string>
+    <string name="ingrese_su_nueva_contraseña">Enter your new password:</string>
+    <string name="contraseña_actual">Current password</string>
+    <string name="ingrese_su_contraseña_actual">Enter your current password:</string>
+    <!---ModificandoTab1Password-->
+    <string name="se_requiere_contraseña">Password is required</string>
+    <string name="se_requiere_contraseña_nueva">New password is required</string>
+    <string name="se_requiere_confirmar_contraseña">Confirm password is required</string>
+    <string name="modificando_espere">Modifying, please wait</string>
+    <string name="la_contraseña_nueva_no_concuerda">The new password does not match with the confirmed password</string>
+    <string name="la_contraseña_se_cambio_exitosamente">The password has been changed successfully</string>
+    <!---modificando_tab2_correo-->
+    <string name="ingrese_su_contraseña_para_confirmar">Enter your password to confirm:</string>
+    <string name="nuevo_correo">New email</string>
+    <string name="ingrese_su_nuevo_correo">Enter your new email:</string>
+    <string name="correo_actual">Current email:</string>
+    <string name="cambiar_correo_boton">Change \nemail</string>
+    <!---ModificandoTab2Correo-->
+    <string name="se_requiere_el_nuevo_correo">The new email is required</string>
+    <string name="el_correo_se_cambio_exitosamente">The email has been changed successfully</string>
+    <!---modificando_tab3_usuario-->
+    <string name="nuevo_nombre_de_usuario">New username</string>
+    <string name="ingrese_su_nuevo_nombre_de_usuario">Enter your new username:</string>
+    <string name="nombre_de_usuario_actual">Current username:</string>
+    <string name="cambiar_nombre_boton">Change \nusername</string>
+    <!---ModificandoTab3Usuario-->
+    <string name="se_requiere_el_nuevo_nombre_de_usuario">New username is required</string>
+    <string name="el_nombre_de_usuario_se_cambio_exitosamente">The username has been changes successfully</string>
+
+    <!---NotasActivity-->
+    <string name="escribir_nota_may">WRITE NOTE</string>
+    <string name="ver_notas_may">SEE NOTES</string>
+
+    <!---MetodosUtiles DetectaConexion-->
+    <string name="no_hay_conexion_a_internet">No hay conexión a internet</string>
+    <string name="avisonointernet1_es_posible_que">Es posible que</string>
+    <string name="avisonointernet2_algunas_opciones_no_funcionen">algunas opciones no funcionen correctamente. Por seguridad de datos mantenga la aplicación abierta u oculta hasta</string>
+    <string name="avisonointernet3_que_vuelva_la_conexion">que vuelva a entrar la conexión.</string>
+
 
 </resources>

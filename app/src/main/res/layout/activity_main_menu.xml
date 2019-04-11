@@ -35,7 +35,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="300dp"
-        android:text="GASTO"
+        android:text="@string/gasto"
         android:background="@drawable/btn_uno"
         android:textColor="@drawable/txt_btn_uno"
         android:textSize="25sp" />
@@ -47,7 +47,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="200dp"
-        android:text="VIAJE"
+        android:text="@string/viaje"
         android:background="@drawable/btn_uno"
         android:textColor="@drawable/txt_btn_uno"
         android:textSize="24sp" />
@@ -60,7 +60,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100dp"
-        android:text="NOTAS"
+        android:text="@string/notas"
         android:background="@drawable/btn_uno"
         android:textColor="@drawable/txt_btn_uno"
         android:textSize="24sp" />
@@ -75,7 +75,7 @@
         android:layout_marginTop="23dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="Saludos\n"
+        android:text="@string/saludos"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textSize="23sp" />
