@@ -66,21 +66,14 @@ public class GastoTab1Gasto extends Fragment {
     private int detectorDeErroresGastaste = 0, detectorDeErroresPrecio = 0;
     private String gastasteStr, precioStr;
 
-    private static GastoTab1Gasto instance = null;
-
-
-
     private static DecimalFormat df2 = new DecimalFormat("0.00"); //Para usar solo dos decimales
 
     MetodosUtiles MandarToast = new MetodosUtiles();
-    GastoTab2Historial ElementoDelOtroTab = new GastoTab2Historial();
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.gasto_tab1_gasto, container, false);
-        instance = GastoTab1Gasto.this;
         añadirButton = rootView.findViewById(R.id.fab1);
         efectivototalText =  rootView.findViewById(R.id.activity_gasto_tab1_efectivo_total_text);
         gastasteEdit = rootView.findViewById(R.id.activity_gasto_tab1_gastaste_edittext);
@@ -109,7 +102,8 @@ public class GastoTab1Gasto extends Fragment {
         //Constante simbolo de peso
         MU.EstiloDinero(precioEdit);
 
-        //cursor siempre al final
+
+
         gastasteEdit.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -117,6 +111,20 @@ public class GastoTab1Gasto extends Fragment {
                 gastasteEdit.setSelection(gastasteEdit.getText().length());
             }
         });
+
+        gastasteEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                gastasteEdit.setSelection(gastasteEdit.getText().length());
+            }
+        });
+
 
 
         //Restar al monto

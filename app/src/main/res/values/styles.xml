@@ -21,4 +21,16 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
+
+    <!-- Dialog sin margins -->
+    <style name="BottomOptionsDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:layout_gravity">center</item>
+
+
+    </style>
+
+
 </resources>

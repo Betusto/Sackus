@@ -196,7 +196,6 @@ public class OlvidePassword extends AppCompatActivity {
         Database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.e("TEST2", "TODO BIEN");
                 final int CantidadTotalDeSnaps = (int) dataSnapshot.getChildrenCount();
                 for (final DataSnapshot snapshot : dataSnapshot.getChildren()) //Recorremos cada campo de la tabla Usuarios
                 {

@@ -37,3 +37,17 @@ class GastosGetters{
 
 
 
+class InvitacionesGetters{
+    public String NombreViaje, UsuarioMando, UsuarioDestino, Fecha, Texto, TimeStamp;
+    public InvitacionesGetters(){
+
+    }
+    public InvitacionesGetters(String NombreViaje,String  UsuarioMando, String UsuarioDestino, String Fecha, String Texto, String TimeStamp){
+        this.NombreViaje = NombreViaje;
+        this.UsuarioMando = "Enviado por "+UsuarioMando;
+        this.UsuarioDestino = UsuarioDestino;
+        this.Fecha = "Enviado el "+Fecha;
+        this.Texto = Texto;
+        this.TimeStamp = TimeStamp;
+    }
+}

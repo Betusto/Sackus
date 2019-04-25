@@ -32,6 +32,7 @@ public class MainMenu extends AppCompatActivity {
     private TextView usuarioBienvenidoText;
     private DatabaseReference Database;
     private ImageButton nowifibutton;
+    private ImageButton mailboxButton;
     //Variable que nos permite vincular con el metodo que se encuentra en MetodosUtiles de VariablesEstaticas para guardar o cargar data
     SharedPreferences sharedPreferences;
     VariablesEstaticas VE = new VariablesEstaticas();
@@ -51,6 +52,7 @@ public class MainMenu extends AppCompatActivity {
         usuarioBienvenidoText = (TextView) findViewById(R.id.usuarioTextView);
         OpcionesButton = (ImageButton) findViewById(R.id.activity_main_menu_opcionesButton);
         nowifibutton = findViewById(R.id.activity_main_menu_nowifibutton);
+        mailboxButton = findViewById(R.id.activity_mainmenu_mailboxbutton);
 
         final DetectaConexion CD = new DetectaConexion(this);
         CD.startConexion(nowifibutton);
@@ -64,6 +66,15 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 CD.mensajeNoInternet(MainMenu.this);
+            }
+        });
+
+        //Ir al mailbox
+        mailboxButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mailbox = new Intent(MainMenu.this,MailBoxActivity.class);
+                startActivity(mailbox);
             }
         });
 

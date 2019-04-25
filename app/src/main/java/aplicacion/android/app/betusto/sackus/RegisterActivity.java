@@ -249,7 +249,8 @@ public void LogeoExitoso(String UID){
                                             CantidadDeSnapshots.clear();
                                             Progress.dismiss();
                                             noMasDataChanges = true;
-                                            logearUsuarioParaBD(VariablesEstaticas.UID);
+                                            VariablesEstaticas VE = new VariablesEstaticas();
+                                            logearUsuarioParaBD(VE.UID);
                                     }else{
                                         if(noMasDataChanges == false) {
                                             CantidadDeSnapshots.clear();
@@ -279,7 +280,7 @@ public void LogeoExitoso(String UID){
                         }
                         }else{
                     Progress.dismiss();
-                    logearUsuarioParaBD(VariablesEstaticas.UID);
+                    logearUsuarioParaBD(VE.UID);
             }
             }
 

@@ -105,8 +105,14 @@ public class GastoActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setText(getResources().getString(R.string.historial));
 
         CD.startConexion(nowifibutton);
-        //mViewPager.setCurrentItem(1);
-        //mViewPager.setCurrentItem(0);
+        //Te lleve automaticamente al tab 2 si modificaste algo
+        Intent reebot = getIntent();
+        Bundle b = reebot.getExtras();
+        if(b!=null){
+            if(b.getInt("INTENT") == 1){
+                mViewPager.setCurrentItem(1);
+            }
+        }
     }
 
     //Revisar conexion internet

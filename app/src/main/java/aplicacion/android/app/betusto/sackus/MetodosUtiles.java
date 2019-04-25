@@ -1,6 +1,7 @@
 package aplicacion.android.app.betusto.sackus;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,7 +21,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Adapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -28,8 +29,9 @@ import android.widget.Toast;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.google.firebase.database.DataSnapshot;
@@ -39,9 +41,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 public class MetodosUtiles {
@@ -242,6 +242,35 @@ public class MetodosUtiles {
         DateFormat format = new SimpleDateFormat("EEE, dd 'de' MMM 'del' yyyy 'a las' hh:mm aaa");
         return format.format(new Date(time));
     }
+
+    public void MostrarDatePicker(Context context, final TextView textView, final String complemento){
+        //Conseguir fecha actual completa
+        Calendar calendario = Calendar.getInstance();
+        int dia = calendario.get(Calendar.DAY_OF_MONTH);
+        int mes = calendario.get(Calendar.MONTH);
+        int año = calendario.get(Calendar.YEAR);
+        //DateFormat.getInstance(DateFormat.DAY_OF_WEEK_IN_MONTH_FIELD).format(calendario.getTime());
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                //Formato completo de la fecha
+
+                //String fecha = DateFormat.getDateInstance(DateFormat.FULL).format(calendario.getTime());
+                String fecha = dayOfMonth + "/" + (month + 1)  + "/" + year;
+                textView.setText(complemento + fecha+"\n"); //Escribe la fecha
+                // fechaInicioText.setText("Fecha de inicio:\n"+fecha); //Escribe la fecha
+            }
+        }, año, mes, dia);
+        datePickerDialog.show();
+    }
+
+    //Revisar si los elementos de un arreglo son positivos
+    public static boolean areAllTrue(boolean[] array)
+    {
+        for(boolean b : array) if(!b) return false;
+        return true;
+    }
+
 }
 
 
@@ -331,7 +360,7 @@ class VariablesEstaticas extends  android.app.Application{
     public static boolean isLoged = false; //VARIABLE QUE DEBE GUARDARSE HASTA CUANDO SE CIERRA LA APP
     //Listas para guardar los valores temporales para luego ser almacenadas a la base de datos y al auth cuando vuelva internet
     //static para que su valor se guarde, y final para que la lista no cambie, lo que contiene si puede cambiar
-    public static String UID = UUID.randomUUID().toString().replace("-", ""); //Generador
+    public String UID = UUID.randomUUID().toString().replace("-", ""); //Generador
     //Variable estatica que tomará un control del uid que se vaya a guardar en la base de datos local
     public static boolean Locked = false;
     //Metodo que nos ayudara a guardar las variables desde la memoria del telefono
@@ -353,6 +382,7 @@ class VariablesEstaticas extends  android.app.Application{
 }
 
 class BaseDeDatos{
+    private static DecimalFormat df2 = new DecimalFormat("0.00"); //Para usar solo dos decimales
     VariablesEstaticas VE = new VariablesEstaticas();
     //Metodo encargado de mostrar algun elemento de la base de datos relacionado al usuario actual
     public void MostrarElementoUsuarioActual(DatabaseReference Database, String ElementoAConseguir, final TextView textView, final SharedPreferences sharedPreferences){
@@ -366,6 +396,61 @@ class BaseDeDatos{
                 if(VariablesEstaticas.CurrentUserUID != null && !VariablesEstaticas.CurrentUserUID.equals("")) {
                 String elemento = dataSnapshot.getValue().toString();
                     textView.setText(elemento);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+    public void MostrarElementoUsuarioActualConComplemento(DatabaseReference Database, String ElementoAConseguir, final String Complemento, final TextView textView, final SharedPreferences sharedPreferences) {
+        Database.child(VariablesEstaticas.CurrentUserUID).child(ElementoAConseguir).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //if necesario por si ya no obtiene el valor del uid por alguna razon, de esta manera no crasheara
+                //Se necesitan volver a cargar los datos porque cada cambio en la base de datos activa este ondatachange
+                VE.CargarDatos(sharedPreferences);
+                if (VariablesEstaticas.CurrentUserUID != null && !VariablesEstaticas.CurrentUserUID.equals("")) {
+                    String elemento = dataSnapshot.getValue().toString();
+                    textView.setText(Complemento + elemento);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+    public void MostarElementoEditText(String ElementoPadre, String Estampa, String ElementoAConseguir, final EditText editText, final SharedPreferences sharedPreferences){
+        //Referencia para la BD de forma en que podamos meter una tabla dentro de ella
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        //Referencia a la tabla del child:
+        final DatabaseReference TablaHija = database.child(VariablesEstaticas.CurrentUserUID);
+        TablaHija.child(ElementoPadre).child(Estampa).child(ElementoAConseguir).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //if necesario por si ya no obtiene el valor del uid por alguna razon, de esta manera no crasheara
+                //Se necesitan volver a cargar los datos porque cada cambio en la base de datos activa este ondatachange
+                VE.CargarDatos(sharedPreferences);
+                if(VariablesEstaticas.CurrentUserUID != null && !VariablesEstaticas.CurrentUserUID.equals("")) {
+                    if (dataSnapshot.getValue() != null){
+                        String elemento = dataSnapshot.getValue().toString();
+                        //Log.e("TEST","Valor de elemento: "+elemento.replace("$", ""));
+                        if(elemento.contains("$0.")){
+                            //Si el elemento empieza con 0 deberemos quitar ese 0
+                            editText.setText(elemento.replace("$0", ""));
+                        }else{
+                            editText.setText(elemento.replace("$", ""));
+                        }
+                    //Log.e("TEST",editText.getText().toString());
+                    if (elemento.contains("$")) {
+                        GastoTab2Historial.precioStrOld = editText.getText().toString();
+                    } else {
+                        GastoTab2Historial.gastasteStrOld = editText.getText().toString();
+                    }
+                }
                 }
             }
             @Override
@@ -395,21 +480,26 @@ class BaseDeDatos{
         });
     }
 
+    ArrayList<Gastos>notas = new ArrayList<>();
     //Metodo para mostrar las listas
     public static ArrayList<Gastos> retornarGastos = new ArrayList<>();
-    public void MostrarListasDelUsuario(final String ElementoPadre, final ArrayList<Gastos> notas, final  SharedPreferences sharedPreferences, final RecyclerView recyclerView, final Adaptador adaptador
+    public static ArrayList<Invitaciones> retornarInviraciones = new ArrayList<>();
+    public void MostrarListasDelUsuario(final String ElementoPadre, final ArrayList<Gastos> notas, final ArrayList<Invitaciones> invitaciones,
+                                        final  SharedPreferences sharedPreferences, final RecyclerView recyclerView, final AdaptadorInvitaciones adaptadorInvitaciones,
+                                        final Adaptador adaptador
     , final Context mActivity){
-        retornarGastos.add(new Gastos("","",""));
+        retornarGastos.add(new Gastos("","","",""));
         retornarGastos.clear();
-        //Referencia.child("Gastos").child(ElementoAConseguir)
-        //String ID = BD.GenerarTimeStamp(); //ID unico basado en el tiempo en el que se consiguió
-        //String fecha = MetodosUtiles.fechaHora(new Date().getTime()); //Fecha actual
+        if(notas != null) {
+            this.notas.clear();
+            this.notas = Adaptador.ReiniciarNotas();
+        }
         //Referencia para la BD de forma en que podamos meter una tabla dentro de ella
         DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         //Referencia a la tabla del child:
         final DatabaseReference TablaHija = database.child(VariablesEstaticas.CurrentUserUID);
         final List CantidadDeSnapshots = new ArrayList();
-        TablaHija.child(ElementoPadre).addValueEventListener(new ValueEventListener(){
+        TablaHija.child(ElementoPadre).addListenerForSingleValueEvent(new ValueEventListener(){
 
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
@@ -429,20 +519,46 @@ class BaseDeDatos{
                                     String GastoNota = snapshot.child("NombreDelGasto").getValue().toString();
                                     String Fecha = snapshot.child("Fecha").getValue().toString();
                                     String Precio = snapshot.child("Gasto").getValue().toString();
-                                    notas.add(new Gastos(GastoNota, Fecha, Precio));
-                                    if (CantidadDeSnapshots.size() == CantidadTotalDeSnaps) {
-                                        //Collections.copy(retornarGastos,notas);
-                                        //retornarGastos.addAll(notas); //le pasamos todos los elementos conseguidos
-                                        GastoTab2Historial Historial = new GastoTab2Historial();
-                                        retornarGastos = (ArrayList<Gastos>)notas.clone();
-                                        Log.e("TEST","CANTIDAD DE NOTAS: "+retornarGastos.size());
-                                        CantidadDeSnapshots.clear();
-                                        Historial.Adaptando(recyclerView, adaptador, mActivity);
+                                    //Para conseguir su referencia
+                                    String TimeStamp = snapshot.child("TimeStamp").getValue().toString();
+                                    if(notas != null) {
+                                        notas.add(new Gastos(GastoNota, Fecha, Precio, TimeStamp));
+                                        if (CantidadDeSnapshots.size() == CantidadTotalDeSnaps) {
+                                            //Collections.copy(retornarGastos,notas);
+                                            //retornarGastos.addAll(notas); //le pasamos todos los elementos conseguidos
+                                            GastoTab2Historial Historial = new GastoTab2Historial();
+                                            retornarGastos = (ArrayList<Gastos>) notas.clone();
+                                            Log.e("TEST", "CANTIDAD DE NOTAS: " + retornarGastos.size());
+                                            CantidadDeSnapshots.clear();
+                                            Historial.Adaptando(recyclerView, adaptador, mActivity);
                                         }
+                                    }
                                     break;
                                 case "Viajes":
                                     break;
                                 case "Notas":
+                                    break;
+                                case "Mensajes":
+                                    //Conseguimos los valores de la tabla
+                                    CantidadDeSnapshots.add(snapshot.child("NombreViaje"));
+                                    String NombreViaje = snapshot.child("NombreViaje").getValue().toString();
+                                    String FechaMensajes = snapshot.child("Fecha").getValue().toString();
+                                    String Texto = snapshot.child("Texto").getValue().toString();
+                                    String EnviadoPor = snapshot.child("UsuarioMando").getValue().toString();
+                                    //Para conseguir su referencia
+                                    String TimeStampMensajes = snapshot.child("TimeStamp").getValue().toString();
+                                    if(invitaciones!=null) {
+                                        invitaciones.add(new Invitaciones(NombreViaje, Texto, FechaMensajes, EnviadoPor, TimeStampMensajes));
+                                        if (CantidadDeSnapshots.size() == CantidadTotalDeSnaps) {
+                                            //Collections.copy(retornarGastos,notas);
+                                            //retornarGastos.addAll(notas); //le pasamos todos los elementos conseguidos
+                                            MailBoxActivity Mail = new MailBoxActivity();
+                                            retornarInviraciones = (ArrayList<Invitaciones>) invitaciones.clone();
+                                            Log.e("TEST", "CANTIDAD DE NOTAS: " + retornarInviraciones.size());
+                                            CantidadDeSnapshots.clear();
+                                            Mail.Adaptando(recyclerView, adaptadorInvitaciones, mActivity);
+                                        }
+                                    }
                                     break;
                             }
                             //notas.clear();
@@ -472,9 +588,45 @@ class BaseDeDatos{
         DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         //Referencia a la tabla del child:
         DatabaseReference gastosDB = database.child(VariablesEstaticas.CurrentUserUID);
+        //Lo convertimos a dos numeros
+        double double00 = Double.parseDouble(Precio.replace("$",""));
+        Precio = "$" + df2.format(double00);
         //Guardamos los campos
         GastosGetters g = new GastosGetters(NombreDelGasto, fecha, Precio, ID);
         gastosDB.child("Gastos").child(ID).setValue(g);
+    }
+
+    public void AlAñadirNuevaInvitacion(List<String> UIDS, String dondeStr, String Mensaje, String NombreDelUsuario, List<String> UsuarioEscrito){
+        String ID = GenerarTimeStamp(); //ID unico basado en el tiempo en el que se consiguió
+        AdaptadorInvitaciones.isPressed = 1; //se presionó
+        String fecha = MetodosUtiles.fechaHora(new Date().getTime()); //Fecha actual
+        AdaptadorInvitaciones.isPressed = 0;
+        //Referencia para la BD de forma en que podamos meter una tabla dentro de ella
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        //Referencia a la tabla del child:
+        for(int i = 0; i < UIDS.size(); i++) {
+            Log.e("test", "entro a añadir");
+            Log.e("test","valor timestamp: "+ID);
+            DatabaseReference invitacionDB = database.child(UIDS.get(i));
+            InvitacionesGetters g = new InvitacionesGetters(dondeStr, NombreDelUsuario,UsuarioEscrito.get(i), fecha, Mensaje, ID);
+            invitacionDB.child("Mensajes").child(ID).setValue(g);
+        }
+    }
+
+    public void ActualizarNota(String ElementoPadre, String ElementoHijo, String ValorActualizado, final Gastos gastos){
+        //Referencia para la BD de forma en que podamos meter una tabla dentro de ella
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        //Referencia a la tabla del child:
+        DatabaseReference nodo = database.child(VariablesEstaticas.CurrentUserUID);
+        nodo.child(ElementoPadre).child(gastos.getTimeStamp()).child(ElementoHijo).setValue(ValorActualizado);
+    }
+
+    public void EliminarNota(String ElementoPadre, final Gastos gastos){
+        //Referencia para la BD de forma en que podamos meter una tabla dentro de ella
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        //Referencia a la tabla del child:
+        DatabaseReference nodo = database.child(VariablesEstaticas.CurrentUserUID);
+        nodo.child(ElementoPadre).child(gastos.getTimeStamp()).removeValue();
     }
 
 

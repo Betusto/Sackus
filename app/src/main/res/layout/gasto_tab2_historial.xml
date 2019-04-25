@@ -5,8 +5,9 @@
     android:id="@+id/layoasdut"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/fondo"
-    tools:context=".GastoActivity">
+    tools:context=".GastoActivity"
+    android:background="?android:attr/selectableItemBackground"
+    >
 
     <RelativeLayout
         android:id="@+id/activity_gasto_tab2_historial_banner"
@@ -31,7 +32,8 @@
             android:id="@+id/activity_gasto_tab2_lista"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@android:layout/simple_list_item_1"></android.support.v7.widget.RecyclerView>
+            tools:listitem="@android:layout/simple_list_item_1"
+            ></android.support.v7.widget.RecyclerView>
 
         <CheckBox
             android:id="@+id/checkBox"
@@ -86,7 +88,7 @@
                     android:layout_marginBottom="4dp"
                     android:gravity="right"
                     android:maxLines="1"
-                    android:textColor="?attr/actionModeSplitBackground"
+                    android:textColor="@color/Verde"
                     android:textSize="16sp" />
 
 

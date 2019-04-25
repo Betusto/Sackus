@@ -15,9 +15,10 @@ import java.util.ArrayList;
 
 public class Adaptador extends RecyclerView.Adapter<Adaptador.NoteHolder> {
 
-    private ArrayList<Gastos> notas;
+    private static ArrayList<Gastos> notas;
     private Context context;
     public static int isPressed = 0;
+    private ListListener listener;
 
     public Adaptador(ArrayList<Gastos> notas, Context context) {
         this.notas = notas;
@@ -39,7 +40,23 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.NoteHolder> {
                 noteHolder.noteText.setText(nota.getNoteText());
                 noteHolder.noteDate.setText(nota.getNoteDate());
                 noteHolder.noteGasto.setText(nota.getNoteGasto() + ""); //Hacerlo string
+                //Inicializamos el listener de click
+                noteHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onGastoClick(nota);
+                    }
+                });
+                //Inicializamos el listener de click largo
+                noteHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        listener.onGastoLongClick(nota);
+                        return false;
+                    }
+                });
             }else{
+                //Si se presiona el boton de agregar conseguirá la fecha actual
                 noteHolder.noteText.setText(nota.getNoteText());
                 noteHolder.noteDate.setText(MetodosUtiles.fechaHora(Long.parseLong(nota.getNoteDate())));
                 noteHolder.noteGasto.setText(nota.getNoteGasto() + ""); //Hacerlo string
@@ -63,11 +80,25 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.NoteHolder> {
 
         public NoteHolder(View itemView) {
             super(itemView);
+            //Referenciamos los elementos que se repiten en el listview
             noteDate = itemView.findViewById(R.id.note_date);
             noteText = itemView.findViewById(R.id.note_text);
             checkBox = itemView.findViewById(R.id.checkBox);
             noteGasto = itemView.findViewById(R.id.gasto_text);
         }
+    }
+
+    public static ArrayList<Gastos> ReiniciarNotas(){
+        if(notas != null) {
+            notas.clear();
+            Log.e("test", "notas no es nulo");
+        }
+        return  notas;
+    }
+
+    //Marcamos el listener
+    public void setListener(ListListener listener){
+        this.listener = listener;
     }
 
 }
