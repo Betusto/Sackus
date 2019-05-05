@@ -63,11 +63,8 @@ public class GastoTab2Historial extends Fragment implements ListListener{
     private String gastasteStr, precioStr;
     MetodosUtiles MandarToast = new MetodosUtiles();
     private static DecimalFormat df2 = new DecimalFormat("0.00"); //Para usar solo dos decimales
-    private int detectorDeErroresGastaste = 0, detectorDeErroresPrecio = 0;
     private ProgressDialog Progress;
     public static String gastasteStrOld, precioStrOld;
-
-
 
 
     @Override
@@ -75,19 +72,19 @@ public class GastoTab2Historial extends Fragment implements ListListener{
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.gasto_tab2_historial, container, false);
 
-        //Aumentamos el margen top del layout para tener espacio para el icono de wifi
+     /*   //Aumentamos el margen top del layout para tener espacio para el icono de wifi
         RelativeLayout layout = rootView.findViewById(R.id.porfa);
         RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         relativeParams.setMargins(0, 205, 0, 0);
-        layout.setLayoutParams(relativeParams);
+        layout.setLayoutParams(relativeParams);*/
 
         //linea view
         LinearLayout linearLayout = rootView.findViewById(R.id.activity_gasto_tab2_historial_linea);
         linearLayout.setVisibility(rootView.GONE);
 
-        //Referenciamos otro layout encargado de poner color amarillo y poner un twxtview
+    /*    //Referenciamos otro layout encargado de poner color amarillo y poner un twxtview
        RelativeLayout banner = rootView.findViewById(R.id.activity_gasto_tab2_historial_banner);
-        RelativeLayout.LayoutParams bannerParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 205);
+        RelativeLayout.LayoutParams bannerParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 510);//205
         //relativeParams.setMargins(0, 205, 0, 0);
         banner.setBackground(ContextCompat.getDrawable(getActivity(), R.color.colorHolo));
         //banner.setBackgroundColor(Color.GREEN);
@@ -101,7 +98,7 @@ public class GastoTab2Historial extends Fragment implements ListListener{
         textParams.setMargins(0,110,0,0); //coordenadas
         text.setLayoutParams(textParams);
         banner.addView(text);//lo añadimos al relativelayout referenciado
-        banner.setLayoutParams(bannerParams);
+        banner.setLayoutParams(bannerParams);*/
 
 
         //Persistencia de datos y referencia
@@ -147,7 +144,7 @@ public class GastoTab2Historial extends Fragment implements ListListener{
 
     public void CargarNotas(){
         //MostrarLista
-        BD.MostrarListasDelUsuario("Gastos", notas, null, sharedPreferences, recyclerView,null,adaptador, mActivity);
+        BD.MostrarListasDelUsuario("Gastos", notas, null, sharedPreferences, recyclerView,null,adaptador, mActivity, null, null);
     }
 
     //Por alguna razon, este metodo no tiene los datos actualiados de las variables globales, asi que se le tuvieron que pasar
@@ -288,6 +285,8 @@ public class GastoTab2Historial extends Fragment implements ListListener{
                             } else {
                                 precioEdit.setError("Se requiere un monto valido");
                                 precioEdit.requestFocus();
+                                //MANUAL TECNICO, MANUAL DE USUARIO, NO EMULADOR ADENTRO DEL CD, EJECUTABLE APK, EN EL CD MANUALES Y APK
+                                //ENTREGAR 9 Y 16
                             }
                         }else{
                             MandarToast.MostrarToast(mActivity, "Se necesita efectivo para añadir nuevo gasto");
@@ -312,7 +311,7 @@ public class GastoTab2Historial extends Fragment implements ListListener{
         sharedPreferences = this.mActivity.getSharedPreferences(VariablesEstaticas.SHARED_PREFS, Context.MODE_PRIVATE);
         VE.CargarDatos(sharedPreferences);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity, R.style.BottomOptionsDialogThemeWhite);
         builder.setPositiveButton(
                 "ELIMINAR\nY REVERTIR",
                 new DialogInterface.OnClickListener() {
@@ -391,6 +390,10 @@ public class GastoTab2Historial extends Fragment implements ListListener{
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(true);
         dialog.show();
+        //Esto es necesario para que sea compatible con todos los celulares
+        final float inPixels= mActivity.getResources().getDimension(R.dimen.dimen_entry_in_dp);
+        dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, Math.round(inPixels)); //Modificamos la altura
+
         //centrar los botones
         Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
         Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);

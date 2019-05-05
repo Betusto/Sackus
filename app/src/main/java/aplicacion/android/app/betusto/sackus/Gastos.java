@@ -80,7 +80,62 @@ class Invitaciones{
         return EnviadoPor;
     }
 
+    //Solo para referencias
+    public String getTimeStamp(){return Timestamp; }
+
+}
+
+class Viajes{
+
+    public  Viajes(){
+
+    }
+
+    //Titulo del viaje
+    private String noteViaje;
+    //Mensaje
+    private String noteDinero;
+    //Fecha de inicio del viaje
+    private  String noteFechaInicio;
+    //Fecha de regreso del viaje
+    private  String noteFechaRegreso;
+    //Si el viaje es compartido
+    private String noteCompartido;
+    //TimeStamp para referencias
+    private  String Timestamp;
+
+
+    public Viajes(String noteViaje, String noteDinero, String noteFechaInicio, String noteFechaRegreso, String noteCompartido, String Timestamp) {
+        this.noteViaje = noteViaje;
+        this.noteDinero = noteDinero;
+        this.noteFechaInicio = noteFechaInicio;
+        this.noteFechaRegreso = noteFechaRegreso;
+        this.noteCompartido = noteCompartido;
+        this.Timestamp = Timestamp;
+    }
+
+    public String getNoteViaje() {
+        return noteViaje;
+    }
+
+    public String getNoteDinero() {
+        return noteDinero;
+    }
+
+    public String getNoteFechaInicio() {
+        return noteFechaInicio;
+    }
+
+    public String getNoteFechaRegreso() {
+        return noteFechaRegreso;
+    }
+
+    public String getNoteCompartido() {
+        return noteCompartido;
+    }
+
     public String getTimestamp() {
         return Timestamp;
     }
+
 }

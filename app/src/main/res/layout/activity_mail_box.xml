@@ -23,11 +23,33 @@ android:background="?android:attr/selectableItemBackground"
 <RelativeLayout
     android:id="@+id/activity_mailbox_banner"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="50dp"
     android:layout_alignParentStart="true"
     android:layout_alignParentTop="true"
-    android:layout_marginStart="0dp">
+    android:layout_marginStart="0dp"
+    android:layout_marginBottom="20dp"
+    android:gravity="center"
+    android:background="@color/colorHolo"
+    >
+
+    <TextView
+        android:id="@+id/tituloHistorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="MENSAJES"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="25dp" />
     </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_mailbox_lista"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        tools:listitem="@android:layout/simple_list_item_1"
+        ></android.support.v7.widget.RecyclerView>
+
     <ImageButton
         android:id="@+id/activity_mail_box_nowifibutton"
         android:layout_width="wrap_content"
@@ -39,104 +61,6 @@ android:background="?android:attr/selectableItemBackground"
         android:visibility="gone"
         app:srcCompat="@mipmap/ic_nowifi" />
 
-<RelativeLayout
-    android:id="@+id/porfa4"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true"
-    android:layout_marginStart="0dp"
-    android:layout_marginTop="0dp">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/activity_mailbox_lista"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@android:layout/simple_list_item_1"
-        ></android.support.v7.widget.RecyclerView>
-
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/section_label"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="479dp"
-        android:text="CheckBox"
-        android:visibility="gone" />
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="vertical">
-
-
-        <TextView
-            android:id="@+id/nombreviaje_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_marginBottom="3dp"
-            android:maxLines="3"
-            android:textColor="@color/Verde"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/mensaje_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_marginBottom="3dp"
-            android:maxLines="4"
-            android:textColor="@color/colorIcons"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/fecha_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:layout_marginStart="5dp"
-            android:maxLines="1"
-            android:textColor="@color/colorIcons"
-            android:textSize="13sp" />
-
-
-
-        <TextView
-            android:id="@+id/enviadopor_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="20"
-            android:layout_margin="4dp"
-            android:layout_marginBottom="3dp"
-            android:maxLines="1"
-            android:ellipsize="end"
-
-            android:textColor="@color/colorIcons"
-            android:textSize="13sp" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginTop="3dp" />
-
-        <LinearLayout
-            android:id="@+id/activity_mailbox_linea"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginTop="3dp"
-            android:background="@color/colorPrimaryText"
-            android:orientation="horizontal" />
-
-    </LinearLayout>
-</RelativeLayout>
-
-
+    <include layout="@layout/recycler_invitaciones" />
 
 </RelativeLayout>

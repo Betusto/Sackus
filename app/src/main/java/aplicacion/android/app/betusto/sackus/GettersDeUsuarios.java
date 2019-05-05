@@ -51,3 +51,18 @@ class InvitacionesGetters{
         this.TimeStamp = TimeStamp;
     }
 }
+
+class ViajesGetters{
+    public String Viaje, DineroDedicado, FechaInicio, FechaRegreso, Compartir, TimeStamp;
+    public ViajesGetters(){
+
+    }
+    public ViajesGetters(String Viaje,String DineroDedicado, String FechaInicio, String FechaRegreso, String Compartir, String TimeStamp){
+        this.Viaje = Viaje;
+        this.DineroDedicado = DineroDedicado;
+        this.FechaInicio = FechaInicio;
+        this.FechaRegreso = FechaRegreso;
+        this.Compartir = Compartir;
+        this.TimeStamp = TimeStamp;
+    }
+}

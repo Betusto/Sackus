@@ -263,14 +263,6 @@ public class MetodosUtiles {
         }, año, mes, dia);
         datePickerDialog.show();
     }
-
-    //Revisar si los elementos de un arreglo son positivos
-    public static boolean areAllTrue(boolean[] array)
-    {
-        for(boolean b : array) if(!b) return false;
-        return true;
-    }
-
 }
 
 
@@ -484,10 +476,11 @@ class BaseDeDatos{
     //Metodo para mostrar las listas
     public static ArrayList<Gastos> retornarGastos = new ArrayList<>();
     public static ArrayList<Invitaciones> retornarInviraciones = new ArrayList<>();
+    public static ArrayList<Viajes> retornarViajes = new ArrayList<>();
     public void MostrarListasDelUsuario(final String ElementoPadre, final ArrayList<Gastos> notas, final ArrayList<Invitaciones> invitaciones,
                                         final  SharedPreferences sharedPreferences, final RecyclerView recyclerView, final AdaptadorInvitaciones adaptadorInvitaciones,
                                         final Adaptador adaptador
-    , final Context mActivity){
+    , final Context mActivity, final ArrayList<Viajes> viajes, final AdaptadorViajes adaptadorViajes){
         retornarGastos.add(new Gastos("","","",""));
         retornarGastos.clear();
         if(notas != null) {
@@ -535,6 +528,24 @@ class BaseDeDatos{
                                     }
                                     break;
                                 case "Viajes":
+                                    //Conseguimos los valores de la tabla
+                                    CantidadDeSnapshots.add(snapshot.child("NombreViaje"));
+                                    String Viaje = snapshot.child("Viaje").getValue().toString();
+                                    String DineroDedicado = snapshot.child("DineroDedicado").getValue().toString();
+                                    String FechaInicio = snapshot.child("FechaInicio").getValue().toString();
+                                    String FechaRegreso = snapshot.child("FechaRegreso").getValue().toString();
+                                    String Compartir = snapshot.child("Compartir").getValue().toString();
+                                    //Para conseguir su referencia
+                                    String TimeStampViajes = snapshot.child("TimeStamp").getValue().toString();
+                                    if(viajes != null) {
+                                        viajes.add(new Viajes(Viaje, DineroDedicado, FechaInicio, FechaRegreso, Compartir, TimeStampViajes));
+                                        if (CantidadDeSnapshots.size() == CantidadTotalDeSnaps) {
+                                            ViajesTab2Mirar Mirar = new ViajesTab2Mirar();
+                                            retornarViajes = (ArrayList<Viajes>) viajes.clone();
+                                            CantidadDeSnapshots.clear();
+                                            Mirar.Adaptando(recyclerView, adaptadorViajes, mActivity);
+                                        }
+                                    }
                                     break;
                                 case "Notas":
                                     break;
@@ -611,6 +622,23 @@ class BaseDeDatos{
             InvitacionesGetters g = new InvitacionesGetters(dondeStr, NombreDelUsuario,UsuarioEscrito.get(i), fecha, Mensaje, ID);
             invitacionDB.child("Mensajes").child(ID).setValue(g);
         }
+    }
+
+    public void AlAñadirNuevoViaje(String dondeStr, String dinerollevasStr, String fechaInicioStr, String fechaRegresoStr, String compartir){
+        String ID = GenerarTimeStamp(); //ID unico basado en el tiempo en el que se consiguió
+        //Referencia para la BD de forma en que podamos meter una tabla dentro de ella
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        //Referencia a la tabla del child:
+        DatabaseReference viajesDB = database.child(VariablesEstaticas.CurrentUserUID);
+        //Lo convertimos a dos numeros
+        double double00 = Double.parseDouble(dinerollevasStr.replace("$",""));
+        dinerollevasStr = "$" + df2.format(double00);
+        //Guardamos los campos
+        dinerollevasStr = "Dinero dedicado: " + dinerollevasStr;
+        fechaInicioStr = "Fecha de inicio: " + fechaInicioStr;
+        fechaRegresoStr = "Fecha de regreso: " + fechaRegresoStr;
+        ViajesGetters g = new ViajesGetters(dondeStr, dinerollevasStr, fechaInicioStr, fechaRegresoStr, compartir, ID);
+        viajesDB.child("Viajes").child(ID).setValue(g);
     }
 
     public void ActualizarNota(String ElementoPadre, String ElementoHijo, String ValorActualizado, final Gastos gastos){

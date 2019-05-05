@@ -26,7 +26,7 @@ public class AdaptadorInvitaciones extends RecyclerView.Adapter<AdaptadorInvitac
 
     @Override
     public AdaptadorInvitaciones.NoteHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(context).inflate(R.layout.activity_mail_box, viewGroup, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.recycler_invitaciones, viewGroup, false);
         return new AdaptadorInvitaciones.NoteHolder(v);
     }
 

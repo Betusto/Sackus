@@ -76,10 +76,10 @@ public class MailBoxActivity extends AppCompatActivity implements MensajeListLis
         mActivity = MailBoxActivity.this;
 
         //Aumentamos el margen top del layout para tener espacio para el icono de wifi
-        RelativeLayout layout = findViewById(R.id.porfa4);
+      /*  RelativeLayout layout = findViewById(R.id.porfa4);
         RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         relativeParams.setMargins(0, 105, 0, 0);
-        layout.setLayoutParams(relativeParams);
+        layout.setLayoutParams(relativeParams);*/
 
         //linea view
         LinearLayout linearLayout = findViewById(R.id.activity_mailbox_linea);
@@ -89,7 +89,7 @@ public class MailBoxActivity extends AppCompatActivity implements MensajeListLis
         RelativeLayout fondo = findViewById(R.id.activity_fondo);
         fondo.setVisibility(View.VISIBLE);
 
-        //Referenciamos otro layout encargado de poner color amarillo y poner un twxtview
+      /*  //Referenciamos otro layout encargado de poner color amarillo y poner un twxtview
         RelativeLayout banner = findViewById(R.id.activity_mailbox_banner);
         RelativeLayout.LayoutParams bannerParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 105);
         //relativeParams.setMargins(0, 205, 0, 0);
@@ -105,7 +105,7 @@ public class MailBoxActivity extends AppCompatActivity implements MensajeListLis
         textParams.setMargins(0,35,0,0); //coordenadas
         text.setLayoutParams(textParams);
         banner.addView(text);//lo añadimos al relativelayout referenciado
-        banner.setLayoutParams(bannerParams);
+        banner.setLayoutParams(bannerParams);*/
 
         //Referenciamos al recyclerview y su adaptador
         recyclerView = findViewById(R.id.activity_mailbox_lista);
@@ -120,7 +120,7 @@ public class MailBoxActivity extends AppCompatActivity implements MensajeListLis
 
     public void CargarInvitaciones(){
         //MostrarLista
-        BD.MostrarListasDelUsuario("Mensajes", null,invitaciones, sharedPreferences, recyclerView, adaptador, null, mActivity);
+        BD.MostrarListasDelUsuario("Mensajes", null,invitaciones, sharedPreferences, recyclerView, adaptador, null, mActivity, null, null);
     }
 
     //Por alguna razon, este metodo no tiene los datos actualiados de las variables globales, asi que se le tuvieron que pasar

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -54,7 +55,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ViajesTab1Crear extends Fragment {
     //Variables del layout
@@ -106,6 +109,8 @@ public class ViajesTab1Crear extends Fragment {
     private List<String> UIDS = new ArrayList<>();
     private List<String> NombresEscritos = new ArrayList<>();
     private int i; //Variable del for
+    boolean flag=true;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -215,52 +220,89 @@ public class ViajesTab1Crear extends Fragment {
     }
 
     public void Validar() {
+        dondeStr = dondeEdit.getText().toString().trim();
+        dinerollevasStr = dineroLlevasEdit.getText().toString().trim();
+        invertirHotelStr = invertirHotelEdit.getText().toString().trim();
+        invertirTransporteStr = invertirTransporteEdit.getText().toString().trim();
+        invertirComidaStr = invertirComidaEdit.getText().toString().trim();
         //do {
         //    BD.GetElementoUsuarioActual(Database, "Usuario", sharedPreferences);
         //}while(NombreDelUsuario == null);
-        if (VariablesEstaticas.Locked == false) {
-            VariablesEstaticas.Locked = true;
-            ExisteCorreo = false;
-            existe[0] = false;
-            existe[1] = false;
-            existe[2] = false;
-            existe[3] = false;
-            existe[4] = false;
-            detectorDeErrores = 0;
-            helper=0;
-                Database.child(VariablesEstaticas.CurrentUserUID).child("Usuario").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        //if necesario por si ya no obtiene el valor del uid por alguna razon, de esta manera no crasheara
-                        //Se necesitan volver a cargar los datos porque cada cambio en la base de datos activa este ondatachange
-                        VE.CargarDatos(sharedPreferences);
-                        if (VariablesEstaticas.CurrentUserUID != null && !VariablesEstaticas.CurrentUserUID.equals("")) {
-                            String resultado = dataSnapshot.getValue().toString();
-                            NombreDelUsuario = resultado; //Conseguimos el nombre de usuario del usuario actual para evitar errores si se agrega el mismo
-                            Log.e("TEST", "Valor de UsuarioActual: " + NombreDelUsuario);
-                            for (i = 0; i < acompañantesEditList.size(); i++) { //Recorremos el arraylist
-                                if (acompañantesEditList.get(i).getText().toString().trim().isEmpty()) {
-                                    acompañantesEditList.get(i).setError("Se requiere nombre de usuario del acompañante");
-                                    acompañantesEditList.get(i).requestFocus();
-                                    Log.e("TEST", "Acompañante " + i + " empty");
-                                    detectorDeErrores = 1;
-                                } else if (acompañantesEditList.get(i).getText().toString().trim().equals(NombreDelUsuario)) {
-                                    acompañantesEditList.get(i).setError("No es necesario agregarte como acompañante");
-                                    acompañantesEditList.get(i).requestFocus();
-                                    detectorDeErrores = 1;
-                                } else if (!acompañantesEditList.get(i).getText().toString().trim().isEmpty()) {
-                                    //TODO: QUE NO SE PUEDA ESCRIBIR MAS DE UNA VEZ EL MISMO USUARIO
-                                    validarUsuariosCorrectos(acompañantesEditList.get(i).getText().toString().trim(), i);
+        if(dondeStr.isEmpty()){
+            dondeEdit.setError("Se necesita nombre del lugar a visitar");
+            dondeEdit.requestFocus();
+            detectorDeErrores = 1;
+        }
+        if(dinerollevasStr.equals("$") || dinerollevasStr.equals("$.") || dinerollevasStr.isEmpty()){
+            dineroLlevasEdit.setError("Se necesita un monto de dinero");
+            dineroLlevasEdit.requestFocus();
+            detectorDeErrores = 1;
+        }
+        if(detectorDeErrores == 0) {
+            if (VariablesEstaticas.Locked == false) {
+                if (controlDeEditTexts != 0) {
+                    VariablesEstaticas.Locked = true;
+                    ExisteCorreo = false;
+                    existe[0] = false;
+                    existe[1] = false;
+                    existe[2] = false;
+                    existe[3] = false;
+                    existe[4] = false;
+                    detectorDeErrores = 0;
+                    helper = 0;
+                    Database.child(VariablesEstaticas.CurrentUserUID).child("Usuario").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            //if necesario por si ya no obtiene el valor del uid por alguna razon, de esta manera no crasheara
+                            //Se necesitan volver a cargar los datos porque cada cambio en la base de datos activa este ondatachange
+                            VE.CargarDatos(sharedPreferences);
+                            if (VariablesEstaticas.CurrentUserUID != null && !VariablesEstaticas.CurrentUserUID.equals("")) {
+                                String resultado = dataSnapshot.getValue().toString();
+                                NombreDelUsuario = resultado; //Conseguimos el nombre de usuario del usuario actual para evitar errores si se agrega el mismo
+                                Log.e("TEST", "Valor de UsuarioActual: " + NombreDelUsuario);
+                                for (i = 0; i < acompañantesEditList.size(); i++) { //Recorremos el arraylist
+                                    if (acompañantesEditList.get(i).getText().toString().trim().isEmpty()) {
+                                        acompañantesEditList.get(i).setError("Se requiere nombre de usuario del acompañante");
+                                        acompañantesEditList.get(i).requestFocus();
+                                        Log.e("TEST", "Acompañante " + i + " empty");
+                                        detectorDeErrores = 1;
+                                    } else if (acompañantesEditList.get(i).getText().toString().trim().equals(NombreDelUsuario)) {
+                                        acompañantesEditList.get(i).setError("No es necesario agregarte como acompañante");
+                                        acompañantesEditList.get(i).requestFocus();
+                                        detectorDeErrores = 1;
+                                    } else if (!acompañantesEditList.get(i).getText().toString().trim().isEmpty()) {
+                                        DetectarSiSeRepiteElementos();
+                                        if (detectorDeErrores != 1) {
+                                            validarUsuariosCorrectos(acompañantesEditList.get(i).getText().toString().trim(), i);
+                                        }
+                                    }
                                 }
+                                VariablesEstaticas.Locked = false;
                             }
-                            VariablesEstaticas.Locked = false;
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
+                }else {
+                    AgregarViaje();
+            }
+            }
+        }
+        }
+
+        //Metodo encargado de revisar que
+        public void DetectarSiSeRepiteElementos(){
+            Set<String> set=new HashSet<>();
+            for(int i=0;i<acompañantesEditList.size();i++){
+                flag=set.add(acompañantesEditList.get(i).getText().toString().trim());
+                if(!(flag)){
+                    acompañantesEditList.get(i).setError("Repetiste nombre de usuario");
+                    acompañantesEditList.get(i).requestFocus();
+                    detectorDeErrores = 1;
+                    flag=true;
+                }
             }
         }
 
@@ -408,29 +450,55 @@ public class ViajesTab1Crear extends Fragment {
     }
 
     public void AgregarViaje() {
-        dondeStr = dondeEdit.getText().toString().trim();
-        dinerollevasStr = dineroLlevasEdit.getText().toString().trim();
-        invertirHotelStr = invertirHotelEdit.getText().toString().trim();
-        invertirTransporteStr = invertirTransporteEdit.getText().toString().trim();
-        invertirComidaStr = invertirComidaEdit.getText().toString().trim();
+        String compartir = "false";
         Log.e("nuevoarreglo","Paso el ondatachange con exito");
         helper=0;
         if(detectorDeErrores == 0) {
             Progress.setMessage("Añadiendo, por favor espere");
             Progress.show();
             DetectaConexion CD = new DetectaConexion(this.getActivity());
-            if(CD.isConnected()){
-                MandarToast.MostrarToast(getActivity(),"Mensaje enviado");
-            }else{
-                MandarToast.MostrarToast(getActivity(),"El mensaje se enviará al regresar la conexión");
+            if(controlDeEditTexts != 0) {
+                compartir = "true";
+                if (CD.isConnected()) {
+                    MandarToast.MostrarToast(getActivity(), "Mensaje enviado");
+                } else {
+                    MandarToast.MostrarToast(getActivity(), "El mensaje se enviará al regresar la conexión");
+                }
+                String Mensaje = mensajeEdit.getText().toString().trim();
+                if (Mensaje.isEmpty()) {
+                    Mensaje = "-";
+                }
+                BD.AlAñadirNuevaInvitacion(UIDS, dondeStr, Mensaje, NombreDelUsuario, NombresEscritos);
+                NombresEscritos.clear();
+                UIDS.clear();
+                VariablesEstaticas.Locked = false;
             }
-            String Mensaje = mensajeEdit.getText().toString().trim();
-            if(Mensaje.isEmpty()){
-                Mensaje = "-";
+            //TODO: VALIDAR DE BUENA MANERA EL DINERO CUANDO SE QUIERA MOSTRAR
+            //TODO: Dineros a invertir validar con respecto al efectivo total
+            //TODO: Efectivo TOTAL ESTARA IGUAL AUNQUE SE HAYA AGREGADO VIAJE
+            //Añadimos el viaje
+            if(!fechaInicioText.getText().toString().substring(17).isEmpty() || fechaInicioText.getText().toString().substring(17) != null &&
+            !fechaRegresoText.getText().toString().substring(18).isEmpty() || fechaRegresoText.getText().toString().substring(18) != null){
+                String fechaInicioStr = fechaInicioText.getText().toString().substring(17).replace("\n", "");
+                String fechaRegresoStr = fechaRegresoText.getText().toString().substring(18).replace("\n","");
+                if(fechaInicioStr.contains("/") && fechaRegresoStr.contains("/")){
+                    VariablesEstaticas.Locked = false;
+                    BD.AlAñadirNuevoViaje(dondeStr, dinerollevasStr, fechaInicioStr, fechaRegresoStr, compartir);
+                }else{
+                    VariablesEstaticas.Locked = false;
+                    BD.AlAñadirNuevoViaje(dondeStr, dinerollevasStr, "-", "-", compartir);
+                }
             }
-            BD.AlAñadirNuevaInvitacion(UIDS, dondeStr, Mensaje, NombreDelUsuario, NombresEscritos);
-            NombresEscritos.clear();
-            UIDS.clear();
+            VariablesEstaticas.Locked = false;
+            MandarToast.MostrarToast(getActivity(), "Viaje añadido");
+            Intent reebot = new Intent(getActivity(), ViajesActivity.class);
+            //Engañar al usuario, no pude encontrar una mejor solucion, el recycler no se actualiza
+            //hasta que se cambie de activity
+            getActivity().finish();
+            //Quitar animacione
+            getActivity().overridePendingTransition(0, 0);
+            getActivity().startActivity(reebot);
+            getActivity().overridePendingTransition(0, 0);
             Progress.dismiss();
         }
         VariablesEstaticas.Locked = false;

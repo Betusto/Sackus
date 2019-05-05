@@ -28,7 +28,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.NoteHolder> {
 
     @Override
     public NoteHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(context).inflate(R.layout.gasto_tab2_historial, viewGroup, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.recycler_gastos, viewGroup, false);
         return new NoteHolder(v);
     }
 
