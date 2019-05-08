@@ -5,6 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     tools:context=".ViajesActivity"    android:focusable="true" android:focusableInTouchMode="true">
 
     <android.support.design.widget.FloatingActionButton
@@ -88,6 +89,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@drawable/btn_uno"
+                android:textColor="@drawable/txt_btn_uno"
                 android:text="Escoger Fecha\nde inicio" />
 
             <TextView
@@ -103,6 +106,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@drawable/btn_uno"
+                android:textColor="@drawable/txt_btn_uno"
                 android:text="Escoger Fecha\nde regreso" />
 
             <android.support.design.widget.TextInputLayout
