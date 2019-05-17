@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo"
+    tools:context=".MainMenu">
+
+    <Button
+        android:id="@+id/sackButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="400dp"
+        android:text="SACK"
+        android:background="@drawable/btn_uno"
+        android:textColor="@drawable/txt_btn_uno"
+        android:textAlignment="center"
+        android:textSize="25sp" />
+
+    <ImageButton
+        android:id="@+id/activity_main_menu_opcionesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@android:drawable/ic_menu_preferences" />
+
+    <Button
+        android:id="@+id/gastoButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="220dp"
+        android:background="@drawable/btn_uno"
+        android:text="@string/gasto"
+        android:textColor="@drawable/txt_btn_uno"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/viajeButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="160dp"
+        android:background="@drawable/btn_uno"
+        android:text="@string/viaje"
+        android:textColor="@drawable/txt_btn_uno"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/notasButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_above="@+id/activity_main_menu_opcionesButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:text="@string/notas"
+        android:background="@drawable/btn_uno"
+        android:textColor="@drawable/txt_btn_uno"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/usuarioTextView"
+        android:layout_width="358dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="17dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="@string/saludos"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textSize="23sp" />
+
+    <ImageButton
+        android:id="@+id/activity_main_menu_nowifibutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/circleshape"
+        app:srcCompat="@mipmap/ic_nowifi" />
+
+    <ImageButton
+        android:id="@+id/activity_mainmenu_mailboxbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
+
+</RelativeLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoasdutf"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ViajesActivity"
+    android:background="?android:attr/selectableItemBackground"
+    >
+
+    <RelativeLayout
+        android:id="@+id/activity_viajes_tab2_ver_banner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:background="@color/colorHolo"
+        >
+
+        <TextView
+            android:id="@+id/tituloViajes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="LISTA DE VIAJES"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="25dp" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_viajes_tab2_lista"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="106dp"
+        tools:listitem="@android:layout/simple_list_item_1"
+        ></android.support.v7.widget.RecyclerView>
+
+    <include layout="@layout/recycler_viajes" />
+
+</RelativeLayout>

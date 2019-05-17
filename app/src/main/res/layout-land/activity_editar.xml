@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true" android:focusableInTouchMode="true">
+
+    <ImageView
+        android:id="@+id/activity_editar_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:srcCompat="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/activity_editar_indicacion_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar Gasto"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@color/colorIcons"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/activity_editar_precio_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="131dp"
+        android:ems="10"
+        android:hint="Precio"
+        android:inputType="numberDecimal"
+        android:singleLine="true"
+        android:textSize="22sp" />
+
+    <EditText
+        android:id="@+id/activity_editar_gastaste_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignBottom="@+id/activity_editar_imageview"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="138dp"
+        android:ems="10"
+        android:hint="¿Qué gastaste?"
+        android:inputType="textCapSentences|textMultiLine"
+        android:lines="2"
+        android:maxLines="2"
+        android:minLines="1"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="false"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/activity_editar_listobutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="202dp"
+        android:background="@color/colorPrimary"
+        android:text="LISTO" />
+</RelativeLayout>

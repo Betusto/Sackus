@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context=".ViajesActivity"    android:focusable="true" android:focusableInTouchMode="true">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:src="@mipmap/ic_addsincirculo" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="56dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/activity_viajes_tab1_linearlayout">
+
+            <TextView
+                android:id="@+id/activity_viajes_tab1_indicacion_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Nuevo Viaje"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/colorIcons"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/activity_viajes_tab1_efectivo_total_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="10dp"
+                android:text="Efectivo Total:"
+                android:textAlignment="viewStart"
+                android:textSize="18sp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/activity_viajes_tab1_nombreviaje_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="¿A dónde quieres ir?*"
+                android:inputType="textCapSentences|textMultiLine"
+                android:lines="2"
+                android:maxLines="2"
+                android:minLines="1"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+                android:textSize="22sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/activity_viajes_tab1_fechainiciotext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha de inicio:\n"
+                android:layout_marginTop="16dp"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/activity_viajes_tab1_seleccionarfechainiciobutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_uno"
+                android:textColor="@drawable/txt_btn_uno"
+                android:text="Escoger Fecha\nde inicio" />
+
+            <TextView
+                android:id="@+id/activity_viajes_tab1_fechafinaltext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha de regreso:\n"
+                android:layout_marginTop="16dp"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/activity_viajes_tab1_seleccionarfecharegresobutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_uno"
+                android:textColor="@drawable/txt_btn_uno"
+                android:text="Escoger Fecha\nde regreso" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/activity_viajes_tab1_dineroquellevas_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="¿Cuánto dinero llevas?*"
+                android:inputType="numberDecimal"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textSize="22sp" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/activity_viajes_tab1_dineroainvertirenhotel_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:ems="10"
+                android:layout_marginTop="16dp"
+                android:hint="¿Dinero a invertir en hotel?"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:textSize="22sp" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/activity_viajes_tab1_dineroainvertirentransporte_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="¿Dinero a invertir en transporte?"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:textSize="22sp" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/activity_viajes_tab1_dineroainvertirencomida_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="¿Dinero a invertir en comida?"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:textSize="22sp" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/activity_viajes_tab1_dineroainvertirenbaratijas_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="¿Dinero a invertir en baratijas?"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:textSize="22sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="0dp">
+
+                <ImageButton
+                    android:id="@+id/activity_viajes_tab1_info_button"
+                    android:layout_width="35dp"
+                    android:layout_height="30dp"
+
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="53dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/circleshape"
+                    android:src="@mipmap/ic_info" />
+
+                <ImageButton
+                    android:id="@+id/activity_viajes_tab1_añadiracompañante_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/circleshape"
+                    app:srcCompat="@mipmap/ic_share" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/activity_viajes_tab1_indicacion2_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Acompañantes"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/colorIcons"
+                android:textSize="24sp"
+                android:visibility="gone"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/activity_viajes_tab1_mensaje_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mensaje"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:inputType="textCapSentences|textMultiLine"
+                android:lines="4"
+                android:maxLines="4"
+                android:minLines="1"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+                android:visibility="gone"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="wdafs"
+                android:visibility="invisible"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
