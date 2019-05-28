@@ -166,4 +166,7 @@
     <string name="avisonointernet3_que_vuelva_la_conexion">que vuelva a entrar la conexión.</string>
 
 
+    <string name="agree_terms_privacy">Check if you agree and have read our <a href="https://pastebin.com/raw/FbAzBPCz">Privacy Policy</a></string>
+    <string name="para_continuar_acepte">To continue, please, accept and Pivacy Policy.</string>
+    <string name="i_agree">I agree.</string>
 </resources>

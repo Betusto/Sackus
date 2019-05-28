@@ -8,13 +8,16 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.CheckBox;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText Contraseña;
     private Button Registrar;
     private Button YaTengoCuenta;
-    private int detectorDeErroresEmail = 0, detectorDeErroresPassword = 0, detectorDeErroresUsuario = 0;
+    private CheckBox checkBoxPolitica;
+    private int detectorDeErroresEmail = 0, detectorDeErroresPassword = 0, detectorDeErroresUsuario = 0, detectorDeErroresPrivacidad = 0;
     public String usuarioStr, correoStr, contraseñaStr;
     private ProgressDialog Progress;
     private ImageButton nowifibutton;
@@ -62,7 +66,11 @@ public class RegisterActivity extends AppCompatActivity {
         Registrar = (Button) findViewById(R.id.registrarbutton);
         YaTengoCuenta = (Button) findViewById(R.id.tengocuentabutton);
         nowifibutton = findViewById(R.id.activity_register_nowifibutton);
+        checkBoxPolitica = (CheckBox) findViewById(R.id.checkbox_politica);
         Progress = new ProgressDialog(this);
+
+        TextView politicaslink = (TextView) findViewById(R.id.linksPoliticas);
+        politicaslink.setMovementMethod(LinkMovementMethod.getInstance());
 
         //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
@@ -116,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
         contraseñaStr = Contraseña.getText().toString().trim();
         //Verificamos que el usuario no haya dejado campos sin escribir
         Validar(usuarioStr, correoStr, contraseñaStr);
-        if (detectorDeErroresEmail == 0 && detectorDeErroresPassword == 0) {
+        if (detectorDeErroresEmail == 0 && detectorDeErroresPassword == 0 && detectorDeErroresPrivacidad == 0) {
         Progress.setMessage(getResources().getString(R.string.registrando_espere));
         Progress.show();
         CheckUsuarioExiste(); //Se encarga de revisar si el usuario existe en la base de datos
@@ -172,6 +180,14 @@ public void LogeoExitoso(String UID){
             detectorDeErroresEmail++;
         }else{
             detectorDeErroresEmail = 0;
+        }
+        if(checkBoxPolitica.isChecked()) {
+            detectorDeErroresPrivacidad = 0;
+        }
+        else{
+            checkBoxPolitica.setError(getResources().getString(R.string.para_continuar_acepte));
+            checkBoxPolitica.requestFocus();
+            detectorDeErroresPrivacidad++;
         }
 
         if(contraseñaStr.isEmpty()){
@@ -245,7 +261,7 @@ public void LogeoExitoso(String UID){
                                     }
                                 }
                                 if(CantidadTotalDeSnaps == CantidadDeSnapshots.size()) { //Ultimo ciclo del for ejecutar lo siguiente
-                                    if (detectorDeErroresEmail == 0 && detectorDeErroresPassword == 0 && detectorDeErroresUsuario == 0) {
+                                    if (detectorDeErroresEmail == 0 && detectorDeErroresPassword == 0 && detectorDeErroresUsuario == 0 && detectorDeErroresPrivacidad == 0 ) {
                                             CantidadDeSnapshots.clear();
                                             Progress.dismiss();
                                             noMasDataChanges = true;

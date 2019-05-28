@@ -18,6 +18,16 @@
         android:hint="@string/correo"
         android:inputType="textEmailAddress" />
 
+    <CheckBox
+        android:id="@+id/checkbox_politica"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="310dp"
+        android:ems="40"
+        android:text="@string/i_agree" />
+
     <EditText
         android:id="@+id/password"
         android:layout_width="wrap_content"
@@ -80,4 +90,15 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/circleshape"
         app:srcCompat="@mipmap/ic_nowifi" />
+
+    <TextView
+        android:id="@+id/linksPoliticas"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="256dp"
+        android:ems="40"
+        android:text="@string/agree_terms_privacy" />
+
 </RelativeLayout>

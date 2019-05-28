@@ -167,4 +167,7 @@ NOTA</string>
     <string name="avisonointernet3_que_vuelva_la_conexion">que vuelva a entrar la conexión.</string>
 
 
+    <string name="agree_terms_privacy">Confirma si estás de acuerdo y leíste nuestra <a href="https://pastebin.com/raw/E8msG8k4">Política de privacidad</a></string>
+    <string name="para_continuar_acepte">Para continuar, por favor, acepte los terminos de uso y políticas de privacidad.</string>
+    <string name="i_agree">Estoy de acuerdo.</string>
 </resources>
