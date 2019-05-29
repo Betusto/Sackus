@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo"
+    tools:context=".IngresarActivity">
+
+    <EditText
+        android:id="@+id/usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="261dp"
+        android:ems="10"
+        android:hint="@string/usuario_o_correo"
+        android:inputType="textEmailAddress|textCapSentences" />
+
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="181dp"
+        android:layout_marginEnd="261dp"
+        android:ems="10"
+        android:hint="@string/contraseña"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/ingresarbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="119dp"
+        android:background="@drawable/btn_uno"
+        android:text="@string/ingresar"
+        android:textColor="@drawable/txt_btn_uno" />
+
+    <Button
+        android:id="@+id/crearbutton"
+        android:layout_width="134dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="69dp"
+        android:background="@drawable/btn_uno"
+        android:text="@string/crear_cuenta"
+        android:textColor="@drawable/txt_btn_uno" />
+
+    <Button
+        android:id="@+id/olvidebutton"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/btn_uno"
+        android:text="@string/olvide_contraseña"
+        android:textColor="@drawable/txt_btn_uno" />
+
+    <ImageView
+        android:id="@+id/logoimage"
+        android:layout_width="189dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="269dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="273dp"
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
+
+    <ImageButton
+        android:id="@+id/activity_ingresar_nowifibutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/circleshape"
+        app:srcCompat="@mipmap/ic_nowifi" />
+</RelativeLayout>
