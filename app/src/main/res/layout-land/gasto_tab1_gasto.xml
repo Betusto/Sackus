@@ -8,7 +8,6 @@
     tools:context=".GastoActivity"
     android:background="@color/colorAccent"
     android:focusable="true" android:focusableInTouchMode="true">
-
     <TextView
         android:id="@+id/activity_gasto_tab1_efectivo_total_text"
         android:layout_width="match_parent"

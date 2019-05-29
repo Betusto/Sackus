@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="197dp"
+        android:layout_marginBottom="187dp"
         android:background="@drawable/btn_uno"
         android:textColor="@drawable/txt_btn_uno"
         android:text="@string/registrar" />

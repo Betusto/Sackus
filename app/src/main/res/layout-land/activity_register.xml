@@ -13,10 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="62dp"
         android:ems="10"
         android:hint="@string/correo"
         android:inputType="textEmailAddress" />
+
+
 
     <EditText
         android:id="@+id/password"
@@ -24,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/correo"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="182dp"
         android:ems="10"
         android:inputType="textPassword"
         android:hint="@string/contraseña"/>
@@ -35,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/correo"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="120dp"
         android:ems="10"
         android:inputType="textEmailAddress|textCapSentences"
         android:hint="@string/nombre_de_usuario"/>
@@ -50,27 +52,34 @@
         android:text="@string/crear_cuenta_low"
         android:textSize="24sp" />
 
-    <Button
-        android:id="@+id/registrarbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="101dp"
-        android:background="@drawable/btn_uno"
-        android:text="@string/registrar"
-        android:textColor="@drawable/txt_btn_uno" />
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/tengocuentabutton"
-        android:layout_width="145dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="0dp"
-        android:background="@drawable/btn_uno"
-        android:text="@string/ya_tengo_cuenta"
-        android:textColor="@drawable/txt_btn_uno" />
+        <Button
+            android:id="@+id/registrarbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_uno"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="0dp"
+            android:text="@string/registrar"
+            android:textColor="@drawable/txt_btn_uno" />
+
+        <Button
+            android:id="@+id/tengocuentabutton"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/btn_uno"
+            android:text="@string/ya_tengo_cuenta"
+            android:textColor="@drawable/txt_btn_uno" />
+    </LinearLayout>
+
 
     <ImageButton
         android:id="@+id/activity_register_nowifibutton"
@@ -80,4 +89,24 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/circleshape"
         app:srcCompat="@mipmap/ic_nowifi" />
+
+    <CheckBox
+        android:id="@+id/checkbox_politica"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="310dp"
+        android:ems="40"
+        android:text="@string/i_agree" />
+
+    <TextView
+        android:id="@+id/linksPoliticas"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="256dp"
+        android:ems="40"
+        android:text="@string/agree_terms_privacy" />
 </RelativeLayout>

@@ -73,18 +73,19 @@ public class MetodosUtiles {
         @Override
         public CharSequence filter(CharSequence source, int start, int end,
                                    Spanned dest, int dstart, int dend) {
-            StringBuilder builder = new StringBuilder(dest);
-            builder.replace(dstart, dend, source
-                    .subSequence(start, end).toString());
-            if (!builder.toString().replace("$", "").matches( //el replace es para que no tome en cuenta el signo de peso
-                    "(([1-9]{1})([0-9]{0,"+(maxDigitsBeforeDecimalPoint-1)+"})?)?(\\.[0-9]{0,"+maxDigitsAfterDecimalPoint+"})?"
+            if(source.length() != 0){
+                StringBuilder builder = new StringBuilder(dest);
+                builder.replace(dstart, dend, source
+                        .subSequence(start, end).toString());
+                if (!builder.toString().replace("$", "").matches( //el replace es para que no tome en cuenta el signo de peso
+                        "(([1-9]{1})([0-9]{0,"+(maxDigitsBeforeDecimalPoint-1)+"})?)?(\\.[0-9]{0,"+maxDigitsAfterDecimalPoint+"})?"
 
-            )) {
-                if(source.length()==0)
-                    return dest.subSequence(dstart, dend);
-                return "";
+                )) {
+                    if(source.length()==0)
+                        return dest.subSequence(dstart, dend);
+                    return "";
+                }
             }
-
             return null;
 
         }
@@ -219,15 +220,13 @@ public class MetodosUtiles {
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 if(!s.toString().startsWith("$")){
-                    editText.setText("$"+s.toString());
+                    editText.setText("$"+s.toString().replace("$","")); //replace necesario para que no ponga doble signo de preco
                     Selection.setSelection(editText.getText(), editText.getText().length());
-
                 }
 
             }
