@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.provider.Contacts;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -120,7 +121,7 @@ public class MailBoxActivity extends AppCompatActivity implements MensajeListLis
 
     public void CargarInvitaciones(){
         //MostrarLista
-        BD.MostrarListasDelUsuario("Mensajes", null,invitaciones, sharedPreferences, recyclerView, adaptador, null, mActivity, null, null);
+        BD.MostrarListasDelUsuario("Mensajes", null,invitaciones, sharedPreferences, recyclerView, adaptador, null, mActivity, null, null, null, null);
     }
 
     //Por alguna razon, este metodo no tiene los datos actualiados de las variables globales, asi que se le tuvieron que pasar
@@ -215,13 +216,13 @@ public class MailBoxActivity extends AppCompatActivity implements MensajeListLis
                 if(respuestaStr.isEmpty()){
                     respuestaStr="-";
                 }
-                RevisarUsuario(invitaciones.getEnviadoPor(), respuestaStr, invitaciones.getNoteViaje(), CD);
+                RevisarUsuario(invitaciones.getEnviadoPor(), respuestaStr, invitaciones.getNoteViaje(), CD, invitaciones.getTimeStamp());
                 dialog.dismiss();
             }
         });
     }
 
-    public void RevisarUsuario(final String usuarioMando, final String respuestaStr, final String Viaje, final DetectaConexion CD){
+    public void RevisarUsuario(final String usuarioMando, final String respuestaStr, final String Viaje, final DetectaConexion CD, final String Timestamp){
                         Database.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -245,9 +246,49 @@ public class MailBoxActivity extends AppCompatActivity implements MensajeListLis
                                                             }else{
                                                                 MandarToast.MostrarToast(mActivity,"El mensaje se enviará al regresar la conexión");
                                                             }
+                                                            final String usuarioContesta= dataSnapshot.getValue().toString();
                                                             BD.AlAñadirNuevaInvitacion(UID, Viaje, respuestaStr, dataSnapshot.getValue().toString(), user);
-                                                            UID.clear();
-                                                            user.clear();
+                                                            //Remover ultimos 3 caracteres al Timestamp
+                                                            final String TimestampSin3 = Timestamp.substring(0, Timestamp.length() - 3);
+                                                            Log.e("TEST", "UID.GET0: "+UID.get(0));
+                                                            Database.child(UID.get(0)).child("Viajes").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                    final int CantidadTotalDeSnaps = (int) dataSnapshot.getChildrenCount();
+                                                                    final List CantidadDeSnapshots = new ArrayList();
+                                                                    for (final DataSnapshot snapshot : dataSnapshot.getChildren()) //Recorremos cada campo de la tabla Usuarios
+                                                                    {
+                                                                        Database.child(UID.get(0)).child("Viajes").child(snapshot.getKey()).child("TimeStamp").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                            @Override
+                                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                                if(dataSnapshot.getValue().toString().contains(TimestampSin3)){
+                                                                                    CantidadDeSnapshots.add(dataSnapshot.getValue().toString());
+                                                                                    SolicitudAceptada(Database, UID, snapshot, "Invitado1", usuarioContesta);
+                                                                                    SolicitudAceptada(Database, UID, snapshot, "Invitado2", usuarioContesta);
+                                                                                    SolicitudAceptada(Database, UID, snapshot, "Invitado3", usuarioContesta);
+                                                                                    SolicitudAceptada(Database, UID, snapshot, "Invitado4", usuarioContesta);
+                                                                                    SolicitudAceptada(Database, UID, snapshot, "Invitado5", usuarioContesta);
+                                                                                    if(CantidadDeSnapshots.size() == CantidadTotalDeSnaps) {
+                                                                                        UID.clear();
+                                                                                        CantidadDeSnapshots.clear();
+                                                                                        user.clear();
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                            @Override
+                                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                                }
+                                                            });
+                                                            //TODO: Al dar click en aceptar solicitud añadir viaje al usuario actual
                                                         }
 
                                                         @Override
@@ -275,5 +316,15 @@ public class MailBoxActivity extends AppCompatActivity implements MensajeListLis
     @Override
     public void onGastoLongClick(Invitaciones invitaciones) {
 
+    }
+
+    public void SolicitudAceptada(DatabaseReference Database, List<String> UID, DataSnapshot snapshot, String Invitado, String userContesta){
+        Log.e("TEST","Valorde user: "+userContesta);
+        Log.e("TEST","Valorde snap: "+snapshot);
+        if(userContesta.equals(snapshot.child("Invitados").child(Invitado).child("Usuario").getValue().toString()) && !userContesta.equals("-")){
+            //TODO: Evitar que se pueda escribir de nombre de usuario "-"
+            Database.child(UID.get(0)).child("Viajes").child(snapshot.getKey()).child("Invitados").child(Invitado).child("SolicitudAceptada")
+                    .setValue("true");
+        }
     }
 }

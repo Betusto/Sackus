@@ -1,6 +1,8 @@
 package aplicacion.android.app.betusto.sackus;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,7 +34,7 @@ public class AdaptadorViajes extends RecyclerView.Adapter<AdaptadorViajes.NoteHo
     }
 
     @Override
-    public void onBindViewHolder(AdaptadorViajes.NoteHolder noteHolder, int position) {
+    public void onBindViewHolder(final AdaptadorViajes.NoteHolder noteHolder, int position) {
         final Viajes viaje = getViajes(position);
         if (viaje != null) {
             if(isPressed == 0) {
@@ -44,7 +46,12 @@ public class AdaptadorViajes extends RecyclerView.Adapter<AdaptadorViajes.NoteHo
                 noteHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        listener.onGastoClick(viaje);
+                        //listener.onGastoClick(viaje);
+                        Activity contexto = (Activity) context;
+                        contexto.finish();
+                        Intent viajesver = new Intent(context,ViajesVerActivity.class);
+                        viajesver.putExtra("TIMESTAMP", viaje.getTimestamp());
+                        context.startActivity(viajesver);
                     }
                 });
                 //Inicializamos el listener de click largo
@@ -65,6 +72,8 @@ public class AdaptadorViajes extends RecyclerView.Adapter<AdaptadorViajes.NoteHo
 
             if(viaje.getNoteCompartido().equals("true")){
                 noteHolder.compartidoImage.setVisibility(View.VISIBLE);
+            }else{
+                noteHolder.compartidoImage.setVisibility(View.GONE); //Super duper importantisimo
             }
         }
     }

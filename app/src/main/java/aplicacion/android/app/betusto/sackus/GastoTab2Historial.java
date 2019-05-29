@@ -144,7 +144,7 @@ public class GastoTab2Historial extends Fragment implements ListListener{
 
     public void CargarNotas(){
         //MostrarLista
-        BD.MostrarListasDelUsuario("Gastos", notas, null, sharedPreferences, recyclerView,null,adaptador, mActivity, null, null);
+        BD.MostrarListasDelUsuario("Gastos", notas, null, sharedPreferences, recyclerView,null,adaptador, mActivity, null, null, null, null);
     }
 
     //Por alguna razon, este metodo no tiene los datos actualiados de las variables globales, asi que se le tuvieron que pasar
@@ -222,10 +222,23 @@ public class GastoTab2Historial extends Fragment implements ListListener{
                 precioStr =   precioEdit.getText().toString().trim();
                 //Verificamos que el usuario no haya dejado campos sin escribir
                 //Si lo que se escribio es diferente entonces el boton tomara accion
+                int detectorErrores = 0;
                 if(!precioStr.equals(precioStrOld) || !gastasteStr.equals(gastasteStrOld)) {
+                    if(precioStr.equals("$") || precioStr.equals("$.") || precioStr.isEmpty()) {
+                        precioEdit.setError("Se necesita un monto de dinero");
+                        precioEdit.requestFocus();
+                        detectorErrores=1;
+                    }
+                    if(gastasteStr.isEmpty()){
+                        gastasteEdit.setError("Se necesita nombre del lugar a visitar");
+                        gastasteEdit.requestFocus();
+                        detectorErrores=1;
+                    }
+                    if(detectorErrores == 0) {
                         Progress.setMessage("Añadiendo, por favor espere");
                         Progress.show();
                         Calcular(gastasteEdit, precioEdit, gastos); //Se encarga de calcular y guardar el historial en la bd
+                    }
                 }
                 dialog.dismiss();
             }

@@ -2,22 +2,35 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/libreta"
-    tools:context=".NotasActivity"
     android:focusable="true" android:focusableInTouchMode="true">
 
+    <ImageView
+        android:id="@+id/activity_editar_nota_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:background="@drawable/libreta" />
+
+    <TextView
+        android:id="@+id/activity_editar_nota_indicacion_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar Nota"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@color/colorIcons"
+        android:textSize="24sp" />
+
     <EditText
-        android:id="@+id/activity_notas_tab1_indicacion_edittext"
+        android:id="@+id/activity_editar_nota_cuerpo_edittext"
         android:layout_width="339dp"
-        android:layout_height="match_parent"
+        android:layout_height="280dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="top"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="175dp"
+        android:layout_marginTop="95dp"
         android:background="@null"
         android:ems="10"
         android:gravity="top|left"
@@ -27,14 +40,14 @@
         android:text="" />
 
     <EditText
-        android:id="@+id/activity_notas_tab1_indicacion_edittext2"
+        android:id="@+id/activity_editar_nota_titulo_edittext"
         android:layout_width="339dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="top"
         android:layout_marginStart="62dp"
-        android:layout_marginTop="133dp"
+        android:layout_marginTop="48dp"
         android:background="@null"
         android:ems="10"
         android:maxLines="2"
@@ -43,29 +56,14 @@
         android:inputType="textCapSentences|textMultiLine"
         android:textStyle="bold" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
-        android:src="@mipmap/ic_addsincirculo" />
-
-    <TextView
-        android:id="@+id/activity_notas_tab1_indicacion_textview"
-        android:layout_width="352dp"
+    <Button
+        android:id="@+id/activity_editar_nota_listobutton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="70dp"
-        android:gravity="center"
-        android:text="Nueva Nota"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textColor="@color/colorIcons"
-        android:textSize="30sp" />
-
+        android:layout_marginStart="-6dp"
+        android:layout_marginTop="372dp"
+        android:background="@color/colorPrimary"
+        android:text="LISTO" />
 </RelativeLayout>

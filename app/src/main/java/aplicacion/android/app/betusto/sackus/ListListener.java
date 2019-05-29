@@ -48,3 +48,19 @@ interface ViajeListListener{
      */
     void onGastoLongClick(Viajes viajes);
 }
+
+interface NotasListListener{
+    /**
+     * click en la nota.
+     *
+     * @param notas: note item
+     */
+    void onGastoClick(Notas notas);
+
+    /**
+     * call largo en la nota.
+     *
+     * @param notas : item
+     */
+    void onGastoLongClick(Notas notas);
+}

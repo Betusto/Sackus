@@ -54,6 +54,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -94,7 +95,8 @@ public class ViajesTab1Crear extends Fragment {
 
     //Otras variables
     private int detectorDeErrores = 0;
-    private String dondeStr, dinerollevasStr, invertirHotelStr, invertirTransporteStr, invertirComidaStr, invertirBaratijasStr;
+    private String dondeStr, dinerollevasStr, invertirHotelStr, invertirTransporteStr, invertirComidaStr, invertirBaratijasStr, fechaInicioStr,
+    fechaRegresoStr;
     private ProgressDialog Progress;
     private int controlDeEditTexts = 0;
     private ArrayList<EditText> acompañantesEditList = new ArrayList<>();
@@ -106,6 +108,7 @@ public class ViajesTab1Crear extends Fragment {
     //private int[] values = new int[]{1, 2, 3 };
     private boolean[] existe = new boolean[]{false, false, false, false, false};
     private int helper;
+    private Double sumaTotal = 0.00;
     private List<String> UIDS = new ArrayList<>();
     private List<String> NombresEscritos = new ArrayList<>();
     private int i; //Variable del for
@@ -197,6 +200,9 @@ public class ViajesTab1Crear extends Fragment {
             @Override
             public void onClick(View v) {
                 //Mostrar Calendario
+                /*if(fechaInicioText.getText().toString().substring(17).replace("\n", "").isEmpty()) {
+                    MU.MostrarToast(getActivity(), "si esta vacio man");
+                }*/
                 MU.MostrarDatePicker(getActivity(), fechaInicioText, "Fecha de inicio: ");
             }
         });
@@ -208,8 +214,6 @@ public class ViajesTab1Crear extends Fragment {
                 MU.MostrarDatePicker(getActivity(), fechaRegresoText, "Fecha de regreso: ");
             }
         });
-
-
         return rootView;
     }
 
@@ -220,11 +224,16 @@ public class ViajesTab1Crear extends Fragment {
     }
 
     public void Validar() {
+        sumaTotal=0.00;
+        detectorDeErrores=0;
         dondeStr = dondeEdit.getText().toString().trim();
         dinerollevasStr = dineroLlevasEdit.getText().toString().trim();
         invertirHotelStr = invertirHotelEdit.getText().toString().trim();
         invertirTransporteStr = invertirTransporteEdit.getText().toString().trim();
         invertirComidaStr = invertirComidaEdit.getText().toString().trim();
+        invertirBaratijasStr = invertirBaratijasEdit.getText().toString().trim();
+        fechaInicioStr = fechaInicioText.getText().toString().substring(17).replace("\n", "").trim();
+        fechaRegresoStr = fechaRegresoText.getText().toString().substring(18).replace("\n", "").trim();
         //do {
         //    BD.GetElementoUsuarioActual(Database, "Usuario", sharedPreferences);
         //}while(NombreDelUsuario == null);
@@ -239,60 +248,100 @@ public class ViajesTab1Crear extends Fragment {
             detectorDeErrores = 1;
         }
         if(detectorDeErrores == 0) {
+            //Revisar si escribio algo en los campos no obligatorios
+            if (invertirHotelStr.equals("$") || invertirHotelStr.equals("$.") || invertirHotelStr.isEmpty()) {
+                invertirHotelStr = "$";
+            } else {
+                IrSumando(invertirHotelStr);
+            }
+            if (invertirTransporteStr.equals("$") || invertirTransporteStr.equals("$.") || invertirTransporteStr.isEmpty()) {
+                invertirTransporteStr = "$";
+            } else {
+                IrSumando(invertirTransporteStr);
+            }
+            if (invertirComidaStr.equals("$") || invertirComidaStr.equals("$.") || invertirComidaStr.isEmpty()) {
+                invertirComidaStr = "$";
+            } else {
+                IrSumando(invertirComidaStr);
+            }
+            if (invertirBaratijasStr.equals("$") || invertirBaratijasStr.equals("$.") || invertirBaratijasStr.isEmpty()) {
+                invertirBaratijasStr = "$";
+            } else {
+                IrSumando(invertirBaratijasStr);
+            }
+            if (fechaInicioStr.isEmpty()) {
+                fechaInicioStr = "-";
+            }
+            if (fechaRegresoStr.isEmpty()) {
+                fechaRegresoStr = "-";
+            }
+            double dineroLlevasDoub = Double.parseDouble(dinerollevasStr.replace("$", "")); //Conseguimos el monto que se escribio
+            if(sumaTotal>dineroLlevasDoub){
+                MU.MostrarToast(getActivity(), "La suma de los montos a invertir sobrepasan al dinero total que llevas");
+                detectorDeErrores=1;
+            }
             if (VariablesEstaticas.Locked == false) {
-                if (controlDeEditTexts != 0) {
-                    VariablesEstaticas.Locked = true;
-                    ExisteCorreo = false;
-                    existe[0] = false;
-                    existe[1] = false;
-                    existe[2] = false;
-                    existe[3] = false;
-                    existe[4] = false;
-                    detectorDeErrores = 0;
-                    helper = 0;
-                    Database.child(VariablesEstaticas.CurrentUserUID).child("Usuario").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            //if necesario por si ya no obtiene el valor del uid por alguna razon, de esta manera no crasheara
-                            //Se necesitan volver a cargar los datos porque cada cambio en la base de datos activa este ondatachange
-                            VE.CargarDatos(sharedPreferences);
-                            if (VariablesEstaticas.CurrentUserUID != null && !VariablesEstaticas.CurrentUserUID.equals("")) {
-                                String resultado = dataSnapshot.getValue().toString();
-                                NombreDelUsuario = resultado; //Conseguimos el nombre de usuario del usuario actual para evitar errores si se agrega el mismo
-                                Log.e("TEST", "Valor de UsuarioActual: " + NombreDelUsuario);
-                                for (i = 0; i < acompañantesEditList.size(); i++) { //Recorremos el arraylist
-                                    if (acompañantesEditList.get(i).getText().toString().trim().isEmpty()) {
-                                        acompañantesEditList.get(i).setError("Se requiere nombre de usuario del acompañante");
-                                        acompañantesEditList.get(i).requestFocus();
-                                        Log.e("TEST", "Acompañante " + i + " empty");
-                                        detectorDeErrores = 1;
-                                    } else if (acompañantesEditList.get(i).getText().toString().trim().equals(NombreDelUsuario)) {
-                                        acompañantesEditList.get(i).setError("No es necesario agregarte como acompañante");
-                                        acompañantesEditList.get(i).requestFocus();
-                                        detectorDeErrores = 1;
-                                    } else if (!acompañantesEditList.get(i).getText().toString().trim().isEmpty()) {
-                                        DetectarSiSeRepiteElementos();
-                                        if (detectorDeErrores != 1) {
-                                            validarUsuariosCorrectos(acompañantesEditList.get(i).getText().toString().trim(), i);
+                VariablesEstaticas.Locked = true;
+                if (detectorDeErrores == 0){
+                    if (controlDeEditTexts != 0) {
+                        ExisteCorreo = false;
+                        existe[0] = false;
+                        existe[1] = false;
+                        existe[2] = false;
+                        existe[3] = false;
+                        existe[4] = false;
+                        detectorDeErrores = 0;
+                        helper = 0;
+                        Database.child(VariablesEstaticas.CurrentUserUID).child("Usuario").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                //if necesario por si ya no obtiene el valor del uid por alguna razon, de esta manera no crasheara
+                                //Se necesitan volver a cargar los datos porque cada cambio en la base de datos activa este ondatachange
+                                VE.CargarDatos(sharedPreferences);
+                                if (VariablesEstaticas.CurrentUserUID != null && !VariablesEstaticas.CurrentUserUID.equals("")) {
+                                    String resultado = dataSnapshot.getValue().toString();
+                                    NombreDelUsuario = resultado; //Conseguimos el nombre de usuario del usuario actual para evitar errores si se agrega el mismo
+                                    Log.e("TEST", "Valor de UsuarioActual: " + NombreDelUsuario);
+                                    for (i = 0; i < acompañantesEditList.size(); i++) { //Recorremos el arraylist
+                                        if (acompañantesEditList.get(i).getText().toString().trim().isEmpty()) {
+                                            acompañantesEditList.get(i).setError("Se requiere nombre de usuario del acompañante");
+                                            acompañantesEditList.get(i).requestFocus();
+                                            Log.e("TEST", "Acompañante " + i + " empty");
+                                            detectorDeErrores = 1;
+                                        } else if (acompañantesEditList.get(i).getText().toString().trim().equals(NombreDelUsuario)) {
+                                            acompañantesEditList.get(i).setError("No es necesario agregarte como acompañante");
+                                            acompañantesEditList.get(i).requestFocus();
+                                            detectorDeErrores = 1;
+                                        } else if (!acompañantesEditList.get(i).getText().toString().trim().isEmpty()) {
+                                            DetectarSiSeRepiteElementos();
+                                            if (detectorDeErrores != 1) {
+                                                validarUsuariosCorrectos(acompañantesEditList.get(i).getText().toString().trim(), i);
+                                            }
                                         }
                                     }
+                                    VariablesEstaticas.Locked = false;
                                 }
-                                VariablesEstaticas.Locked = false;
                             }
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                        }
-                    });
-                }else {
-                    AgregarViaje();
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
+                    } else {
+                        AgregarViaje();
+                    }
+            }else{
+                    VariablesEstaticas.Locked = false;
+                }
+        }else{
+                VariablesEstaticas.Locked = false;
             }
-            }
+        }else{
+            VariablesEstaticas.Locked = false;
         }
         }
 
-        //Metodo encargado de revisar que
+        //Metodo encargado de revisar que no se repitan nombres de usuarios
         public void DetectarSiSeRepiteElementos(){
             Set<String> set=new HashSet<>();
             for(int i=0;i<acompañantesEditList.size();i++){
@@ -302,6 +351,17 @@ public class ViajesTab1Crear extends Fragment {
                     acompañantesEditList.get(i).requestFocus();
                     detectorDeErrores = 1;
                     flag=true;
+                }
+            }
+        }
+
+        //Metodo encargado de sumar las inversiones para poder validar luego si sobrepasan el limite indicado
+        public void IrSumando(String suma){
+            if(Double.parseDouble(suma.replace("$","")) != Double.NaN && Double.parseDouble(suma.replace("$",""))
+                    != 0.00){
+                double sumaDouble = Double.parseDouble(suma.replace("$", "")); //Conseguimos el monto que se escribio
+                if (sumaDouble != 0.00 && sumaDouble != Double.NaN) { //no valores nulos
+                    sumaTotal=sumaTotal+sumaDouble;
                 }
             }
         }
@@ -432,6 +492,9 @@ public class ViajesTab1Crear extends Fragment {
                                         }
                                     });
 
+                                }else{
+                                    Log.e("TEST","snapshot es nulo");
+                                    VariablesEstaticas.Locked = false;
                                 }
                             }
                         }
@@ -440,6 +503,8 @@ public class ViajesTab1Crear extends Fragment {
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                         }
                     });
+                }else{
+                    VariablesEstaticas.Locked = false;
                 }
             }
 
@@ -450,9 +515,14 @@ public class ViajesTab1Crear extends Fragment {
     }
 
     public void AgregarViaje() {
+        sumaTotal=0.00;
         String compartir = "false";
         Log.e("nuevoarreglo","Paso el ondatachange con exito");
         helper=0;
+        List<String> Invitados = new ArrayList(Arrays.asList("-","-","-","-","-"));
+        Log.e("PRUEBA","Valor de Invitados: "+Invitados);
+        Log.e("PRUEBA","Valor de NombresEscritos: "+NombresEscritos);
+        Collections.copy(Invitados, NombresEscritos);
         if(detectorDeErrores == 0) {
             Progress.setMessage("Añadiendo, por favor espere");
             Progress.show();
@@ -473,11 +543,11 @@ public class ViajesTab1Crear extends Fragment {
                 UIDS.clear();
                 VariablesEstaticas.Locked = false;
             }
-            //TODO: VALIDAR DE BUENA MANERA EL DINERO CUANDO SE QUIERA MOSTRAR
-            //TODO: Dineros a invertir validar con respecto al efectivo total
-            //TODO: Efectivo TOTAL ESTARA IGUAL AUNQUE SE HAYA AGREGADO VIAJE
             //Añadimos el viaje
-            if(!fechaInicioText.getText().toString().substring(17).isEmpty() || fechaInicioText.getText().toString().substring(17) != null &&
+            BD.AlAñadirNuevoViaje(dondeStr, dinerollevasStr, invertirHotelStr, invertirTransporteStr,
+                    invertirComidaStr, invertirBaratijasStr, fechaInicioStr, fechaRegresoStr, compartir, Invitados);
+            Invitados.clear();
+            /*if(!fechaInicioText.getText().toString().substring(17).isEmpty() || fechaInicioText.getText().toString().substring(17) != null &&
             !fechaRegresoText.getText().toString().substring(18).isEmpty() || fechaRegresoText.getText().toString().substring(18) != null){
                 String fechaInicioStr = fechaInicioText.getText().toString().substring(17).replace("\n", "");
                 String fechaRegresoStr = fechaRegresoText.getText().toString().substring(18).replace("\n","");
@@ -488,7 +558,7 @@ public class ViajesTab1Crear extends Fragment {
                     VariablesEstaticas.Locked = false;
                     BD.AlAñadirNuevoViaje(dondeStr, dinerollevasStr, "-", "-", compartir);
                 }
-            }
+            }*/
             VariablesEstaticas.Locked = false;
             MandarToast.MostrarToast(getActivity(), "Viaje añadido");
             Intent reebot = new Intent(getActivity(), ViajesActivity.class);

@@ -139,3 +139,47 @@ class Viajes{
     }
 
 }
+
+class Notas{
+
+    public  Notas(){
+
+    }
+
+
+    //Titulo de la nota
+    private String noteNota;
+    //Descripcion
+    private String noteDescripcion;
+    //Fecha en que se escribio la nota
+    private  String noteFecha;
+    //TimeStamp para referencias
+    private  String Timestamp;
+
+
+    public Notas(String noteNota, String noteDescripcion, String noteFecha, String Timestamp) {
+        this.noteNota = noteNota;
+        this.noteDescripcion = noteDescripcion;
+        this.noteFecha = noteFecha;
+        this.Timestamp = Timestamp;
+    }
+
+    public String getNoteNota() {
+        return noteNota;
+    }
+
+    public String getNoteDescripcion() {
+        return noteDescripcion;
+    }
+
+    public String getNoteFecha() {
+        return noteFecha;
+    }
+
+    public String getTimestamp() {
+        return Timestamp;
+    }
+
+}
+
+

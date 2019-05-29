@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="aplicacion.android.app.betusto.sackus">
-
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-
-    <!-- Revisar la conexion a internet -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- Revisar la conexion a internet -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -19,6 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ViajesEditarActivity">
+            android:windowSoftInputMode="adjustResize"
+        </activity>
+        <activity android:name=".ViajesVerActivity" />
         <activity android:name=".IngresarActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,7 +55,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".MailBoxActivity"></activity>
+        <activity android:name=".MailBoxActivity" />
     </application>
 
 </manifest>

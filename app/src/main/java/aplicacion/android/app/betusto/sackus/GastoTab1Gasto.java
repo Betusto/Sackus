@@ -171,7 +171,7 @@ public class GastoTab1Gasto extends Fragment {
                         handler.postDelayed(new Runnable() {
                             public void run() {
                         if (Double.parseDouble(dataSnapshot.getValue().toString().replace("$", "")) != Double.NaN && Double.parseDouble(dataSnapshot.getValue().toString().replace("$", "")) != 0.00) {
-                        double efectivoTotal = Double.parseDouble(dataSnapshot.getValue().toString().replace("$", "")); //Conseguimos la cantidad actual y la convertimos a int
+                        double efectivoTotal = Double.parseDouble(dataSnapshot.getValue().toString().replace("$", "")); //Conseguimos la cantidad actual y la convertimos a double
                         double dineroeditDouble = Double.parseDouble(precioEdit.getText().toString().replace("$", "")); //Conseguimos el monto que se escribio
                         if (dineroeditDouble != 0.00 && dineroeditDouble != Double.NaN) { //no valores nulos
                             if (efectivoTotal - dineroeditDouble >= 0) {

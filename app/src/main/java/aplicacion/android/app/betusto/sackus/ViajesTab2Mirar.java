@@ -3,11 +3,15 @@ package aplicacion.android.app.betusto.sackus;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,19 +45,14 @@ public class ViajesTab2Mirar extends Fragment implements ViajeListListener{
     public android.support.v7.widget.RecyclerView recyclerView;
     public ArrayList<Viajes> viajes = new ArrayList<>();
     private AdaptadorViajes adaptadorViajes;
-    public View rootView;
     MetodosUtiles MU = new MetodosUtiles();
     BaseDeDatos BD = new BaseDeDatos();
     private DatabaseReference Database;
     SharedPreferences sharedPreferences;
     VariablesEstaticas VE = new VariablesEstaticas();
     //MetodosUtiles MandarToast = new MetodosUtiles();
-    private Activity mActivity;
-    private String gastasteStr, precioStr;
+    public  Activity mActivity;
     MetodosUtiles MandarToast = new MetodosUtiles();
-    private static DecimalFormat df2 = new DecimalFormat("0.00"); //Para usar solo dos decimales
-    private ProgressDialog Progress;
-    public static String gastasteStrOld, precioStrOld;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,9 +79,11 @@ public class ViajesTab2Mirar extends Fragment implements ViajeListListener{
         recyclerView.setLayoutManager(mLayoutManager);
         mActivity = this.getActivity();
         CargarViajes();
+        Log.e("aaa", isAdded()+"");
 
         return rootView;
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -92,8 +93,9 @@ public class ViajesTab2Mirar extends Fragment implements ViajeListListener{
 
     public void CargarViajes(){
         //MostrarLista
-        BD.MostrarListasDelUsuario("Viajes", null, null, sharedPreferences, recyclerView,null,null, mActivity, viajes, adaptadorViajes);
+        BD.MostrarListasDelUsuario("Viajes", null, null, sharedPreferences, recyclerView,null,null, mActivity, viajes, adaptadorViajes, null, null);
     }
+
 
     //Por alguna razon, este metodo no tiene los datos actualiados de las variables globales, asi que se le tuvieron que pasar
     //de nuevo
@@ -112,10 +114,11 @@ public class ViajesTab2Mirar extends Fragment implements ViajeListListener{
         }
     }
 
+    //Debido a que los listeneres no funcionan bien en fragments, se traslado la funcion en adaptadorviajes
     @Override
     public void onGastoClick(Viajes viajes) {
-
     }
+
 
     @Override
     public void onGastoLongClick(Viajes viajes) {

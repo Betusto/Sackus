@@ -103,6 +103,14 @@ public class NotasActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setText(getResources().getString(R.string.ver_notas_may));
 
         CD.startConexion(nowifibutton);
+        //Te lleve automaticamente al tab 2 si modificaste algo
+        Intent reebot = getIntent();
+        Bundle b = reebot.getExtras();
+        if(b!=null){
+            if(b.getInt("INTENT") == 1){
+                mViewPager.setCurrentItem(1);
+            }
+        }
     }
 
     //Revisar conexion internet

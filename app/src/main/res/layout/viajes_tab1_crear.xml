@@ -88,6 +88,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@drawable/btn_uno"
+                android:textColor="@drawable/txt_btn_uno"
                 android:text="Escoger Fecha\nde inicio" />
 
             <TextView
@@ -103,6 +105,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@drawable/btn_uno"
+                android:textColor="@drawable/txt_btn_uno"
                 android:text="Escoger Fecha\nde regreso" />
 
             <android.support.design.widget.TextInputLayout
