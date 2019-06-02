@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Tu viaje"
+                android:text="@string/tu_viaje"
                 android:layout_marginTop="10dp"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="10dp"
-                android:text="Efectivo Total:"
+                android:text="@string/efectivo_total_2"
                 android:textAlignment="viewStart"
                 android:textSize="18sp" />
             <LinearLayout
@@ -62,7 +62,7 @@
                 android:id="@+id/activity_viajes_ver_nombreviajetext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lugar a visitar:"
+                android:text="@string/lugar_a_visitar"
                 android:layout_marginTop="16dp"
                 android:textSize="24sp" />
 
@@ -88,7 +88,7 @@
                 android:id="@+id/activity_viajes_ver_fechainiciotext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fecha de inicio:"
+                android:text="@string/fecha_de_inicio"
                 android:layout_marginTop="16dp"
                 android:textSize="24sp" />
 
@@ -114,7 +114,7 @@
                 android:id="@+id/activity_viajes_ver_fecharegresotext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fecha de regreso:"
+                android:text="@string/fecha_de_regreso"
                 android:layout_marginTop="16dp"
                 android:textSize="24sp" />
 
@@ -140,7 +140,7 @@
                 android:id="@+id/activity_viajes_ver_dinerototaltext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dinero que llevas:"
+                android:text="@string/dinero_que_llevas"
                 android:layout_marginTop="16dp"
                 android:textSize="24sp" />
 
@@ -166,7 +166,7 @@
                 android:id="@+id/activity_viajes_ver_dinerohoteltext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dinero a invertir en hotel:"
+                android:text="@string/dinero_a_invertir_en_hotel"
                 android:layout_marginTop="16dp"
                 android:textSize="24sp" />
 
@@ -192,7 +192,7 @@
                 android:id="@+id/activity_viajes_ver_dinerotransportetext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dinero a invertir en transporte:"
+                android:text="@string/dinero_a_invertir_en_transporte"
                 android:layout_marginTop="16dp"
                 android:textSize="24sp" />
 
@@ -218,7 +218,7 @@
                 android:id="@+id/activity_viajes_ver_dinerocomidatext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dinero a invertir en comida:"
+                android:text="@string/dinero_a_invertir_en_comida"
                 android:layout_marginTop="16dp"
                 android:textSize="24sp" />
 
@@ -244,7 +244,7 @@
                 android:id="@+id/activity_viajes_ver_dinerobaratijastext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dinero a invertir en baratijas:"
+                android:text="@string/dinero_a_invertir_en_baratijas"
                 android:layout_marginTop="16dp"
                 android:textSize="24sp" />
 
@@ -270,7 +270,7 @@
                 android:id="@+id/activity_viajes_ver_acompañantestext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Acompañantes:"
+                android:text="@string/acompañantes"
                 android:layout_marginTop="16dp"
                 android:textSize="24sp" />
             <LinearLayout
@@ -437,7 +437,7 @@
             android:layout_weight="5"
             android:background="@color/colorHolo"
             android:layout_gravity="bottom"
-            android:text="EDITAR"
+            android:text="@string/editar_mayus"
             android:textSize="18sp" />
 
         <Button
@@ -447,7 +447,7 @@
             android:layout_gravity="bottom"
             android:layout_weight="5"
             android:background="@color/colorPrimary"
-            android:text="LISTO"
+            android:text="@string/listo_mayus"
             android:textSize="18sp" />
 
     </LinearLayout>

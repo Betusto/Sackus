@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="LISTA DE GASTOS"
+            android:text="@string/lista_de_gastos_may"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="25dp" />
     </RelativeLayout>

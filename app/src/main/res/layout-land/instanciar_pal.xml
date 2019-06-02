@@ -13,7 +13,7 @@
         android:layout_weight="5"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:hint="Nombre de usuario del acompañante"
+        android:hint="@string/nombre_de_usuario_del_acompañante"
         android:singleLine="true"/>
 
     <Button

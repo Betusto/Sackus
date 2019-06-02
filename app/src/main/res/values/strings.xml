@@ -115,7 +115,7 @@
     <string name="se_necesita_efectivo_para_añadir_gasto">You need cash to add a new expense</string>
     <string name="se_requiere_nombre_del_gasto">Name of the expense is required</string>
     <!---GastoTab2Historial-->
-    <string name="lista_de_gastos_may">LISTA DE GASTOS</string>
+    <string name="lista_de_gastos_may">LIST OF EXPENSES</string>
     <!---GastoActivity-->
     <string name="historial">HISTORY</string>
 
@@ -169,4 +169,73 @@
     <string name="agree_terms_privacy">Check if you agree and have read our <a href="https://pastebin.com/raw/FbAzBPCz">Privacy Policy</a></string>
     <string name="para_continuar_acepte">To continue, please, accept and Pivacy Policy.</string>
     <string name="i_agree">I agree.</string>
+
+    <string name="crear_viaje">Create Travel</string>
+    <string name="ver_viajes">View Travels</string>
+
+    <string name="nuevo_viaje">New Travel</string>
+    <string name="a_donde_quieres_ir">Where are you going?*</string>
+    <string name="fecha_de_inicio">Start date:\n</string>
+    <string name="escoger_fecha_de_inicio">Select start\ndate</string>
+    <string name="fecha_de_regreso">Return date:\n</string>
+    <string name="escoger_fecha_de_regreso">Select return\ndate</string>
+    <string name="cuanto_dinero_llevas">How much money?*</string>
+    <string name="dinero_a_invertir_en_hotel">Money to invest in hotel?</string>
+    <string name="dinero_a_invertir_en_transporte">Money to invest in transportation?</string>
+    <string name="dinero_a_invertir_en_comida">Money to invest in food?</string>
+    <string name="dinero_a_invertir_en_baratijas">Money to invest in trinkets?</string>
+    <string name="acompañantes">Companions</string>
+    <string name="mensaje">Message</string>
+    <string name="mensajes_may">MESSAGES</string>
+
+    <string name="lugar_a_visitar">Place to visit:</string>
+    <string name="dinero_que_llevas">Money taken:</string>
+    <string name="regresar_mayus">BACK</string>
+    <string name="listo_mayus">DONE</string>
+    <string name="tu_viaje">Your travel</string>
+
+    <string name="nombre_de_usuario_del_acompañante">Username of your companion</string>
+    <string name="compartir_viaje">Share travel</string>
+    <string name="info_compartir_viaje">If you plan to travel with someone who also uses Sackus, you can invite them to share the trip and the money they carry with you. You can share a trip with up to 5 people!</string>
+
+    <string name="eliminar_gasto_pregunta">Delete expense?</string>
+    <string name="eliminar_gasto">DELETE\n EXPENSE</string>
+    <string name="eliminar_y_revertir">DELETE\n AND REVERT</string>
+    <string name="gasto_eliminado">The expense has been deleted</string>
+
+
+    <string name="se_necesita_un_monto_de_dinero">An amount of money is needed</string>
+    <string name="se_necesita_nombre_del_lugar">A name of the place to visit is needed</string>
+    <string name="añadiendo_por_favor_espere">Adding, please wait</string>
+
+    <string name="lista_de_viajes_mayus">LIST OF TRAVELS</string>
+    <string name="editar_mayus">EDIT</string>
+
+    <string name="editar_gasto">Edit spending</string>
+
+    <!-- ViajesTab1Crear-->
+    <string name="la_suma_de_los_montos_sobrepasan_dinero_total">The sum of the amounts to invest surpass the total money that you carry</string>
+    <string name="se_requiere_nombre_de_usuario_del_acompañante">Companion user name is required</string>
+    <string name="no_es_necesario_agregarte_como_acompañante">It is not necessary to add yourself as a companion</string>
+    <string name="repetiste_nombre_de_usuario">You repeated a username</string>
+    <string name="el_usuario_que_escribió_no_se_encuentra_registrado">This user is not registered</string>
+
+    <string name="mensaje_enviado">Message sent</string>
+    <string name="el_mensaje_se_enviara_cuando_haya_conexion">The message will be sent when the connection returns</string>
+
+    <string name="viaje_añadido">Travel added</string>
+
+    <!-- Notas -->
+    <string name="algo_que_olvides">Something you could forget?</string>
+    <string name="titulo">Title</string>
+    <string name="nueva_nota">New Note</string>
+
+
+    <string name="la_nota_necesita_un_titulo">The note needs a title</string>
+    <string name="la_nota_necesita_contenido">The note needs content</string>
+    <string name="editar_nota">Edit note</string>
+
+    <!--Responder-->
+    <string name="respuesta">Response</string>
+    <string name="aceptar_solicitud_mayus">ACCEPT REQUEST</string>
 </resources>

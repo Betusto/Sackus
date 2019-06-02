@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Nuevo Viaje"
+                android:text="@string/nuevo_viaje"
                 android:layout_marginTop="10dp"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="10dp"
-                android:text="Efectivo Total:"
+                android:text="@string/efectivo_total_2"
                 android:textAlignment="viewStart"
                 android:textSize="18sp" />
 
@@ -66,7 +66,7 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:hint="¿A dónde quieres ir?*"
+                android:hint="@string/a_donde_quieres_ir"
                 android:inputType="textCapSentences|textMultiLine"
                 android:lines="2"
                 android:maxLines="2"
@@ -80,35 +80,35 @@
                 android:id="@+id/activity_viajes_tab1_fechainiciotext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fecha de inicio:\n"
+                android:text="@string/fecha_de_inicio"
                 android:layout_marginTop="16dp"
                 android:textSize="20sp" />
 
             <Button
                 android:id="@+id/activity_viajes_tab1_seleccionarfechainiciobutton"
-                android:layout_width="wrap_content"
+                android:layout_width="117dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/btn_uno"
-                android:textColor="@drawable/txt_btn_uno"
-                android:text="Escoger Fecha\nde inicio" />
+                android:text="@string/escoger_fecha_de_inicio"
+                android:textColor="@drawable/txt_btn_uno" />
 
             <TextView
                 android:id="@+id/activity_viajes_tab1_fechafinaltext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fecha de regreso:\n"
+                android:text="@string/fecha_de_regreso"
                 android:layout_marginTop="16dp"
                 android:textSize="20sp" />
 
             <Button
                 android:id="@+id/activity_viajes_tab1_seleccionarfecharegresobutton"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/btn_uno"
-                android:textColor="@drawable/txt_btn_uno"
-                android:text="Escoger Fecha\nde regreso" />
+                android:text="@string/escoger_fecha_de_regreso"
+                android:textColor="@drawable/txt_btn_uno" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -120,7 +120,7 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:hint="¿Cuánto dinero llevas?*"
+                android:hint="@string/cuanto_dinero_llevas"
                 android:inputType="numberDecimal"
                 android:gravity="center"
                 android:singleLine="true"
@@ -138,7 +138,7 @@
                 android:layout_marginStart="0dp"
                 android:ems="10"
                 android:layout_marginTop="16dp"
-                android:hint="¿Dinero a invertir en hotel?"
+                android:hint="@string/dinero_a_invertir_en_hotel"
                 android:inputType="numberDecimal"
                 android:singleLine="true"
                 android:textSize="22sp" />
@@ -155,7 +155,7 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:hint="¿Dinero a invertir en transporte?"
+                android:hint="@string/dinero_a_invertir_en_transporte"
                 android:inputType="numberDecimal"
                 android:singleLine="true"
                 android:textSize="22sp" />
@@ -172,7 +172,7 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:hint="¿Dinero a invertir en comida?"
+                android:hint="@string/dinero_a_invertir_en_comida"
                 android:inputType="numberDecimal"
                 android:singleLine="true"
                 android:textSize="22sp" />
@@ -189,7 +189,7 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:hint="¿Dinero a invertir en baratijas?"
+                android:hint="@string/dinero_a_invertir_en_baratijas"
                 android:inputType="numberDecimal"
                 android:singleLine="true"
                 android:textSize="22sp" />
@@ -227,7 +227,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Acompañantes"
+                android:text="@string/acompañantes"
                 android:layout_marginTop="10dp"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
@@ -242,7 +242,7 @@
                 android:id="@+id/activity_viajes_tab1_mensaje_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Mensaje"
+                android:hint="@string/mensaje"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
                 android:ems="10"

@@ -236,12 +236,12 @@ public class ViajesEditarActivity extends AppCompatActivity {
         String fechaInicioStr = mostrarFechaInicioEdit.getText().toString().trim();
         String fechaRegresoStr = mostrarFechaRegresoEdit.getText().toString().trim();
         if(dondeStr.isEmpty()){
-            mostrarNombreViajeEdit.setError("Se necesita nombre del lugar a visitar");
+            mostrarNombreViajeEdit.setError(getResources().getString(R.string.se_necesita_nombre_del_lugar));
             mostrarNombreViajeEdit.requestFocus();
             detectarErrores = 1;
         }
         if(dinerollevasStr.equals("$") || dinerollevasStr.equals("$.") || dinerollevasStr.isEmpty()){
-            mostrarDineroQueLlevasEdit.setError("Se necesita un monto de dinero");
+            mostrarDineroQueLlevasEdit.setError(getResources().getString(R.string.se_necesita_un_monto_de_dinero));
             mostrarDineroQueLlevasEdit.requestFocus();
             detectarErrores = 1;
         }
@@ -275,7 +275,7 @@ public class ViajesEditarActivity extends AppCompatActivity {
             }
             double dineroLlevasDoub = Double.parseDouble(dinerollevasStr.replace("$", "")); //Conseguimos el monto que se escribio
             if(sumaTotal>dineroLlevasDoub){
-                MU.MostrarToast(ViajesEditarActivity.this, "La suma de los montos a invertir sobrepasan al dinero total que llevas");
+                MU.MostrarToast(ViajesEditarActivity.this, getResources().getString(R.string.la_suma_de_los_montos_sobrepasan_dinero_total));
             }else{
                 AplicarCambios(dondeStr, nombreViajeOriginal, "Viaje");
                 AplicarCambios(dinerollevasStr, dineroQueLlevasOriginal, "DineroDedicado");

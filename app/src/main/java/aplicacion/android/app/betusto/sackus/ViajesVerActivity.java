@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ViajesVerActivity extends AppCompatActivity {
     //Textviews que tomarán datos de la base de datos para mostrar
@@ -162,6 +163,9 @@ public class ViajesVerActivity extends AppCompatActivity {
         MostrarElementoViajes("InvertirEnTransporte",mostrarDineroTransporteText, DineroTransporteText, lineaDineroTransporte);
         MostrarElementoViajes("InvertirEnComida",mostrarDineroComidaText, DineroComidaText, lineaDineroComida);
         MostrarElementoViajes("InvertirEnBaratijas",mostrarDineroBaratijasText, DineroBaratijasText, lineaDineroBaratijas);
+
+
+
     }
 
     //Metodo para conseguir algun child de viajes

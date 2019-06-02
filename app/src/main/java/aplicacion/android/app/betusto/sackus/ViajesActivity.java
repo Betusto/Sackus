@@ -97,8 +97,8 @@ public class ViajesActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         //Nombres de los tabs
-        tabLayout.getTabAt(0).setText("CREAR VIAJE");
-        tabLayout.getTabAt(1).setText("VER VIAJES");
+        tabLayout.getTabAt(0).setText(getResources().getString(R.string.crear_viaje));
+        tabLayout.getTabAt(1).setText(getResources().getString(R.string.ver_viajes));
 
         CD.startConexion(nowifibutton);
         //Te lleve automaticamente al tab 2 si modificaste algo

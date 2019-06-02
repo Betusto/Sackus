@@ -64,6 +64,8 @@ public class GastoTab2Historial extends Fragment implements ListListener{
     MetodosUtiles MandarToast = new MetodosUtiles();
     private static DecimalFormat df2 = new DecimalFormat("0.00"); //Para usar solo dos decimales
     private ProgressDialog Progress;
+    //context
+    private Context mContext;
     public static String gastasteStrOld, precioStrOld;
 
 
@@ -225,12 +227,12 @@ public class GastoTab2Historial extends Fragment implements ListListener{
                 int detectorErrores = 0;
                 if(!precioStr.equals(precioStrOld) || !gastasteStr.equals(gastasteStrOld)) {
                     if(precioStr.equals("$") || precioStr.equals("$.") || precioStr.isEmpty()) {
-                        precioEdit.setError("Se necesita un monto de dinero");
+                        precioEdit.setError("Se requiere un monto valido");
                         precioEdit.requestFocus();
                         detectorErrores=1;
                     }
                     if(gastasteStr.isEmpty()){
-                        gastasteEdit.setError("Se necesita nombre del lugar a visitar");
+                        gastasteEdit.setError("El nombre del lugar a visitar es necesario");
                         gastasteEdit.requestFocus();
                         detectorErrores=1;
                     }
@@ -345,7 +347,7 @@ public class GastoTab2Historial extends Fragment implements ListListener{
                                 mActivity.finish();
                                 Double Efectivo = Double.parseDouble(dataSnapshot.getValue().toString().replace("$", ""));
                                 Double NuevoEfectivo = Efectivo + Double.parseDouble(gastos.getNoteGasto().replace("$", "")); //Sumamos el efectivo actual con el del gasto
-                            Database.child(VariablesEstaticas.CurrentUserUID).child("EfectivoTotal").setValue("$" + df2.format(NuevoEfectivo));
+                                Database.child(VariablesEstaticas.CurrentUserUID).child("EfectivoTotal").setValue("$" + df2.format(NuevoEfectivo));
                                 BD.EliminarNota("Gastos",gastos); //Eliminamos el gasto
                                 //Quitar animaciones
                                 mActivity.overridePendingTransition(0, 0);

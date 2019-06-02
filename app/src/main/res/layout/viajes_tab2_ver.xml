@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="LISTA DE VIAJES"
+            android:text="@string/lista_de_viajes_mayus"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="25dp" />
     </RelativeLayout>

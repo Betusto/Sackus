@@ -87,12 +87,12 @@ public class NotasTab1Escribir extends Fragment {
                 String tituloText = tituloEdit.getText().toString().trim();
                 String descripcionText = descripcionEdit.getText().toString().trim();
                 if(tituloText.isEmpty()){
-                    tituloEdit.setError("La nota necesita un título");
+                    tituloEdit.setError(getResources().getString(R.string.la_nota_necesita_un_titulo));
                     tituloEdit.requestFocus();
                     detectorErrores = 1;
                 }
                 if(descripcionText.isEmpty()){
-                    descripcionEdit.setError("La nota necesita contenido");
+                    descripcionEdit.setError(getResources().getString(R.string.la_nota_necesita_contenido));
                     descripcionEdit.requestFocus();
                     detectorErrores = 1;
                 }

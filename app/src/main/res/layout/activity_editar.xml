@@ -16,7 +16,7 @@
         android:id="@+id/activity_editar_indicacion_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Editar Gasto"
+        android:text="@string/editar_gasto"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@color/colorIcons"
@@ -31,7 +31,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="131dp"
         android:ems="10"
-        android:hint="Precio"
+        android:hint="@string/precio"
         android:inputType="numberDecimal"
         android:singleLine="true"
         android:textSize="22sp" />
@@ -46,7 +46,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginBottom="138dp"
         android:ems="10"
-        android:hint="¿Qué gastaste?"
+        android:hint="@string/en_que_gastaste"
         android:inputType="textCapSentences|textMultiLine"
         android:lines="2"
         android:maxLines="2"
@@ -64,5 +64,5 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="202dp"
         android:background="@color/colorPrimary"
-        android:text="LISTO" />
+        android:text="@string/listo_mayus" />
 </RelativeLayout>

@@ -242,9 +242,9 @@ public class MailBoxActivity extends AppCompatActivity implements MensajeListLis
                                                         @Override
                                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                                             if(CD.isConnected()){
-                                                                MandarToast.MostrarToast(mActivity,"Mensaje enviado");
+                                                                MandarToast.MostrarToast(mActivity,getResources().getString(R.string.mensaje_enviado));
                                                             }else{
-                                                                MandarToast.MostrarToast(mActivity,"El mensaje se enviará al regresar la conexión");
+                                                                MandarToast.MostrarToast(mActivity,getResources().getString(R.string.el_mensaje_se_enviara_cuando_haya_conexion));
                                                             }
                                                             final String usuarioContesta= dataSnapshot.getValue().toString();
                                                             BD.AlAñadirNuevaInvitacion(UID, Viaje, respuestaStr, dataSnapshot.getValue().toString(), user);

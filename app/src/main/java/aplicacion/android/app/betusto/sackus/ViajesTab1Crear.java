@@ -184,9 +184,8 @@ public class ViajesTab1Crear extends Fragment {
             public void onClick(View v) {
                 //Dialogo
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Compartir viaje");
-                builder.setMessage("Si tienes pensado viajar con alguien que tenga también la aplicación Sackus, puedes invitarlos a que compartan" +
-                        "el viaje y el dinero que llevan contigo. ¡Puedes compartir un viaje con hasta 5 personas!");
+                builder.setTitle(getResources().getString(R.string.compartir_viaje));
+                builder.setMessage(getResources().getString(R.string.info_compartir_viaje));
                 builder.setPositiveButton("OK", null);
                 AlertDialog dialog = builder.show();
                 //Align del dialogo
@@ -220,7 +219,7 @@ public class ViajesTab1Crear extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-        BD.MostrarElementoUsuarioActualConComplemento(Database, "EfectivoTotal", "Efectivo Total: ", efectivototalText, sharedPreferences);
+        BD.MostrarElementoUsuarioActualConComplemento(Database, "EfectivoTotal", getResources().getString(R.string.efectivo_total_2), efectivototalText, sharedPreferences);
     }
 
     public void Validar() {
@@ -232,18 +231,22 @@ public class ViajesTab1Crear extends Fragment {
         invertirTransporteStr = invertirTransporteEdit.getText().toString().trim();
         invertirComidaStr = invertirComidaEdit.getText().toString().trim();
         invertirBaratijasStr = invertirBaratijasEdit.getText().toString().trim();
+        fechaInicioStr = fechaInicioText.getText().toString().replace("Start date:\n", "Fecha de inicio:\n");
+        fechaRegresoStr = fechaRegresoText.getText().toString().replace("Return date:\n", "Fecha de regreso:\n");
+        fechaInicioText.setText(fechaInicioStr);
+        fechaRegresoText.setText(fechaRegresoStr);
         fechaInicioStr = fechaInicioText.getText().toString().substring(17).replace("\n", "").trim();
         fechaRegresoStr = fechaRegresoText.getText().toString().substring(18).replace("\n", "").trim();
         //do {
         //    BD.GetElementoUsuarioActual(Database, "Usuario", sharedPreferences);
         //}while(NombreDelUsuario == null);
         if(dondeStr.isEmpty()){
-            dondeEdit.setError("Se necesita nombre del lugar a visitar");
+            dondeEdit.setError(getResources().getString(R.string.se_necesita_nombre_del_lugar));
             dondeEdit.requestFocus();
             detectorDeErrores = 1;
         }
         if(dinerollevasStr.equals("$") || dinerollevasStr.equals("$.") || dinerollevasStr.isEmpty()){
-            dineroLlevasEdit.setError("Se necesita un monto de dinero");
+            dineroLlevasEdit.setError(getResources().getString(R.string.se_necesita_un_monto_de_dinero));
             dineroLlevasEdit.requestFocus();
             detectorDeErrores = 1;
         }
@@ -277,7 +280,7 @@ public class ViajesTab1Crear extends Fragment {
             }
             double dineroLlevasDoub = Double.parseDouble(dinerollevasStr.replace("$", "")); //Conseguimos el monto que se escribio
             if(sumaTotal>dineroLlevasDoub){
-                MU.MostrarToast(getActivity(), "La suma de los montos a invertir sobrepasan al dinero total que llevas");
+                MU.MostrarToast(getActivity(), getResources().getString(R.string.la_suma_de_los_montos_sobrepasan_dinero_total));
                 detectorDeErrores=1;
             }
             if (VariablesEstaticas.Locked == false) {
@@ -304,12 +307,12 @@ public class ViajesTab1Crear extends Fragment {
                                     Log.e("TEST", "Valor de UsuarioActual: " + NombreDelUsuario);
                                     for (i = 0; i < acompañantesEditList.size(); i++) { //Recorremos el arraylist
                                         if (acompañantesEditList.get(i).getText().toString().trim().isEmpty()) {
-                                            acompañantesEditList.get(i).setError("Se requiere nombre de usuario del acompañante");
+                                            acompañantesEditList.get(i).setError(getResources().getString(R.string.se_requiere_nombre_de_usuario_del_acompañante));
                                             acompañantesEditList.get(i).requestFocus();
                                             Log.e("TEST", "Acompañante " + i + " empty");
                                             detectorDeErrores = 1;
                                         } else if (acompañantesEditList.get(i).getText().toString().trim().equals(NombreDelUsuario)) {
-                                            acompañantesEditList.get(i).setError("No es necesario agregarte como acompañante");
+                                            acompañantesEditList.get(i).setError(getResources().getString(R.string.no_es_necesario_agregarte_como_acompañante));
                                             acompañantesEditList.get(i).requestFocus();
                                             detectorDeErrores = 1;
                                         } else if (!acompañantesEditList.get(i).getText().toString().trim().isEmpty()) {
@@ -347,7 +350,7 @@ public class ViajesTab1Crear extends Fragment {
             for(int i=0;i<acompañantesEditList.size();i++){
                 flag=set.add(acompañantesEditList.get(i).getText().toString().trim());
                 if(!(flag)){
-                    acompañantesEditList.get(i).setError("Repetiste nombre de usuario");
+                    acompañantesEditList.get(i).setError(getResources().getString(R.string.repetiste_nombre_de_usuario));
                     acompañantesEditList.get(i).requestFocus();
                     detectorDeErrores = 1;
                     flag=true;
@@ -455,31 +458,31 @@ public class ViajesTab1Crear extends Fragment {
                                                                 CantidadDeSnapshots.clear();
                                                                 Log.e("TEST", "SE DETECTO UN ERROR en elemento: " + i);
                                                                 acompañantesEditList.get(i).requestFocus();
-                                                                acompañantesEditList.get(i).setError("El usuario que escribió no se encuentra registrado");
+                                                                acompañantesEditList.get(i).setError(getResources().getString(R.string.el_usuario_que_escribió_no_se_encuentra_registrado));
                                                             }
                                                             if (i == 1) {
                                                                 CantidadDeSnapshots.clear();
                                                                 Log.e("TEST", "SE DETECTO UN ERROR en elemento: " + i);
                                                                 acompañantesEditList.get(i).requestFocus();
-                                                                acompañantesEditList.get(i).setError("El usuario que escribió no se encuentra registrado");
+                                                                acompañantesEditList.get(i).setError(getResources().getString(R.string.el_usuario_que_escribió_no_se_encuentra_registrado));
                                                             }
                                                             if (i == 2) {
                                                                 CantidadDeSnapshots.clear();
                                                                 Log.e("TEST", "SE DETECTO UN ERROR en elemento: " + i);
                                                                 acompañantesEditList.get(i).requestFocus();
-                                                                acompañantesEditList.get(i).setError("El usuario que escribió no se encuentra registrado");
+                                                                acompañantesEditList.get(i).setError(getResources().getString(R.string.el_usuario_que_escribió_no_se_encuentra_registrado));
                                                             }
                                                             if (i == 3) {
                                                                 CantidadDeSnapshots.clear();
                                                                 Log.e("TEST", "SE DETECTO UN ERROR en elemento: " + i);
                                                                 acompañantesEditList.get(i).requestFocus();
-                                                                acompañantesEditList.get(i).setError("El usuario que escribió no se encuentra registrado");
+                                                                acompañantesEditList.get(i).setError(getResources().getString(R.string.el_usuario_que_escribió_no_se_encuentra_registrado));
                                                             }
                                                             if (i == 4) {
                                                                 CantidadDeSnapshots.clear();
                                                                 Log.e("TEST", "SE DETECTO UN ERROR en elemento: " + i);
                                                                 acompañantesEditList.get(i).requestFocus();
-                                                                acompañantesEditList.get(i).setError("El usuario que escribió no se encuentra registrado");
+                                                                acompañantesEditList.get(i).setError(getResources().getString(R.string.el_usuario_que_escribió_no_se_encuentra_registrado));
                                                             }
                                                         }
 
@@ -524,15 +527,15 @@ public class ViajesTab1Crear extends Fragment {
         Log.e("PRUEBA","Valor de NombresEscritos: "+NombresEscritos);
         Collections.copy(Invitados, NombresEscritos);
         if(detectorDeErrores == 0) {
-            Progress.setMessage("Añadiendo, por favor espere");
+            Progress.setMessage(getResources().getString(R.string.añadiendo_por_favor_espere));
             Progress.show();
             DetectaConexion CD = new DetectaConexion(this.getActivity());
             if(controlDeEditTexts != 0) {
                 compartir = "true";
                 if (CD.isConnected()) {
-                    MandarToast.MostrarToast(getActivity(), "Mensaje enviado");
+                    MandarToast.MostrarToast(getActivity(), getResources().getString(R.string.mensaje_enviado));
                 } else {
-                    MandarToast.MostrarToast(getActivity(), "El mensaje se enviará al regresar la conexión");
+                    MandarToast.MostrarToast(getActivity(), getResources().getString(R.string.el_mensaje_se_enviara_cuando_haya_conexion));
                 }
                 String Mensaje = mensajeEdit.getText().toString().trim();
                 if (Mensaje.isEmpty()) {
@@ -560,7 +563,7 @@ public class ViajesTab1Crear extends Fragment {
                 }
             }*/
             VariablesEstaticas.Locked = false;
-            MandarToast.MostrarToast(getActivity(), "Viaje añadido");
+            MandarToast.MostrarToast(getActivity(), getResources().getString(R.string.viaje_añadido));
             Intent reebot = new Intent(getActivity(), ViajesActivity.class);
             //Engañar al usuario, no pude encontrar una mejor solucion, el recycler no se actualiza
             //hasta que se cambie de activity

@@ -21,7 +21,7 @@
         android:background="@null"
         android:ems="10"
         android:gravity="top|left"
-        android:hint="¿Algo que olvides?"
+        android:hint="@string/algo_que_olvides"
         android:inputType="textCapSentences|textMultiLine"
         android:maxLines="20"
         android:text="" />
@@ -38,7 +38,7 @@
         android:background="@null"
         android:ems="10"
         android:gravity="top|left"
-        android:hint="Título"
+        android:hint="@string/titulo"
         android:inputType="textCapSentences|textMultiLine"
         android:maxLines="2"
         android:textStyle="bold" />
@@ -62,7 +62,7 @@
         android:layout_marginStart="105dp"
         android:layout_marginTop="70dp"
         android:gravity="center"
-        android:text="Nueva Nota"
+        android:text="@string/nueva_nota"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@color/colorIcons"

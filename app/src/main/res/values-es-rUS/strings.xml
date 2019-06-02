@@ -170,4 +170,72 @@ NOTA</string>
     <string name="agree_terms_privacy">Confirma si estás de acuerdo y leíste nuestra <a href="https://pastebin.com/raw/E8msG8k4">Política de privacidad</a></string>
     <string name="para_continuar_acepte">Para continuar, por favor, acepte los terminos de uso y políticas de privacidad.</string>
     <string name="i_agree">Estoy de acuerdo.</string>
+
+
+    <string name="crear_viaje">Crear Viaje</string>
+    <string name="ver_viajes">Ver Viajes</string>
+
+    <string name="nuevo_viaje">Nuevo Viaje</string>
+    <string name="a_donde_quieres_ir">¿A dónde quieres ir?*</string>
+    <string name="fecha_de_inicio">Fecha de inicio:\n</string>
+    <string name="escoger_fecha_de_inicio">Escoger fecha\nde inicio</string>
+    <string name="fecha_de_regreso">Fecha de regreso:\n</string>
+    <string name="escoger_fecha_de_regreso">Escoger fecha\nde regreso</string>
+    <string name="cuanto_dinero_llevas">¿Cuánto dinero llevas?*</string>
+    <string name="dinero_a_invertir_en_hotel">¿Dinero a invertir en hotel?</string>
+    <string name="dinero_a_invertir_en_transporte">¿Dinero a invertir en transporte?</string>
+    <string name="dinero_a_invertir_en_comida">¿Dinero a invertir en comida?</string>
+    <string name="dinero_a_invertir_en_baratijas">¿Dinero a invertir en baratijas?</string>
+    <string name="acompañantes">Acompañantes</string>
+    <string name="mensaje">Mensaje</string>
+    <string name="mensajes_may">MENSAJES</string>
+
+    <string name="lugar_a_visitar">Lugar a visitar:</string>
+    <string name="dinero_que_llevas">Dinero que llevas:</string>
+    <string name="regresar_mayus">REGRESAR</string>
+    <string name="listo_mayus">LISTO</string>
+    <string name="tu_viaje">Tu viaje</string>
+
+    <string name="nombre_de_usuario_del_acompañante">Nombre de usuario del acompañante</string>
+    <string name="compartir_viaje">Compartir viaje</string>
+    <string name="info_compartir_viaje">Si tienes pensado viajar con alguien que tenga también la aplicación Sackus, puedes invitarlos a que compartan el viaje y el dinero que llevan contigo. ¡Puedes compartir un viaje con hasta 5 personas!</string>
+
+    <string name="eliminar_gasto_pregunta">¿Eliminar gasto?</string>
+    <string name="eliminar_gasto">ELIMINAR\n GASTO</string>
+    <string name="eliminar_y_revertir">ELIMINAR\n Y REVERTIR</string>
+    <string name="gasto_eliminado">Gasto eliminado</string>
+
+
+    <string name="se_necesita_un_monto_de_dinero">Se necesita un monto de dinero</string>
+    <string name="se_necesita_nombre_del_lugar">Se necesita nombre del lugar a visitar</string>
+    <string name="añadiendo_por_favor_espere">Añadiendo, por favor espere</string>
+
+    <string name="lista_de_viajes_mayus">LISTA DE VIAJES</string>
+    <string name="editar_mayus">EDITAR</string>
+
+    <string name="editar_gasto">Editar gasto</string>
+
+    <!-- ViajesTab1Crear-->
+    <string name="la_suma_de_los_montos_sobrepasan_dinero_total">La suma de los montos a invertir sobrepasan al dinero total que llevas</string>
+    <string name="se_requiere_nombre_de_usuario_del_acompañante">Se requiere nombre de usuario del acompañante</string>
+    <string name="no_es_necesario_agregarte_como_acompañante">No es necesario agregarte como acompañante</string>
+    <string name="repetiste_nombre_de_usuario">Repetiste nombre de usuario</string>
+    <string name="el_usuario_que_escribió_no_se_encuentra_registrado">El usuario que escribió no se encuentra registrado</string>
+
+
+    <string name="mensaje_enviado">Mensaje enviado</string>
+    <string name="el_mensaje_se_enviara_cuando_haya_conexion">El mensaje se enviará al regresar la conexión</string>
+    <string name="viaje_añadido">Viaje añadido</string>
+
+    <!-- Notas -->
+    <string name="algo_que_olvides">¿Algo que olvides?</string>
+    <string name="titulo">Título</string>
+    <string name="nueva_nota">Nueva Nota</string>
+
+    <string name="la_nota_necesita_un_titulo">La nota necesita un título</string>
+    <string name="la_nota_necesita_contenido">La nota necesita contenido</string>
+    <string name="editar_nota">Editar nota</string>
+
+    <string name="respuesta">Respuesta</string>
+    <string name="aceptar_solicitud_mayus">ACEPTAR SOLICITUD</string>
 </resources>
