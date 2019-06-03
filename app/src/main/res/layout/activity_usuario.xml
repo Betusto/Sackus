@@ -42,17 +42,24 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textSize="24sp" />
 
+    <Spinner
+        android:id="@+id/spLanguage"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="210dp"/>
     <Button
         android:id="@+id/activity_usuario_modificarcuentabutton"
         android:layout_width="132dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="223dp"
-        android:text="@string/modificar_cuenta"
+        android:layout_marginBottom="270dp"
         android:background="@drawable/btn_uno"
-        android:textColor="@drawable/txt_btn_uno"
+        android:text="@string/modificar_cuenta"
         android:textAllCaps="true"
+        android:textColor="@drawable/txt_btn_uno"
         android:textSize="15sp" />
 
     <Button
@@ -87,5 +94,18 @@
         android:layout_marginEnd="0dp"
         android:background="@drawable/circleshape"
         app:srcCompat="@mipmap/ic_eliminar" />
+
+    <Button
+        android:id="@+id/cambiar_idioma"
+        android:layout_width="170dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="150dp"
+        android:background="@drawable/btn_uno"
+        android:text="@string/cambiar_idioma"
+        android:textAllCaps="true"
+        android:textColor="@drawable/txt_btn_uno"
+        android:textSize="15sp" />
 
 </RelativeLayout>

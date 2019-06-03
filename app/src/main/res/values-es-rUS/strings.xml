@@ -14,6 +14,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string-array name="language_option">
+        <item>English</item>
+        <item>Español</item>
+    </string-array>
     <string name="title_activity_modificando">ModificandoActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
@@ -238,4 +242,6 @@ NOTA</string>
 
     <string name="respuesta">Respuesta</string>
     <string name="aceptar_solicitud_mayus">ACEPTAR SOLICITUD</string>
+
+    <string name="cambiar_idioma">Cambiar idioma</string>
 </resources>

@@ -6,23 +6,30 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +37,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
 import java.util.UUID;
 
 public class UsuarioActivity extends AppCompatActivity {
@@ -52,6 +60,11 @@ public class UsuarioActivity extends AppCompatActivity {
     EditText input;
     MetodosUtiles MU = new MetodosUtiles();
 
+    //Para cambiar de idioma
+    private Spinner mLanguage;
+    private Button btnSubmit;
+    private String idiomaApp;
+    private ArrayAdapter<String> mAdapter;
 
 
     @Override
@@ -89,7 +102,42 @@ public class UsuarioActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent modify = new Intent(UsuarioActivity.this,     ModificandoActivity.class);
                 startActivity(modify);
+
             }
+        });
+
+        //Cambiar idioma
+        mLanguage = (Spinner) findViewById(R.id.spLanguage);
+        btnSubmit = (Button) findViewById(R.id.cambiar_idioma);
+        mAdapter = new ArrayAdapter<String>(UsuarioActivity.this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.language_option));
+        mLanguage.setAdapter(mAdapter);
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(UsuarioActivity.this,
+                        "Idioma: "+ String.valueOf(mLanguage.getSelectedItem()),
+                        Toast.LENGTH_SHORT).show();
+                if(String.valueOf(mLanguage.getSelectedItem()).equals("English")){
+                    idiomaApp = "en";
+                    setAppLocale(idiomaApp);
+                    Intent cerrarMainMenu = new Intent(MainMenu.FINISH_ALERT);
+                    UsuarioActivity.this.sendBroadcast(cerrarMainMenu);
+                    startActivity(new Intent(UsuarioActivity.this,     MainMenu.class));
+                    finish();
+                }
+                else {
+                    idiomaApp = "es";
+                    setAppLocale(idiomaApp);
+                    Intent cerrarMainMenu = new Intent(MainMenu.FINISH_ALERT);
+                    UsuarioActivity.this.sendBroadcast(cerrarMainMenu);
+                    startActivity(new Intent(UsuarioActivity.this,     MainMenu.class));
+                    finish();
+                }
+            }
+
         });
 
         //Eliminar cuenta
@@ -283,5 +331,18 @@ public class UsuarioActivity extends AppCompatActivity {
         DetectaConexion CD = new DetectaConexion(this);
         CD.DetenerContador();
         super.onPause();
+
+    }
+
+    private void setAppLocale(String localeCode) {
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            conf.setLocale(new Locale(localeCode.toLowerCase()));
+        } else {
+            conf.locale = new Locale(localeCode.toLowerCase());
+        }
+        res.updateConfiguration(conf, dm);
     }
 }

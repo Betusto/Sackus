@@ -16,9 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViajesEditarActivity">
-            android:windowSoftInputMode="adjustResize"
-        </activity>
+        <activity
+            android:name=".ViajesEditarActivity"
+            android:windowSoftInputMode="adjustResize" />
+
         <activity android:name=".ViajesVerActivity" />
         <activity android:name=".IngresarActivity">
             <intent-filter>
