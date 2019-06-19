@@ -23,7 +23,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Sackus 0.0.1"
+        android:text="Sackus 1.0.0"
         android:textSize="20sp" />
 
     <TextView
@@ -107,5 +107,15 @@
         android:textAllCaps="true"
         android:textColor="@drawable/txt_btn_uno"
         android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:gravity="left"
+        android:layout_alignParentBottom="true"
+        android:text="© 2019 Betusto"
+        android:textColor="@color/Transparente"/>
 
 </RelativeLayout>

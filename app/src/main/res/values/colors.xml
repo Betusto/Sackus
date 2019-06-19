@@ -11,4 +11,5 @@
     <color name="colorButtonRed">#801E2E</color>
     <color name="colorHolo">#FFBB33</color>
     <color name="Verde">#008000	</color>
+    <color name="Transparente">#0DFFFFFF</color>
 </resources>
