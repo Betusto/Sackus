@@ -2,7 +2,7 @@
 Aplicación para celular Android que se encarga del manejo de gastos y viajes. 2019.<br />
 Lenguaje usado: Java para Android.
 
-## Imagenes
+## Imágenes
 ![Imagen1](https://user-images.githubusercontent.com/44010738/59736217-5f79c200-921e-11e9-9f3c-4f6ed806b46c.jpeg)
 ![Imagen14](https://user-images.githubusercontent.com/44010738/59736224-699bc080-921e-11e9-94ff-99f317777397.jpeg)
 ![Imagen2](https://user-images.githubusercontent.com/44010738/59736225-699bc080-921e-11e9-81d3-64dccfb028ad.jpeg)
