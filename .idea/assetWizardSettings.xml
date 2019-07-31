@@ -51,11 +51,21 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="scalingPercent" value="104" />
                                               </map>
                                             </option>
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="289102" />
+                                      <entry key="foregroundImage" value="C:\Users\Alberto Villarreal\Downloads\Tareas de Facultad\Sexto Semestre\Sackus\Documentos\_1.png" />
+                                      <entry key="legacyIconShape" value="CIRCLE" />
+                                      <entry key="webIconShape" value="CIRCLE" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -88,13 +98,26 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                      <entry key="image">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="c9ff00" />
+                                                <entry key="trimmed" value="true" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                     </map>
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundColor" value="e0ffeb" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="backgroundColor" value="e3ff25" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="outputName" value="ic_check" />
+                                      <entry key="imageAsset" value="C:\Users\Alberto Villarreal\Downloads\Tareas de Facultad\Sexto Semestre\Sackus\Documentos\_1.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -121,11 +144,6 @@
                                 </PersistentState>
                               </value>
                             </entry>
-                          </map>
-                        </option>
-                        <option name="values">
-                          <map>
-                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
                           </map>
                         </option>
                       </PersistentState>
